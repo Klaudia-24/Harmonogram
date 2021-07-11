@@ -1,4 +1,6 @@
 from tkinter import *
+import sys
+from UI_main_window import *
 
 def create_gui():
     root = Tk()
@@ -159,7 +161,13 @@ def create_gui_6():
     root.mainloop()
 
 def __main__():
-    create_gui_6()
+   # create_gui_6()
+   app = QtWidgets.QApplication(sys.argv)
+   Dialog = QtWidgets.QDialog()
+   ui = Ui_Dialog()
+   ui.setupUi(Dialog)
+   Dialog.show()
+   sys.exit(app.exec_())
 
 if __name__ == '__main__':
     __main__()
