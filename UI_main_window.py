@@ -288,7 +288,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        #own parameters begin
+        #own code begin
 
         self.dateOnDateBar = date.today()
         self.prevButton.clicked.connect(self.changeMonthToPrev)
@@ -313,7 +313,7 @@ class Ui_MainWindow(object):
         self.weekLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.calendarGridLayout.setSpacing(1)
 
-        #own parameters end
+        #own code end
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -389,8 +389,6 @@ class Ui_MainWindow(object):
         self.monthFromDate.setText(self.dateOnDateBar.strftime("%B"))
         self.yearFromDate.setText(str(self.dateOnDateBar.year))
 
-        self.generateCalendarDays()
-
     def generateCalendarDays(self):
         firstWeekDayOfMonth = int(datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
         currentMonthRange = int(monthrange(self.dateOnDateBar.year, self.dateOnDateBar.month)[1])
@@ -409,21 +407,71 @@ class Ui_MainWindow(object):
                 getattr(getattr(self, 'day_' + str(i)), 'setText')(str(i-firstWeekDayOfMonth-currentMonthRange+1))
                 getattr(getattr(self, 'day_' + str(i)), 'setStyleSheet')("background-color: rgb(204, 230, 255)")
 
+        self.setDateInBar()
         self.distinguishDayFromDateBar()
+        self.setWeekNumbers()
 
     def changeMonthToPrev(self):
-        self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month-1, self.dateOnDateBar.day)
-        self.setDateInBar()
+
+        if self.dateOnDateBar.month == 1:
+            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year - 1, self.dateOnDateBar.month + 12, self.dateOnDateBar.day)
+        else:
+            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month - 1, self.dateOnDateBar.day)
+
+        self.generateCalendarDays()
 
     def changeMonthToNext(self):
         self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month+1, self.dateOnDateBar.day)
-        self.setDateInBar()
+        self.generateCalendarDays()
 
     def distinguishDayFromDateBar(self):
         firstWeekDayOfMonth = int(datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
         todayIndex = self.dateOnDateBar.day + firstWeekDayOfMonth - 1
         getattr(getattr(self, 'day_' + str(todayIndex)), 'setStyleSheet')("background-color: rgb(0, 119, 230)")
         getattr(getattr(self, 'day_' + str(todayIndex)), 'setFont')(QFont('Times', 11, QtGui.QFont.Bold))
+
+        for i in range(1, 43):
+            if i != todayIndex:
+                getattr(getattr(self, 'day_' + str(i)), 'setFont')(QFont('Times', 9))
+
+    def setWeekNumbers(self):
+        firstWeekDayOfMonth = int(datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
+        currentMonthRange = int(monthrange(self.dateOnDateBar.year, self.dateOnDateBar.month)[1])
+
+        self.weekNumber1.setText(str(datetime.date(self.dateOnDateBar.year, self.dateOnDateBar.month, int(self.day_7.text())).isocalendar()[1]))
+        self.weekNumber2.setText(str(datetime.date(self.dateOnDateBar.year, self.dateOnDateBar.month, int(self.day_8.text())).isocalendar()[1]))
+        self.weekNumber3.setText(str(datetime.date(self.dateOnDateBar.year, self.dateOnDateBar.month, int(self.day_15.text())).isocalendar()[1]))
+        self.weekNumber4.setText(str(datetime.date(self.dateOnDateBar.year, self.dateOnDateBar.month, int(self.day_22.text())).isocalendar()[1]))
+
+        if firstWeekDayOfMonth + currentMonthRange - 1 < 29:
+            year = self.dateOnDateBar.year
+            month = self.dateOnDateBar.month + 1
+            day = int(self.day_29.text())
+            newDate = datetime.datetime(year, month, day)
+            week = newDate.isocalendar()[1]
+            self.weekNumber5.setText(str(week))
+        else:
+            year = self.dateOnDateBar.year
+            month = self.dateOnDateBar.month
+            day = int(self.day_29.text())
+            newDate = datetime.datetime(year, month, day)
+            week = newDate.isocalendar()[1]
+            self.weekNumber5.setText(str(week))
+
+        if firstWeekDayOfMonth + currentMonthRange - 1 < 36:
+            year = self.dateOnDateBar.year
+            month = self.dateOnDateBar.month + 1
+            day = int(self.day_36.text())
+            newDate = datetime.datetime(year, month, day)
+            week = newDate.isocalendar()[1]
+            self.weekNumber6.setText(str(week))
+        else:
+            year = self.dateOnDateBar.year
+            month = self.dateOnDateBar.month
+            day = int(self.day_36.text())
+            newDate = datetime.datetime(year, month, day)
+            week = newDate.isocalendar()[1]
+            self.weekNumber6.setText(str(week))
 
 
 if __name__ == "__main__":
@@ -432,7 +480,5 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    ui.setDateInBar()
-    ui.generateCalendarDays()
     MainWindow.show()
     sys.exit(app.exec_())
