@@ -291,6 +291,7 @@ class Ui_MainWindow(object):
 
         self.dateOnDateBar = date.today()
         self.prevButton.clicked.connect(self.changeMonthToPrev)
+        self.nextButton.clicked.connect(self.changeMonthToNext)
 
         #own parameters end
 
@@ -389,6 +390,9 @@ class Ui_MainWindow(object):
         self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month-1, self.dateOnDateBar.day)
         self.setDateInBar()
 
+    def changeMonthToNext(self):
+        self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month+1, self.dateOnDateBar.day)
+        self.setDateInBar()
 
 if __name__ == "__main__":
     import sys
