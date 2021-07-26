@@ -13,6 +13,7 @@ import time
 from PyQt5 import QtCore, QtGui, QtWidgets
 from calendar import *
 from datetime import date
+from PyQt5.QtGui import *
 
 
 class Ui_MainWindow(object):
@@ -293,6 +294,25 @@ class Ui_MainWindow(object):
         self.prevButton.clicked.connect(self.changeMonthToPrev)
         self.nextButton.clicked.connect(self.changeMonthToNext)
 
+        for i in range(1, 8):
+            getattr(getattr(self, 'weekDay' + str(i)), 'setStyleSheet')("background-color: rgb(191, 191, 191)")
+            getattr(getattr(self, 'weekDay' + str(i)), 'setFont')(QFont('Times', 11, QtGui.QFont.Bold))
+            getattr(getattr(self, 'weekDay' + str(i)), 'setAlignment')(QtCore.Qt.AlignCenter)
+
+        for i in range(1, 7):
+            getattr(getattr(self, 'weekNumber' + str(i)), 'setStyleSheet')("background-color: rgb(191, 191, 191)")
+            getattr(getattr(self, 'weekNumber' + str(i)), 'setFont')(QFont('Times', 10, QtGui.QFont.Bold))
+            getattr(getattr(self, 'weekNumber' + str(i)), 'setAlignment')(QtCore.Qt.AlignCenter)
+
+        for i in range(1, 43):
+            getattr(getattr(self, 'day_' + str(i)), 'setFont')(QFont('Times', 9))
+            getattr(getattr(self, 'day_' + str(i)), 'setAlignment')(QtCore.Qt.AlignCenter)
+
+        self.weekLabel.setStyleSheet("background-color: rgb(191, 191, 191)")
+        self.weekLabel.setFont(QFont('Times', 11, QtGui.QFont.Bold))
+        self.weekLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.calendarGridLayout.setSpacing(1)
+
         #own parameters end
 
         self.retranslateUi(MainWindow)
@@ -403,6 +423,7 @@ class Ui_MainWindow(object):
         firstWeekDayOfMonth = int(datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
         todayIndex = self.dateOnDateBar.day + firstWeekDayOfMonth - 1
         getattr(getattr(self, 'day_' + str(todayIndex)), 'setStyleSheet')("background-color: rgb(0, 119, 230)")
+        getattr(getattr(self, 'day_' + str(todayIndex)), 'setFont')(QFont('Times', 11, QtGui.QFont.Bold))
 
 
 if __name__ == "__main__":
