@@ -290,7 +290,7 @@ class Ui_MainWindow(object):
         #own parameters begin
 
         self.dateOnDateBar = date.today()
-
+        self.prevButton.clicked.connect(self.changeMonthToPrev)
 
         #own parameters end
 
@@ -363,10 +363,12 @@ class Ui_MainWindow(object):
         self.day_42.setText(_translate("MainWindow", "TextLabel"))
         self.nextButton.setText(_translate("MainWindow", "NEXT"))
 
-    def setStartDateInBar(self):
+    def setDateInBar(self):
         self.dayFromDate.setText(str(self.dateOnDateBar.day))
         self.monthFromDate.setText(self.dateOnDateBar.strftime("%B"))
         self.yearFromDate.setText(str(self.dateOnDateBar.year))
+
+        self.generateCalendarDays()
 
     def generateCalendarDays(self):
         firstWeekDayOfMonth = int(datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
@@ -382,6 +384,11 @@ class Ui_MainWindow(object):
 
             else:
                 getattr(getattr(self, 'day_' + str(i)), 'setText')(str(i-firstWeekDayOfMonth-currentMonthRange+1))
+
+    def changeMonthToPrev(self):
+        self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month-1, self.dateOnDateBar.day)
+        self.setDateInBar()
+
 
 if __name__ == "__main__":
     import sys

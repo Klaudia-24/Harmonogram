@@ -6,7 +6,7 @@ def __main__():
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    ui.setStartDateInBar()
+    ui.setDateInBar()
     ui.generateCalendarDays()
     MainWindow.show()
     sys.exit(app.exec_())
