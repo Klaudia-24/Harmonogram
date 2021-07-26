@@ -379,12 +379,17 @@ class Ui_MainWindow(object):
             if i < firstWeekDayOfMonth:
                 prevMonthRange = int(monthrange(self.dateOnDateBar.year, self.dateOnDateBar.month-1)[1])
                 getattr(getattr(self, 'day_' + str(i)), 'setText')(str(prevMonthRange - firstWeekDayOfMonth + i + 1))
+                getattr(getattr(self, 'day_' + str(i)), 'setStyleSheet')("background-color: rgb(204, 230, 255)")
 
             elif firstWeekDayOfMonth <= i <= currentMonthRange + firstWeekDayOfMonth - 1:
                 getattr(getattr(self, 'day_' + str(i)), 'setText')(str(i-firstWeekDayOfMonth+1))
+                getattr(getattr(self, 'day_' + str(i)), 'setStyleSheet')("background-color: rgb(128, 191, 255)")
 
             else:
                 getattr(getattr(self, 'day_' + str(i)), 'setText')(str(i-firstWeekDayOfMonth-currentMonthRange+1))
+                getattr(getattr(self, 'day_' + str(i)), 'setStyleSheet')("background-color: rgb(204, 230, 255)")
+
+        self.distinguishDayFromDateBar()
 
     def changeMonthToPrev(self):
         self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month-1, self.dateOnDateBar.day)
@@ -393,6 +398,12 @@ class Ui_MainWindow(object):
     def changeMonthToNext(self):
         self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month+1, self.dateOnDateBar.day)
         self.setDateInBar()
+
+    def distinguishDayFromDateBar(self):
+        firstWeekDayOfMonth = int(datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
+        todayIndex = self.dateOnDateBar.day + firstWeekDayOfMonth - 1
+        getattr(getattr(self, 'day_' + str(todayIndex)), 'setStyleSheet')("background-color: rgb(0, 119, 230)")
+
 
 if __name__ == "__main__":
     import sys
