@@ -14,6 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from calendar import *
 from datetime import date
 from PyQt5.QtGui import *
+import dateutils
 
 
 class Ui_MainWindow(object):
@@ -393,9 +394,13 @@ class Ui_MainWindow(object):
         firstWeekDayOfMonth = int(datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
         currentMonthRange = int(monthrange(self.dateOnDateBar.year, self.dateOnDateBar.month)[1])
 
+        if firstWeekDayOfMonth == 0:
+            firstWeekDayOfMonth = 7
+
         for i in range(1, 43):
             if i < firstWeekDayOfMonth:
-                prevMonthRange = int(monthrange(self.dateOnDateBar.year, self.dateOnDateBar.month-1)[1])
+                newDate = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, self.dateOnDateBar.day) - dateutils.relativedelta(months=1)
+                prevMonthRange = int(monthrange(newDate.year, newDate.month)[1])
                 getattr(getattr(self, 'day_' + str(i)), 'setText')(str(prevMonthRange - firstWeekDayOfMonth + i + 1))
                 getattr(getattr(self, 'day_' + str(i)), 'setStyleSheet')("background-color: rgb(204, 230, 255)")
 
@@ -408,70 +413,45 @@ class Ui_MainWindow(object):
                 getattr(getattr(self, 'day_' + str(i)), 'setStyleSheet')("background-color: rgb(204, 230, 255)")
 
         self.setDateInBar()
-        self.distinguishDayFromDateBar()
+
+        if self.dateOnDateBar.year == date.today().year and self.dateOnDateBar.month == date.today().month:
+            self.distinguishDayFromDateBar()
+        else:
+            for i in range(1, 43):
+                getattr(getattr(self, 'day_' + str(i)), 'setFont')(QFont('Times', 9, QtGui.QFont.Normal))
+
         self.setWeekNumbers()
 
     def changeMonthToPrev(self):
 
-        if self.dateOnDateBar.month == 1:
-            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year - 1, self.dateOnDateBar.month + 12, self.dateOnDateBar.day)
-        else:
-            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month - 1, self.dateOnDateBar.day)
-
+        self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+                                               self.dateOnDateBar.day) - dateutils.relativedelta(months=1)
         self.generateCalendarDays()
 
     def changeMonthToNext(self):
-        self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month+1, self.dateOnDateBar.day)
+
+        self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+                                               self.dateOnDateBar.day) + dateutils.relativedelta(months=1)
         self.generateCalendarDays()
 
     def distinguishDayFromDateBar(self):
         firstWeekDayOfMonth = int(datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
+
+        if firstWeekDayOfMonth == 0:
+            firstWeekDayOfMonth = 7
+
         todayIndex = self.dateOnDateBar.day + firstWeekDayOfMonth - 1
         getattr(getattr(self, 'day_' + str(todayIndex)), 'setStyleSheet')("background-color: rgb(0, 119, 230)")
         getattr(getattr(self, 'day_' + str(todayIndex)), 'setFont')(QFont('Times', 11, QtGui.QFont.Bold))
 
-        for i in range(1, 43):
-            if i != todayIndex:
-                getattr(getattr(self, 'day_' + str(i)), 'setFont')(QFont('Times', 9))
-
     def setWeekNumbers(self):
-        firstWeekDayOfMonth = int(datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
-        currentMonthRange = int(monthrange(self.dateOnDateBar.year, self.dateOnDateBar.month)[1])
+        firstSundayDate = date(self.dateOnDateBar.year, self.dateOnDateBar.month, int(self.day_7.text()))
 
-        self.weekNumber1.setText(str(datetime.date(self.dateOnDateBar.year, self.dateOnDateBar.month, int(self.day_7.text())).isocalendar()[1]))
-        self.weekNumber2.setText(str(datetime.date(self.dateOnDateBar.year, self.dateOnDateBar.month, int(self.day_8.text())).isocalendar()[1]))
-        self.weekNumber3.setText(str(datetime.date(self.dateOnDateBar.year, self.dateOnDateBar.month, int(self.day_15.text())).isocalendar()[1]))
-        self.weekNumber4.setText(str(datetime.date(self.dateOnDateBar.year, self.dateOnDateBar.month, int(self.day_22.text())).isocalendar()[1]))
+        for i in range(0, 6):
+            number = (firstSundayDate + dateutils.relativedelta(days=7 * i)).strftime('%W').lstrip("0")
+            i += 1
+            getattr(getattr(self, 'weekNumber' + str(i)), 'setText')(str(number))
 
-        if firstWeekDayOfMonth + currentMonthRange - 1 < 29:
-            year = self.dateOnDateBar.year
-            month = self.dateOnDateBar.month + 1
-            day = int(self.day_29.text())
-            newDate = datetime.datetime(year, month, day)
-            week = newDate.isocalendar()[1]
-            self.weekNumber5.setText(str(week))
-        else:
-            year = self.dateOnDateBar.year
-            month = self.dateOnDateBar.month
-            day = int(self.day_29.text())
-            newDate = datetime.datetime(year, month, day)
-            week = newDate.isocalendar()[1]
-            self.weekNumber5.setText(str(week))
-
-        if firstWeekDayOfMonth + currentMonthRange - 1 < 36:
-            year = self.dateOnDateBar.year
-            month = self.dateOnDateBar.month + 1
-            day = int(self.day_36.text())
-            newDate = datetime.datetime(year, month, day)
-            week = newDate.isocalendar()[1]
-            self.weekNumber6.setText(str(week))
-        else:
-            year = self.dateOnDateBar.year
-            month = self.dateOnDateBar.month
-            day = int(self.day_36.text())
-            newDate = datetime.datetime(year, month, day)
-            week = newDate.isocalendar()[1]
-            self.weekNumber6.setText(str(week))
 
 
 if __name__ == "__main__":
