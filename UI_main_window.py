@@ -440,7 +440,7 @@ class Ui_MainWindow(object):
         if firstWeekDayOfMonth == 0:
             firstWeekDayOfMonth = 7
 
-        todayIndex = self.dateOnDateBar.day + firstWeekDayOfMonth - 1
+        todayIndex = date.today().day + firstWeekDayOfMonth - 1
         getattr(getattr(self, 'day_' + str(todayIndex)), 'setStyleSheet')("background-color: rgb(0, 119, 230)")
         getattr(getattr(self, 'day_' + str(todayIndex)), 'setFont')(QFont('Times', 11, QtGui.QFont.Bold))
 
