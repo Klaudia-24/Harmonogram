@@ -15,6 +15,7 @@ from calendar import *
 from datetime import date
 from PyQt5.QtGui import *
 import dateutils
+from NewEventWindow import Ui_NewEventWindow
 
 
 class Ui_MainWindow(object):
@@ -32,6 +33,11 @@ class Ui_MainWindow(object):
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.sideBarVerticalLayout.addItem(spacerItem)
         self.newEventButton = QtWidgets.QPushButton(self.centralwidget)
+        self.newEventButton.setMinimumSize(QtCore.QSize(0, 50))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.newEventButton.setFont(font)
+        self.newEventButton.setStyleSheet("background-color: rgb(85, 170, 255);")
         self.newEventButton.setObjectName("newEventButton")
         self.sideBarVerticalLayout.addWidget(self.newEventButton)
         self.mainHorizontalLayout.addLayout(self.sideBarVerticalLayout)
@@ -314,6 +320,9 @@ class Ui_MainWindow(object):
         self.weekLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.calendarGridLayout.setSpacing(1)
 
+
+        self.newEventButton.clicked.connect(self.openNewEventWindow)
+
         #own code end
 
         self.retranslateUi(MainWindow)
@@ -321,8 +330,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.newEventButton.setText(_translate("MainWindow", "PushButton"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Shedule"))
+        self.newEventButton.setText(_translate("MainWindow", "New event"))
         self.dayFromDate.setText(_translate("MainWindow", "16"))
         self.monthFromDate.setText(_translate("MainWindow", "July"))
         self.yearFromDate.setText(_translate("MainWindow", "2021"))
@@ -452,6 +461,11 @@ class Ui_MainWindow(object):
             i += 1
             getattr(getattr(self, 'weekNumber' + str(i)), 'setText')(str(number))
 
+    def openNewEventWindow(self):
+        self.mainWindow = QtWidgets.QMainWindow()
+        self.ui_newEventWindow = Ui_NewEventWindow()
+        self.ui_newEventWindow.setupUi(self.mainWindow)
+        self.mainWindow.show()
 
 
 if __name__ == "__main__":
