@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from NewEventTypeWindow import Ui_NewEventTypeWindow
 
 
 class Ui_NewEventWindow(object):
@@ -323,6 +324,9 @@ class Ui_NewEventWindow(object):
         self.remindBeforeComboBox.addItem("5 hours")
         self.remindBeforeComboBox.addItem("1 day")
 
+
+        self.addEventTypeButton.clicked.connect(self.openNewEventTypeWindow)
+
         # own code end
 
         self.retranslateUi(NewEventWindow)
@@ -345,6 +349,12 @@ class Ui_NewEventWindow(object):
         self.beforeEventLabel.setText(_translate("NewEventWindow", "before event"))
         self.cancelButton.setText(_translate("NewEventWindow", "Cancel"))
         self.pushButton_2.setText(_translate("NewEventWindow", "Add"))
+
+    def openNewEventTypeWindow(self):
+        self.mainWindow = QtWidgets.QMainWindow()
+        self.ui_newEventTypeWindow = Ui_NewEventTypeWindow()
+        self.ui_newEventTypeWindow.setupUi(self.mainWindow)
+        self.mainWindow.show()
 
 
 if __name__ == "__main__":
