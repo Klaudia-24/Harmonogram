@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from NewEventTypeWindow import Ui_NewEventTypeWindow
+import json
 
 
 class Ui_NewEventWindow(object):
@@ -289,16 +290,16 @@ class Ui_NewEventWindow(object):
         self.horizontalLayout.addWidget(self.cancelButton)
         spacerItem22 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem22)
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setMinimumSize(QtCore.QSize(0, 40))
+        self.addEventButton = QtWidgets.QPushButton(self.centralwidget)
+        self.addEventButton.setMinimumSize(QtCore.QSize(0, 40))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
         font.setWeight(75)
-        self.pushButton_2.setFont(font)
-        self.pushButton_2.setStyleSheet("background-color: rgb(0, 181, 0);")
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout.addWidget(self.pushButton_2)
+        self.addEventButton.setFont(font)
+        self.addEventButton.setStyleSheet("background-color: rgb(0, 181, 0);")
+        self.addEventButton.setObjectName("addEventButton")
+        self.horizontalLayout.addWidget(self.addEventButton)
         spacerItem23 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem23)
         self.horizontalLayout.setStretch(2, 1)
@@ -326,6 +327,7 @@ class Ui_NewEventWindow(object):
 
 
         self.addEventTypeButton.clicked.connect(self.openNewEventTypeWindow)
+        self.addEventButton.clicked.connect(self.writeEventToJsonFile)
 
         # own code end
 
@@ -348,7 +350,7 @@ class Ui_NewEventWindow(object):
         self.remindLabel.setText(_translate("NewEventWindow", "Remind "))
         self.beforeEventLabel.setText(_translate("NewEventWindow", "before event"))
         self.cancelButton.setText(_translate("NewEventWindow", "Cancel"))
-        self.pushButton_2.setText(_translate("NewEventWindow", "Add"))
+        self.addEventButton.setText(_translate("NewEventWindow", "Add"))
 
     def openNewEventTypeWindow(self):
         self.mainWindow = QtWidgets.QMainWindow()
@@ -356,6 +358,53 @@ class Ui_NewEventWindow(object):
         self.ui_newEventTypeWindow.setupUi(self.mainWindow)
         self.mainWindow.show()
 
+    def changeEventToJsonFile(self):
+
+        if self.allDayEventRadioButton.isChecked():
+            isAllDayEvent = "Yes"
+
+            eventDict = {
+                "eventYear": self.dateEdit.date().year(),
+                "eventMonth": self.dateEdit.date().month(),
+                "eventDay": self.dateEdit.date().day(),
+                "allDayEvent": isAllDayEvent,
+                "type": str(self.eventTypeComboBox.currentText()),
+                "title": self.eventTitlePlainTextEdit.toPlainText(),
+                "description": self.eventDescriptionPlaneTextEdit.toPlainText(),
+                "localization": self.eventLocalizationPlainTextEdit.toPlainText(),
+                "reminder": str(self.remindBeforeComboBox.currentText())
+            }
+
+            jsonEvent = json.dumps(eventDict, indent=9)
+
+        else:
+            isAllDayEvent = "No"
+
+            eventDict = {
+                "eventYear": self.dateEdit.date().year(),
+                "eventMonth": self.dateEdit.date().month(),
+                "eventDay": self.dateEdit.date().day(),
+                "allDayEvent": isAllDayEvent,
+                "timeFromHour": self.timeFromEdit.time().hour(),
+                "timeFromMinute": self.timeFromEdit.time().minute(),
+                "timeToHour": self.timeFromEdit.time().hour(),
+                "timeToMinute": self.timeFromEdit.time().minute(),
+                "type": str(self.eventTypeComboBox.currentText()),
+                "title": self.eventTitlePlainTextEdit.toPlainText(),
+                "description": self.eventDescriptionPlaneTextEdit.toPlainText(),
+                "localization": self.eventLocalizationPlainTextEdit.toPlainText(),
+                "reminder": str(self.remindBeforeComboBox.currentText())
+            }
+
+            jsonEvent = json.dumps(eventDict, indent=13)
+
+        return jsonEvent
+
+    def writeEventToJsonFile(self):
+
+        with open("events.json", "w") as file:
+            file.write(self.changeEventToJsonFile())
+            file.close()
 
 if __name__ == "__main__":
     import sys
