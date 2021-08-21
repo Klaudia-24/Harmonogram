@@ -26,7 +26,6 @@ class Window(QMainWindow):
         layout = dialog.layout()
         dialog.setLayout(layout)
         dialog.setStyleSheet("background-color: rgb(204, 229, 255);")
-        print(dialog.children())
         dialog.exec_()
         self.deleteLater()
 
