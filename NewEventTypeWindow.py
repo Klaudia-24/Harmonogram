@@ -9,7 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtWidgets import QColorDialog
+from ColorSettingWindow import *
 
 class Ui_NewEventTypeWindow(object):
     def setupUi(self, NewEventTypeWindow):
@@ -75,6 +76,7 @@ class Ui_NewEventTypeWindow(object):
         self.pushButton.setFont(font)
         self.pushButton.setStyleSheet("background-color: rgb(166, 166, 166);")
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(self.getColorFromDialog)
         self.horizontalLayout_2.addWidget(self.pushButton)
         spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem5)
@@ -86,6 +88,7 @@ class Ui_NewEventTypeWindow(object):
 
         self.retranslateUi(NewEventTypeWindow)
         QtCore.QMetaObject.connectSlotsByName(NewEventTypeWindow)
+        self.dialog = Window()
 
     def retranslateUi(self, NewEventTypeWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -93,7 +96,9 @@ class Ui_NewEventTypeWindow(object):
         self.label.setText(_translate("NewEventTypeWindow", "Name:"))
         self.pushButton.setText(_translate("NewEventTypeWindow", "Set event color"))
 
-
+    def getColorFromDialog(self):
+        self.color_RGB=self.dialog.ReturnColor()
+        print(self.color_RGB.getRgb())
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

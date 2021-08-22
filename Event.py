@@ -3,7 +3,6 @@ from datetime import date
 
 eventsTypesColorsDict = {"Home": "#00b33c", "Work": "#1a75ff", "School": "#e62e00"}
 
-
 class Event:
 
     def __init__(self, eventDate, title, description, localization, eventDuration, eventType, eventRemind=None):

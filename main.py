@@ -1,6 +1,7 @@
 import sys
 from UI_main_window import *
 
+
 def __main__():
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
@@ -9,6 +10,7 @@ def __main__():
     ui.generateCalendarDays()
     MainWindow.show()
     sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
     __main__()
