@@ -1,9 +1,4 @@
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-import sys
-
-from Event import eventsTypesColorsDict
-
 
 class Window(QMainWindow):
 
