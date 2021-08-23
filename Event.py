@@ -60,7 +60,7 @@ class Event:
 
 class EventDuration:
 
-    def __init__(self, isAllDayEvent, dateTimeFrom, dateTimeTo=None):
+    def __init__(self, isAllDayEvent, dateTimeFrom=None, dateTimeTo=None):
         self.__isAllDayEvent = isAllDayEvent
         self.__dateTimeFrom = dateTimeFrom
         self.__dateTimeTo = dateTimeTo
