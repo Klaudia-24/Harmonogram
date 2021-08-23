@@ -21,6 +21,10 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
+class Ui_NewEventWindow(QtWidgets.QWidget):
+    def __init__(self):
+        super().__init__()
+
         self.confrimEventButton = QtWidgets.QPushButton()
         self.remindBeforeComboBox = QtWidgets.QComboBox()
         self.cancelButton = QtWidgets.QPushButton()
@@ -272,7 +276,6 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         self.ui_newEventTypeWindow.setupUi(self.mainWindow)
         self.mainWindow.show()
     #TODO jumppoint2
-
     def closeWindow(self):
         self.close()
 
