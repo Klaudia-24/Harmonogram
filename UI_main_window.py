@@ -134,6 +134,9 @@ class Ui_MainWindow(object):
         self.calendarGridLayout.addWidget(self.weekNumber6, 6, 0, 1, 1)
         self.day_1 = QtWidgets.QLabel(self.centralwidget)
         self.day_1.setMinimumSize(QtCore.QSize(0, 0))
+        self.day_1.setMouseTracking(True)
+        self.day_1.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.day_1.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
         self.day_1.setObjectName("day_1")
         self.calendarGridLayout.addWidget(self.day_1, 1, 1, 1, 1)
         self.day_2 = QtWidgets.QLabel(self.centralwidget)
@@ -320,7 +323,7 @@ class Ui_MainWindow(object):
         self.weekLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.calendarGridLayout.setSpacing(1)
 
-
+        self.ui_newEventWindow = Ui_NewEventWindow()
         self.newEventButton.clicked.connect(self.openNewEventWindow)
 
         #own code end
@@ -462,10 +465,7 @@ class Ui_MainWindow(object):
             getattr(getattr(self, 'weekNumber' + str(i)), 'setText')(str(number))
 
     def openNewEventWindow(self):
-        self.mainWindow = QtWidgets.QMainWindow()
-        self.ui_newEventWindow = Ui_NewEventWindow()
-        self.ui_newEventWindow.setupUi(self.mainWindow)
-        self.mainWindow.show()
+        self.ui_newEventWindow.show()
 
 
 if __name__ == "__main__":
