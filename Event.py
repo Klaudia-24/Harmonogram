@@ -57,6 +57,9 @@ class Event:
     def getEventRemind(self):
         return self.__eventRemind
 
+    def __hash__(self):
+        return hash(self.__eventDate, self.__title, self.__description, self.__localization,
+                    self.__eventType, self.__eventRemind)
 
 class EventDuration:
 

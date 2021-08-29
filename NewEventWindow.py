@@ -16,6 +16,7 @@ from NewEventTypeWindow import Ui_NewEventTypeWindow
 import json
 from Event import *
 
+eventsList = []
 
 class Ui_NewEventWindow(QtWidgets.QWidget):
     def __init__(self):
@@ -284,9 +285,10 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
             event = Event(datetime.datetime(self.dateEdit.date().year(), self.dateEdit.date().month(), self.dateEdit.date().day()),
                           self.eventTitlePlainTextEdit.toPlainText(), self.eventDescriptionPlaneTextEdit.toPlainText(),
                           self.eventLocalizationPlainTextEdit.toPlainText(), eventDuration,
-                          str(self.eventTypeComboBox.currentText(), str(self.remindBeforeComboBox.currentText())))
+                          str(self.eventTypeComboBox.currentText()), str(self.remindBeforeComboBox.currentText()))
 
-            # eventHash = hash(event)
+            #eventHash = hash(event)
+            #print(eventHash)
             isAllDayEvent = "Yes"
 
             eventDict = {
@@ -295,15 +297,16 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
                 "eventMonth": self.dateEdit.date().month(),
                 "eventDay": self.dateEdit.date().day(),
                 "allDayEvent": isAllDayEvent,
+                "timeFromHour": 0,
+                "timeFromMinute": 1,
+                "timeToHour": 23,
+                "timeToMinute": 59,
                 "type": str(self.eventTypeComboBox.currentText()),
                 "title": self.eventTitlePlainTextEdit.toPlainText(),
                 "description": self.eventDescriptionPlaneTextEdit.toPlainText(),
                 "localization": self.eventLocalizationPlainTextEdit.toPlainText(),
                 "reminder": str(self.remindBeforeComboBox.currentText())
             }
-
-            jsonEvent = json.dumps(eventDict, indent=10)
-            #TODO add to the events list
 
         if self.setDurationEventRadioButton.isChecked():
 
@@ -313,17 +316,17 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
             print(timeFrom)
             print(timeTo)
 
-            # eventDuration = EventDuration(True)
-            # event = Event(datetime.datetime(self.dateEdit.date().year(), self.dateEdit.date().month(),
-            #                                 self.dateEdit.date().day()),
-            #               self.eventTitlePlainTextEdit.toPlainText(), self.eventDescriptionPlaneTextEdit.toPlainText(),
-            #               self.eventLocalizationPlainTextEdit.toPlainText(), eventDuration,
-            #               str(self.eventTypeComboBox.currentText(), str(self.remindBeforeComboBox.currentText())))
-            #
-            # eventHash = hash(event)
+            eventDuration = EventDuration(True, timeFrom, timeTo)
+            event = Event(datetime.datetime(self.dateEdit.date().year(), self.dateEdit.date().month(), self.dateEdit.date().day()),
+                          self.eventTitlePlainTextEdit.toPlainText(), self.eventDescriptionPlaneTextEdit.toPlainText(),
+                          self.eventLocalizationPlainTextEdit.toPlainText(), eventDuration,
+                          str(self.eventTypeComboBox.currentText()), str(self.remindBeforeComboBox.currentText()))
+
+            #eventHash = hash(event)
             isAllDayEvent = "No"
 
             eventDict = {
+                # "eventId": str(eventHash),
                 "eventYear": self.dateEdit.date().year(),
                 "eventMonth": self.dateEdit.date().month(),
                 "eventDay": self.dateEdit.date().day(),
@@ -339,7 +342,9 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
                 "reminder": str(self.remindBeforeComboBox.currentText())
             }
 
-            jsonEvent = json.dumps(eventDict, indent=13)
+        jsonEvent = json.dumps(eventDict, indent=13)
+        # TODO add to the events list
+        eventsList.append(event)
 
         return jsonEvent
 
@@ -348,6 +353,13 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         with open("events.json", "w") as file:
             file.write(self.changeEventToJsonFile())
             file.close()
+
+        # with open("events.json", "w") as file:
+        #     dataFromFile = json.load(file)
+        #     dataFromFile["events"].append(self.changeEventToJsonFile())
+        #     file.seek(0)
+        #     json.dump(dataFromFile, file, indent=14)
+
 
 if __name__ == "__main__":
     import sys
