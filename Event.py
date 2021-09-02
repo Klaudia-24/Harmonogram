@@ -58,8 +58,8 @@ class Event:
         return self.__eventRemind
 
     def __hash__(self):
-        return hash(self.__eventDate, self.__title, self.__description, self.__localization,
-                    self.__eventType, self.__eventRemind)
+        return hash((self.__eventDate, self.__title, self.__description, self.__localization,
+                    self.__eventType, self.__eventRemind if self.__eventRemind is not None else ""))
 
 class EventDuration:
 
