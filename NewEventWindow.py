@@ -13,10 +13,12 @@ import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QFont
 
+import JSONOperationMethods
 from Event import eventsTypesColorsDict
 from NewEventTypeWindow import Ui_NewEventTypeWindow
 import json
 from Event import *
+from JSONOperationMethods import writeToJsonFile
 
 eventsList = []
 
@@ -267,7 +269,7 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         self.remindBeforeComboBox.addItem("1 day")
         self.addEventTypeButton.clicked.connect(self.openNewEventTypeWindow)
         self.cancelButton.clicked.connect(self.closeWindow)
-        self.confrimEventButton.clicked.connect(self.writeEventToJsonFile)
+        self.confrimEventButton.clicked.connect(JSONOperationMethods.writeToJsonFile("events.json", self.changeEventToJsonFile, "events"))
 
     def openNewEventTypeWindow(self):
         self.mainWindow = QtWidgets.QMainWindow()
@@ -347,29 +349,7 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
 
         return eventDict
 
-    def writeEventToJsonFile(self):
 
-        # with open("events.json", "w") as file:
-        #     file.write(self.changeEventToJsonFile())
-        #     file.close()
-
-        fileName = 'events.json'
-
-        if os.path.isfile(fileName) and os.access(fileName, os.R_OK):
-            print("File exists and is readable")
-            with open(fileName, 'r+') as file:
-                file_data = json.load(file)
-                newData = self.changeEventToJsonFile()
-                file_data["events"].append(newData)
-                file.seek(0)
-                json.dump(file_data, file, indent=4)
-                file.close()
-        else:
-            print("File does NOT exist or is NOT readable")
-            with open(fileName, 'w') as file:
-                jsonEvent = json.dumps(self.changeEventToJsonFile(), indent=4)
-                file.write(jsonEvent)
-                file.close()
 
 
 if __name__ == "__main__":
