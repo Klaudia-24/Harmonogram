@@ -1,5 +1,5 @@
+from GUI.UI_main_window import *
 import sys
-from UI_main_window import *
 
 def __main__():
     app = QtWidgets.QApplication(sys.argv)
