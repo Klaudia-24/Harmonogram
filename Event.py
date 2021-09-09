@@ -2,7 +2,8 @@ from calendar import *
 from datetime import date
 
 eventsTypesColorsDict = {"Home": "#00b33c", "Work": "#1a75ff", "School": "#e62e00"}
-
+eventsDictionary = dict()
+eventsDictionary["events"] = []
 
 class Event:
 
