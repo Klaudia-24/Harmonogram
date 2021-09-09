@@ -9,8 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QColorDialog
-from ColorSettingWindow import *
+from GUI.ColorSettingWindow import *
 
 class Ui_NewEventTypeWindow(object):
     def setupUi(self, NewEventTypeWindow):
