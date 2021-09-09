@@ -13,14 +13,13 @@ import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QFont
 
-import JSONOperationMethods
+import FileOperationMethods
 from Event import eventsTypesColorsDict
 from NewEventTypeWindow import Ui_NewEventTypeWindow
 import json
 from Event import *
-from JSONOperationMethods import writeToJsonFile
-
-eventsList = []
+from FileOperationMethods import writeToJsonFile, readFromJsonFileToDict
+from Event import eventsDictionary
 
 class Ui_NewEventWindow(QtWidgets.QWidget):
     def __init__(self):
@@ -269,7 +268,9 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         self.remindBeforeComboBox.addItem("1 day")
         self.addEventTypeButton.clicked.connect(self.openNewEventTypeWindow)
         self.cancelButton.clicked.connect(self.closeWindow)
-        self.confrimEventButton.clicked.connect(JSONOperationMethods.writeToJsonFile("events.json", self.changeEventToJsonFile, "events"))
+        self.confrimEventButton.clicked.connect(self.confirmAddingNewEvent)
+        FileOperationMethods.readFromJsonFileToDict("events.json", eventsDictionary, "events")
+        self.setDurationEventRadioButton.setChecked(True)
 
     def openNewEventTypeWindow(self):
         self.mainWindow = QtWidgets.QMainWindow()
@@ -349,7 +350,10 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
 
         return eventDict
 
-
+    def confirmAddingNewEvent(self):
+        eventsDictionary["events"].append(self.changeEventToJsonFile())
+        writeToJsonFile("events.json", eventsDictionary)
+        self.closeWindow()
 
 
 if __name__ == "__main__":
