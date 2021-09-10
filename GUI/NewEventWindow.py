@@ -265,7 +265,7 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         self.addEventTypeButton.clicked.connect(self.openNewEventTypeWindow)
         self.cancelButton.clicked.connect(self.closeWindow)
         self.confrimEventButton.clicked.connect(self.confirmAddingNewEvent)
-        FileOperationMethods.readFromJsonFileToDict("../events.json", eventsDictionary, "events")
+        FileOperationMethods.readFromJsonFileToDict("./events.json", eventsDictionary, "events")
         self.setDurationEventRadioButton.setChecked(True)
 
     def openNewEventTypeWindow(self):
@@ -348,7 +348,7 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
 
     def confirmAddingNewEvent(self):
         eventsDictionary["events"].append(self.changeEventToJsonFile())
-        writeToJsonFile("../events.json", eventsDictionary)
+        writeToJsonFile("./events.json", eventsDictionary)
         self.closeWindow()
 
 
