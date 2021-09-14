@@ -457,7 +457,7 @@ class Ui_MainWindow(object):
             firstWeekDayOfMonth = 7
 
         todayIndex = date.today().day + firstWeekDayOfMonth - 1
-        getattr(getattr(self, 'day_' + str(todayIndex)), 'setStyleSheet')("background-color: rgb(0, 119, 230)")
+        getattr(getattr(self, 'day_' + str(todayIndex)), 'setStyleSheet')("background-color: rgb(51, 153, 102)")
         getattr(getattr(self, 'day_' + str(todayIndex)), 'setFont')(QFont('Times', 11, QtGui.QFont.Bold))
 
     def setWeekNumbers(self):
@@ -471,13 +471,27 @@ class Ui_MainWindow(object):
     def openNewEventWindow(self):
         self.ui_newEventWindow.show()
 
-    def getLabelNamefromCalendarDayLabel(self, event, labelText):
+    def getLabelNamefromCalendarDayLabel(self, event, labelName):
         button = event.button()
         modify = event.modifiers()
         if modify == Qt.NoModifier and button == Qt.LeftButton:
-            labelObject = getattr(self, labelText)
-            self.setClickedDateInDateBar(labelObject.text(), labelText)
+            labelObject = getattr(self, labelName)
+            self.setClickedDateInDateBar(labelObject.text(), labelName)
+            self.distinguishClickedDay(labelObject.text(), labelName)
             return
+
+    def distinguishClickedDay(self, labelText: str, labelName: str):
+        #TODO Fix for first and last days of months
+        if int(labelName.split("_")[1]) <= 6 and int(labelText) >= 7:
+            clickedIndex = int(labelName.split("_")[1]) + 28
+            getattr(getattr(self, 'day_' + str(clickedIndex)), 'setStyleSheet')("background-color: rgb(102, 204, 153)")
+
+        elif int(labelName.split("_")[1]) >= 30 and int(labelText) >= 1:
+            clickedIndex = int(labelName.split("_")[1]) - 28
+            getattr(getattr(self, 'day_' + str(clickedIndex)), 'setStyleSheet')("background-color: rgb(102, 204, 153)")
+
+        else:
+            getattr(getattr(self, labelName), 'setStyleSheet')("background-color: rgb(102, 204, 153)")
 
     def setClickedDateInDateBar(self, labelText: str, labelName: str):
         #TODO Fix bug with 31 day of month
