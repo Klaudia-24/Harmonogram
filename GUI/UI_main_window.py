@@ -402,6 +402,9 @@ class Ui_MainWindow(object):
         self.monthFromDate.setText(self.dateOnDateBar.strftime("%B"))
         self.yearFromDate.setText(str(self.dateOnDateBar.year))
 
+    def changeDateOnDateBar(self):
+        pass
+
     def generateCalendarDays(self):
         firstWeekDayOfMonth = int(datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
         currentMonthRange = int(monthrange(self.dateOnDateBar.year, self.dateOnDateBar.month)[1])
@@ -411,7 +414,8 @@ class Ui_MainWindow(object):
 
         for i in range(1, 43):
             if i < firstWeekDayOfMonth:
-                newDate = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, self.dateOnDateBar.day) - dateutils.relativedelta(months=1)
+                newDate = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, self.dateOnDateBar.day) \
+                          - dateutils.relativedelta(months=1)
                 prevMonthRange = int(monthrange(newDate.year, newDate.month)[1])
                 getattr(getattr(self, 'day_' + str(i)), 'setText')(str(prevMonthRange - firstWeekDayOfMonth + i + 1))
                 getattr(getattr(self, 'day_' + str(i)), 'setStyleSheet')("background-color: rgb(204, 230, 255)")
@@ -467,12 +471,36 @@ class Ui_MainWindow(object):
     def openNewEventWindow(self):
         self.ui_newEventWindow.show()
 
-    def getLabelNamefromCalendarDayLabel(self, event, text):
+    def getLabelNamefromCalendarDayLabel(self, event, labelText):
         button = event.button()
         modify = event.modifiers()
         if modify == Qt.NoModifier and button == Qt.LeftButton:
-            print(text)
+            labelObject = getattr(self, labelText)
+            self.setClickedDateInDateBar(labelObject.text(), labelText)
             return
+
+    def setClickedDateInDateBar(self, labelText: str, labelName: str):
+        #TODO Fix bug with 31 day of month
+        if int(labelName.split("_")[1]) <= 6 and int(labelText) >= 7:
+
+            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+                                                   int(labelText)) - dateutils.relativedelta(months=1)
+            self.generateCalendarDays()
+
+        elif int(labelName.split("_")[1]) >= 29 and int(labelText) >= 1:
+
+            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+                                                   int(labelText)) + dateutils.relativedelta(months=1)
+            self.generateCalendarDays()
+
+        else:
+            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+                                                   int(labelText))
+            self.generateCalendarDays()
+
+        self.setDateInBar()
+
+
 
 if __name__ == "__main__":
     import sys
