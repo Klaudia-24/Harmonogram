@@ -298,7 +298,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        #own code begin
+        # own code begin
 
         self.dateOnDateBar = date.today()
         self.prevButton.clicked.connect(self.changeMonthToPrev)
@@ -326,7 +326,7 @@ class Ui_MainWindow(object):
         self.ui_newEventWindow = Ui_NewEventWindow()
         self.newEventButton.clicked.connect(self.openNewEventWindow)
 
-        #own code end
+        # own code end
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -406,7 +406,8 @@ class Ui_MainWindow(object):
         pass
 
     def generateCalendarDays(self):
-        firstWeekDayOfMonth = int(datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
+        firstWeekDayOfMonth = int(
+            datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
         currentMonthRange = int(monthrange(self.dateOnDateBar.year, self.dateOnDateBar.month)[1])
 
         if firstWeekDayOfMonth == 0:
@@ -478,39 +479,43 @@ class Ui_MainWindow(object):
         if modify == Qt.NoModifier and button == Qt.LeftButton:
             labelObject = getattr(self, labelName)
             self.setClickedDateInDateBar(labelObject.text(), labelName)
-            self.distinguishClickedDay()
+            self.distinguishClickedDay(labelObject.text(), labelName)
             return
 
-    def distinguishClickedDay(self):
-        firstWeekDayOfMonth = int(
-            datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
+    def distinguishClickedDay(self, labelText: str, labelName: str):
+        # TODO Fix for first and last days of months
+        if int(labelName.split("_")[1]) <= 6 and int(labelText) >= 7:
+            clickedIndex = int(labelName.split("_")[1]) + 28
+            getattr(getattr(self, 'day_' + str(clickedIndex)), 'setStyleSheet')("background-color: rgb(102, 204, 153)")
 
-        if firstWeekDayOfMonth == 0:
-            firstWeekDayOfMonth = 7
+        elif int(labelName.split("_")[1]) >= 30 and int(labelText) >= 1:
+            clickedIndex = int(labelName.split("_")[1]) - 28
+            getattr(getattr(self, 'day_' + str(clickedIndex)), 'setStyleSheet')("background-color: rgb(102, 204, 153)")
 
-        clickedIndex = self.dateOnDateBar.day + firstWeekDayOfMonth - 1
-        getattr(getattr(self, 'day_' + str(clickedIndex)), 'setStyleSheet')("background-color: rgb(102, 204, 153)")
-
+        else:
+            getattr(getattr(self, labelName), 'setStyleSheet')("background-color: rgb(102, 204, 153)")
 
     def setClickedDateInDateBar(self, labelText: str, labelName: str):
+        # TODO Fix bug with 31 day of month
         offset = 0
         if int(labelName.split("_")[1]) <= 6 and int(labelText) >= 7:
+
             offset = -1
 
-        elif int(labelName.split("_")[1]) >= 29 and int(labelText) <= 14:
+        elif int(labelName.split("_")[1]) >= 29 and int(labelText) >= 1:
+
             offset = 1
 
         self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year,
                                                self.dateOnDateBar.month + offset if 1 <= self.dateOnDateBar.month + offset <= 12
-                                               else 12 if self.dateOnDateBar.month + offset < 1 else 1,
-                                               int(labelText))
+                                               else 12 if self.dateOnDateBar.month + offset < 1 else 1, int(labelText))
         self.generateCalendarDays()
         self.setDateInBar()
 
 
-
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
