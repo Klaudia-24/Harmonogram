@@ -17,6 +17,7 @@ from Objects.Event import *
 from Lib.FileOperationMethods import writeToJsonFile
 from Objects.Event import eventsDictionary
 
+
 class Ui_NewEventWindow(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
@@ -62,12 +63,12 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         self.setupUi()
 
     def setupUi(self):
-        self.resize(500, 745)
+        self.resize(500, 650)
 
-        self.dateLabel.setFont(QFont("Times",14, QFont.Bold)) #TODO check wieight set to 75
+        self.dateLabel.setFont(QFont("Times", 14, QFont.Bold))  # check weight set to 75
 
         self.dateEdit.setMinimumSize(QtCore.QSize(200, 0))
-        self.dateEdit.setFont(QFont("Times",17))
+        self.dateEdit.setFont(QFont("Times", 17))
         self.dateEdit.setDateTime(QtCore.QDateTime(QtCore.QDate(2021, 8, 8), QtCore.QTime(0, 0, 0)))
 
         self.allDayEventRadioButton.setFont(QFont("Times", 14))
@@ -76,7 +77,7 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
 
         self.fromLabel.setMinimumSize(QtCore.QSize(80, 0))
         self.fromLabel.setMaximumSize(QtCore.QSize(80, 16777215))
-        self.fromLabel.setFont(QFont("Times", 14, QFont.Bold)) # weight 75
+        self.fromLabel.setFont(QFont("Times", 14, QFont.Bold))  # weight 75
 
         self.timeFromEdit.setMinimumSize(QtCore.QSize(120, 30))
         self.timeFromEdit.setMaximumSize(QtCore.QSize(100, 16777215))
@@ -84,14 +85,14 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
 
         self.toLabel.setMinimumSize(QtCore.QSize(40, 0))
         self.toLabel.setMaximumSize(QtCore.QSize(80, 16777215))
-        self.toLabel.setFont(QFont("Times", 14, QFont.Bold)) # weight 75
+        self.toLabel.setFont(QFont("Times", 14, QFont.Bold))  # weight 75
 
         self.timeToEdit.setMinimumSize(QtCore.QSize(120, 30))
         self.timeToEdit.setMaximumSize(QtCore.QSize(100, 16777215))
         self.timeToEdit.setFont(QFont("Times", 12))
         self.timeToEdit.setDateTime(QtCore.QDateTime(QtCore.QDate(2000, 1, 1), QtCore.QTime(1, 0, 0)))
 
-        self.eventTypeLabel.setFont(QFont("Times", 14, QFont.Bold)) # weight 75
+        self.eventTypeLabel.setFont(QFont("Times", 14, QFont.Bold))  # weight 75
 
         self.eventTypeComboBox.setMaximumSize(QtCore.QSize(250, 16777215))
         self.eventTypeComboBox.setFont(QFont("Times", 10))
@@ -100,23 +101,23 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
 
         self.addEventTypeButton.setText("Add new type")
         self.addEventTypeButton.setMaximumSize(QtCore.QSize(100, 16777215))
-        self.addEventTypeButton.setFont(QFont("Times", 9)) #TODO set Kerning
+        self.addEventTypeButton.setFont(QFont("Times", 9))  # set Kerning
         self.addEventTypeButton.setStyleSheet("background-color: rgb(128, 200, 255);")
 
         self.titleLabel.setMinimumSize(QtCore.QSize(110, 0))
-        self.titleLabel.setFont(QFont("Times", 14, QFont.Bold)) # weight 75
+        self.titleLabel.setFont(QFont("Times", 14, QFont.Bold))  # weight 75
 
         self.eventTitlePlainTextEdit.setMaximumSize(QtCore.QSize(340, 60))
         self.eventTitlePlainTextEdit.setFont(QFont("Times", 10))
 
         self.descriptionLabel.setMinimumSize(QtCore.QSize(110, 0))
-        self.descriptionLabel.setFont(QFont("Times", 14, QFont.Bold)) # weight 75
+        self.descriptionLabel.setFont(QFont("Times", 14, QFont.Bold))  # weight 75
 
         self.eventDescriptionPlaneTextEdit.setMaximumSize(QtCore.QSize(340, 80))
         self.eventDescriptionPlaneTextEdit.setFont(QFont("Times", 10))
 
         self.localizationLabel.setMinimumSize(QtCore.QSize(110, 0))
-        self.localizationLabel.setFont(QFont("Times", 14, QFont.Bold)) # weight 75
+        self.localizationLabel.setFont(QFont("Times", 14, QFont.Bold))  # weight 75
 
         self.eventLocalizationPlainTextEdit.setMaximumSize(QtCore.QSize(340, 40))
         self.eventLocalizationPlainTextEdit.setFont(QFont("Times", 10))
@@ -131,12 +132,12 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         self.beforeEventLabel.setFont(QFont("Times", 10))
 
         self.cancelButton.setMinimumSize(QtCore.QSize(0, 40))
-        self.cancelButton.setFont(QFont("Times", 11, QFont.Bold)) # weight 75
+        self.cancelButton.setFont(QFont("Times", 11, QFont.Bold))  # weight 75
         self.cancelButton.setStyleSheet("background-color: rgb(213, 0, 0);")
         self.cancelButton.setText("Cancel")
 
         self.confrimEventButton.setMinimumSize(QtCore.QSize(0, 40))
-        self.confrimEventButton.setFont(QFont("Times", 11, QFont.Bold)) # weight 75
+        self.confrimEventButton.setFont(QFont("Times", 11, QFont.Bold))  # weight 75
         self.confrimEventButton.setStyleSheet("background-color: rgb(0, 181, 0);")
         self.confrimEventButton.setText("Confirm")
 
@@ -179,7 +180,7 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
                                                                QtWidgets.QSizePolicy.Minimum))
 
         self.horizontalLayout_8.addItem(QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding,
-                                                             QtWidgets.QSizePolicy.Minimum))
+                                                              QtWidgets.QSizePolicy.Minimum))
 
         self.horizontalLayout_7.addWidget(self.toLabel)
         self.horizontalLayout_7.addWidget(self.timeToEdit)
@@ -190,7 +191,7 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         self.horizontalLayout_10.addLayout(self.horizontalLayout_8)
         self.horizontalLayout_10.setStretch(2, 1)
         self.verticalLayout.addLayout(self.horizontalLayout_10)
-        self.verticalLayout.addItem(QtWidgets.QSpacerItem(20, 80, QtWidgets.QSizePolicy.Minimum,
+        self.verticalLayout.addItem(QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum,
                                                           QtWidgets.QSizePolicy.Fixed))
         self.horizontalLayout_6.addWidget(self.eventTypeLabel)
         self.horizontalLayout_6.addWidget(self.eventTypeComboBox)
@@ -198,7 +199,7 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         self.horizontalLayout_6.setStretch(1, 1)
         self.verticalLayout.addLayout(self.horizontalLayout_6)
         self.verticalLayout.addItem(QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Minimum,
-                                                           QtWidgets.QSizePolicy.Fixed))
+                                                          QtWidgets.QSizePolicy.Fixed))
         self.horizontalLayout_5.addWidget(self.titleLabel)
         self.horizontalLayout_5.addWidget(self.eventTitlePlainTextEdit)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
@@ -273,7 +274,7 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         self.ui_newEventTypeWindow = Ui_NewEventTypeWindow()
         self.ui_newEventTypeWindow.setupUi(self.mainWindow)
         self.mainWindow.show()
-    #TODO jumppoint2
+    # jump point2
 
     def closeWindow(self):
         self.close()
@@ -340,9 +341,9 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
                 "reminder": str(self.remindBeforeComboBox.currentText())
             }
 
-        #jsonEvent = json.dumps(eventDict, indent=13)
+        # jsonEvent = json.dumps(eventDict, indent=13)
         # TODO add to the events list
-        #eventsList.append(event)
+        # eventsList.append(event)
 
         return eventDict
 
