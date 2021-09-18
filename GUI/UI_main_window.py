@@ -298,7 +298,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        #own code begin
+        # own code begin
 
         self.dateOnDateBar = date.today()
         self.prevButton.clicked.connect(self.changeMonthToPrev)
@@ -326,7 +326,7 @@ class Ui_MainWindow(object):
         self.ui_newEventWindow = Ui_NewEventWindow()
         self.newEventButton.clicked.connect(self.openNewEventWindow)
 
-        #own code end
+        # own code end
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -406,7 +406,8 @@ class Ui_MainWindow(object):
         pass
 
     def generateCalendarDays(self):
-        firstWeekDayOfMonth = int(datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
+        firstWeekDayOfMonth = int(
+            datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
         currentMonthRange = int(monthrange(self.dateOnDateBar.year, self.dateOnDateBar.month)[1])
 
         if firstWeekDayOfMonth == 0:
@@ -508,9 +509,9 @@ class Ui_MainWindow(object):
         self.setDateInBar()
 
 
-
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
