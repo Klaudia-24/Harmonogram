@@ -21,7 +21,7 @@ from Objects.Event import eventsDictionary
 class Ui_NewEventWindow(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
-
+        self.dateFromCalendar= None
         self.confrimEventButton = QtWidgets.QPushButton()
         self.remindBeforeComboBox = QtWidgets.QComboBox()
         self.cancelButton = QtWidgets.QPushButton()
@@ -70,7 +70,6 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         self.dateEdit.setMinimumSize(QtCore.QSize(200, 0))
         self.dateEdit.setFont(QFont("Times", 17))
         self.dateEdit.setDateTime(QtCore.QDateTime(QtCore.QDate(2021, 8, 8), QtCore.QTime(0, 0, 0)))
-
         self.allDayEventRadioButton.setFont(QFont("Times", 14))
 
         self.setDurationEventRadioButton.setFont(QFont("Times", 14))
@@ -279,6 +278,11 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
     def closeWindow(self):
         self.close()
 
+    def setDateFromCalendar(self, date):
+        self.dateFromCalendar = date
+        self.dateEdit.setDateTime(QtCore.QDateTime(QtCore.QDate(self.dateFromCalendar.year, self.dateFromCalendar.month,
+                                                                self.dateFromCalendar.day), QtCore.QTime(0, 0, 0)))
+
     def changeEventToJsonFile(self):
 
         eventDict = {}
@@ -352,10 +356,9 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         writeToJsonFile("./events.json", eventsDictionary)
         self.closeWindow()
 
-
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    ui = Ui_NewEventWindow()
+    ui = Ui_NewEventWindow(4)
     ui.show()
     sys.exit(app.exec_())

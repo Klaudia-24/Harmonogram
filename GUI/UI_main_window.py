@@ -322,7 +322,6 @@ class Ui_MainWindow(object):
         self.weekLabel.setFont(QFont('Times', 11, QtGui.QFont.Bold))
         self.weekLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.calendarGridLayout.setSpacing(1)
-
         self.ui_newEventWindow = Ui_NewEventWindow()
         self.newEventButton.clicked.connect(self.openNewEventWindow)
 
@@ -402,8 +401,10 @@ class Ui_MainWindow(object):
         self.monthFromDate.setText(self.dateOnDateBar.strftime("%B"))
         self.yearFromDate.setText(str(self.dateOnDateBar.year))
 
-    def changeDateOnDateBar(self):
-        pass
+    def getDateOnDateBar(self):
+        return self.dateOnDateBar
+
+
 
     def generateCalendarDays(self):
         firstWeekDayOfMonth = int(
@@ -471,6 +472,7 @@ class Ui_MainWindow(object):
             getattr(getattr(self, 'weekNumber' + str(i)), 'setText')(str(number))
 
     def openNewEventWindow(self):
+        self.ui_newEventWindow.setDateFromCalendar(self.dateOnDateBar)
         self.ui_newEventWindow.show()
 
     def getLabelNamefromCalendarDayLabel(self, event, labelName):
