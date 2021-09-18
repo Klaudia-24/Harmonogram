@@ -494,6 +494,8 @@ class Ui_MainWindow(object):
         clickedIndex = self.dateOnDateBar.day + firstWeekDayOfMonth - 1
         getattr(getattr(self, 'day_' + str(clickedIndex)), 'setStyleSheet')("background-color: rgb(102, 204, 153)")
 
+    def getCurrentDate(self):
+        pass
 
     def setClickedDateInDateBar(self, labelText: str, labelName: str):
         offset = 0
