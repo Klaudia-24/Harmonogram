@@ -22,17 +22,11 @@ def readFromJsonFileToDict(fileName, dictName, keyName):
         messageWindow = QMessageBox()
         messageWindow.setWindowTitle("File not found")
         messageWindow.setText("File with saved events was not found. New file will be created.")
-        button = messageWindow.exec()
-
-        if button == QMessageBox.Ok:
-            print("OK!")
+        messageWindow.exec()
 
     except PermissionError:
 
         messageWindow = QMessageBox()
         messageWindow.setWindowTitle("Problem with permission")
         messageWindow.setText("Occurred some problems with file permission.")
-        button = messageWindow.exec()
-
-        if button == QMessageBox.Ok:
-            print("OK!")
+        messageWindow.exec()
