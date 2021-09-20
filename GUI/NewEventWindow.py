@@ -254,7 +254,6 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
 
         self.init_ui()
 
-
     def init_ui(self):
         # own code begin
         self.remindBeforeComboBox.addItem("15 minutes")
@@ -344,11 +343,6 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
                 "localization": self.eventLocalizationPlainTextEdit.toPlainText(),
                 "reminder": str(self.remindBeforeComboBox.currentText())
             }
-
-        # jsonEvent = json.dumps(eventDict, indent=13)
-        # TODO add to the events list
-        # eventsList.append(event)
-
         return eventDict
 
     def confirmAddingNewEvent(self):
@@ -359,6 +353,6 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    ui = Ui_NewEventWindow(4)
+    ui = Ui_NewEventWindow()
     ui.show()
     sys.exit(app.exec_())
