@@ -1,5 +1,7 @@
 import json
 
+from PyQt5.QtWidgets import QMessageBox
+
 
 def writeToJsonFile(fileName, dataToWrite):
 
@@ -15,8 +17,22 @@ def readFromJsonFileToDict(fileName, dictName, keyName):
             for i in dataFromFile[keyName]:
                 dictName[keyName].append(i)
     except FileNotFoundError:
-        pass
-    #TODO add dialog window with information
+        #TODO add dialog window with information
+
+        messageWindow = QMessageBox()
+        messageWindow.setWindowTitle("File not found")
+        messageWindow.setText("File with saved events was not found. New file will be created.")
+        button = messageWindow.exec()
+
+        if button == QMessageBox.Ok:
+            print("OK!")
 
     except PermissionError:
-        pass
+
+        messageWindow = QMessageBox()
+        messageWindow.setWindowTitle("Problem with permission")
+        messageWindow.setText("Occurred some problems with file permission.")
+        button = messageWindow.exec()
+
+        if button == QMessageBox.Ok:
+            print("OK!")
