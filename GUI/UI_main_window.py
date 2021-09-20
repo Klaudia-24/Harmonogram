@@ -404,8 +404,6 @@ class Ui_MainWindow(object):
     def getDateOnDateBar(self):
         return self.dateOnDateBar
 
-
-
     def generateCalendarDays(self):
         firstWeekDayOfMonth = int(
             datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
@@ -493,9 +491,6 @@ class Ui_MainWindow(object):
 
         clickedIndex = self.dateOnDateBar.day + firstWeekDayOfMonth - 1
         getattr(getattr(self, 'day_' + str(clickedIndex)), 'setStyleSheet')("background-color: rgb(102, 204, 153)")
-
-    def getCurrentDate(self):
-        pass
 
     def setClickedDateInDateBar(self, labelText: str, labelName: str):
         offset = 0
