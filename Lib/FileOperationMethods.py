@@ -17,16 +17,16 @@ def readFromJsonFileToDict(fileName, dictName, keyName):
             for i in dataFromFile[keyName]:
                 dictName[keyName].append(i)
     except FileNotFoundError:
-        #TODO add dialog window with information
 
         messageWindow = QMessageBox()
-        messageWindow.setWindowTitle("File not found")
+        messageWindow.setWindowTitle("Info")
         messageWindow.setText("File with saved events was not found. New file will be created.")
         messageWindow.exec()
+        #raise, file with own errors
 
     except PermissionError:
 
         messageWindow = QMessageBox()
-        messageWindow.setWindowTitle("Problem with permission")
+        messageWindow.setWindowTitle("Info")
         messageWindow.setText("Occurred some problems with file permission.")
         messageWindow.exec()
