@@ -19,6 +19,8 @@ from Objects.Event import eventsDictionary
 
 
 class Ui_NewEventWindow(QtWidgets.QWidget):
+    """Represents window for collecting data and creating new event."""
+
     def __init__(self):
         super().__init__()
         self.dateFromCalendar= None
@@ -63,6 +65,8 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         self.setupUi()
 
     def setupUi(self):
+        """Set basic appearance of the window (basic distances between elements)."""
+
         self.resize(500, 650)
 
         self.dateLabel.setFont(QFont("Times", 14, QFont.Bold))  # check weight set to 75
@@ -254,8 +258,9 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
 
         self.init_ui()
 
-    def init_ui(self):
-        # own code begin
+    def init_ui(self) -> None:
+        """Contains additional setups and methods calls."""
+
         self.remindBeforeComboBox.addItem("15 minutes")
         self.remindBeforeComboBox.addItem("30 minutes")
         self.remindBeforeComboBox.addItem("1 hour")
@@ -267,22 +272,28 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
         FileOperationMethods.readFromJsonFileToDict("./events.json", eventsDictionary, "events")
         self.setDurationEventRadioButton.setChecked(True)
 
-    def openNewEventTypeWindow(self):
+    def openNewEventTypeWindow(self) -> None:
+        """Create a window for adding new type of the event."""
+
         self.mainWindow = QtWidgets.QMainWindow()
         self.ui_newEventTypeWindow = Ui_NewEventTypeWindow()
         self.ui_newEventTypeWindow.setupUi(self.mainWindow)
         self.mainWindow.show()
-    # jump point2
 
-    def closeWindow(self):
+    def closeWindow(self) -> None:
+        """Only close the opened window, used for 'Close' buttons etc."""
+
         self.close()
 
-    def setDateFromCalendar(self, date):
+    def setDateFromCalendar(self, date) -> None:
+        """Sets date in the date edit field. The date is taken from the date bar in the main window."""
+
         self.dateFromCalendar = date
         self.dateEdit.setDateTime(QtCore.QDateTime(QtCore.QDate(self.dateFromCalendar.year, self.dateFromCalendar.month,
                                                                 self.dateFromCalendar.day), QtCore.QTime(0, 0, 0)))
 
-    def changeEventToJsonFile(self):
+    def changeEventToJsonFile(self) -> dict:
+        """Changes the event object to the JSON dictionary."""
 
         eventDict = {}
 
@@ -345,7 +356,10 @@ class Ui_NewEventWindow(QtWidgets.QWidget):
             }
         return eventDict
 
-    def confirmAddingNewEvent(self):
+    def confirmAddingNewEvent(self) -> None:
+        """Used for 'Confirm' button. Adds new event to the events dictionary,
+        saves the event dictionary to the JSON file and closes the new event window."""
+
         eventsDictionary["events"].append(self.changeEventToJsonFile())
         writeToJsonFile("./events.json", eventsDictionary)
         self.closeWindow()
