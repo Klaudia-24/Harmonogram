@@ -1,6 +1,8 @@
 from calendar import *
 from datetime import date
 
+from dataclasses import dataclass, field
+
 eventsTypesColorsDict = {"Home": "#00b33c", "Work": "#1a75ff", "School": "#e62e00"}
 eventsDictionary = dict()
 eventsDictionary["events"] = []
@@ -86,3 +88,47 @@ class EventDuration:
 
     def getDateTimeTo(self):
         return self.__dateTimeTo
+
+
+# "eventId": "6044419142954959992",
+# "eventYear": 2021,
+# "eventMonth": 9,
+# "eventDay": 20,
+# "allDayEvent": 0,
+# "timeFromHour": 0,
+# "timeFromMinute": 0,
+# "timeToHour": 1,
+# "timeToMinute": 0,
+# "type": "Home",
+# "title": "xxxxx",
+# "description": "",
+# "localization": "",
+# "reminder": "15 minutes"
+
+
+@dataclass
+class Event_2:
+
+    #TODO use dataclass and json write/read
+
+    eventId: str = field(init=False)
+    eventYear: int
+    eventMonth: int
+    eventDay: int
+    allDayEvent: int
+    timeFromHour: int
+    timeFromMinute: int
+    timeToHour: int
+    timeToMinute: int
+    type: str
+    title: str
+    description: str
+    localization: str
+    reminder: str
+
+    def __post_init__(self):
+        self.eventId = self.__hash__()
+
+    def __hash__(self):
+        return hash((self.eventYear, self.eventMonth, self.eventDay, self.allDayEvent, self.timeFromHour, self.timeFromMinute,
+                     self.timeToHour, self.timeToMinute, self.type, self.title, self.description, self.localization, self.reminder))
