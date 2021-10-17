@@ -3,9 +3,14 @@ from PyQt5.QtWidgets import QLabel
 
 
 class QLabelClickable(QLabel):
-    def __init__(self, whenClicked, parent=None):
-        QtWidgets.QLabel.__init__(self, parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._whenClicked=None
+
+    def setClicked(self, whenClicked):
         self._whenClicked = whenClicked
 
     def mousePressEvent(self, event):
-        self._whenClicked(event, self.objectName())
+        if self._whenClicked is None:
+            return
+        self._whenClicked(event, self.objectName()) #TODO poprawić na przekazywanie jakiejkolwiek funkcji.

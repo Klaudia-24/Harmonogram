@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'NewEventWindow.ui'
+# Form implementation generated from reading ui file 'AGNewEventW.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtGui import QFont
 
 from Lib import FileOperationMethods
-from GUI.NewEventTypeWindow import Ui_NewEventTypeWindow
+from GUI.AGNewEventTypeW import Ui_NewEventTypeWindow
 from Objects.Event import *
 from Lib.FileOperationMethods import writeToJsonFile
 from Objects.Event import eventsDictionary
