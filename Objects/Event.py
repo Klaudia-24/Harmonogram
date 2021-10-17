@@ -111,7 +111,7 @@ class Event_2:
 
     #TODO use dataclass and json write/read
 
-    eventId: str = field(init=False)
+    eventId: str = field(init=False, repr=False)
     eventYear: int
     eventMonth: int
     eventDay: int
