@@ -1,5 +1,6 @@
 from GUI.AGMainW import Ui_MainWindow
 import GUI.AGNewEventW as nw
+import GUI.NewEventW as newEventW
 from PyQt5 import QtWidgets, QtCore
 from PyQt5 import QtCore, QtGui, QtWidgets
 from datetime import date
@@ -33,7 +34,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.weekLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.ui.calendarGridLayout.setSpacing(1)
 
-        self.ui.ui_newEventWindow = nw.Ui_NewEventWindow()
+        #self.ui.ui_newEventWindow = nw.Ui_NewEventWindow()
+        self.ui.ui_newEventWindow = newEventW.NewEventW()
         self.ui.newEventButton.clicked.connect(self.openNewEventWindow)
         self.dateOnDateBar = date.today()
         self.ui.prevButton.clicked.connect(self.changeMonthToPrev)
