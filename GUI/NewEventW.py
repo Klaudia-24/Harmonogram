@@ -1,7 +1,6 @@
 import datetime
 
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtGui import QFont
 
 from Lib import FileOperationMethods
 from GUI.AGNewEventTypeW import Ui_NewEventTypeWindow
@@ -9,15 +8,14 @@ from Objects.Event import *
 from Lib.FileOperationMethods import writeToJsonFile
 from Objects.Event import eventsDictionary
 
-import GUI.AGNewEventW_2 as agNewEventW
-from GUI.AGNewEventW_2 import Ui_NewEventWindow
+from GUI.AGNewEventW3 import Ui_Form
 
 class NewEventW(QtWidgets.QWidget):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.newEventW = Ui_NewEventWindow()
+        self.newEventW = Ui_Form()
         self.newEventW.setupUi(self)
         self.init_ui()
 
@@ -61,62 +59,62 @@ class NewEventW(QtWidgets.QWidget):
 
         eventDict = {}
 
-        if self.allDayEventRadioButton.isChecked():
+        if self.newEventW.allDayEventRadioButton.isChecked():
             timeFrom = datetime.datetime.strptime("00:00", '%H:%M')
             timeTo = datetime.datetime.strptime("23:59", '%H:%M')
             eventDuration = EventDuration(True, timeFrom, timeTo)
-            event = Event(datetime.datetime(self.dateEdit.date().year(), self.dateEdit.date().month(), self.dateEdit.date().day()),
-                          self.eventTitlePlainTextEdit.toPlainText(), self.eventDescriptionPlaneTextEdit.toPlainText(),
-                          self.eventLocalizationPlainTextEdit.toPlainText(), eventDuration,
-                          str(self.eventTypeComboBox.currentText()), str(self.remindBeforeComboBox.currentText()))
+            event = Event(datetime.datetime(self.newEventW.dateEdit.date().year(), self.newEventW.dateEdit.date().month(), self.newEventW.dateEdit.date().day()),
+                          self.newEventW.eventTitlePlainTextEdit.toPlainText(), self.newEventW.eventDescriptionPlaneTextEdit.toPlainText(),
+                          self.newEventW.eventLocalizationPlainTextEdit.toPlainText(), eventDuration,
+                          str(self.newEventW.eventTypeComboBox.currentText()), str(self.newEventW.remindBeforeComboBox.currentText()))
 
             eventHash = hash(event)
 
             eventDict = {
                 "eventId": str(eventHash),
-                "eventYear": self.dateEdit.date().year(),
-                "eventMonth": self.dateEdit.date().month(),
-                "eventDay": self.dateEdit.date().day(),
+                "eventYear": self.newEventW.dateEdit.date().year(),
+                "eventMonth": self.newEventW.dateEdit.date().month(),
+                "eventDay": self.newEventW.dateEdit.date().day(),
                 "allDayEvent": int(eventDuration.getIsAllDayEvent()),
                 "timeFromHour": 0,
                 "timeFromMinute": 0,
                 "timeToHour": 23,
                 "timeToMinute": 59,
-                "type": str(self.eventTypeComboBox.currentText()),
-                "title": self.eventTitlePlainTextEdit.toPlainText(),
-                "description": self.eventDescriptionPlaneTextEdit.toPlainText(),
-                "localization": self.eventLocalizationPlainTextEdit.toPlainText(),
-                "reminder": str(self.remindBeforeComboBox.currentText())
+                "type": str(self.newEventW.eventTypeComboBox.currentText()),
+                "title": self.newEventW.eventTitlePlainTextEdit.toPlainText(),
+                "description": self.newEventW.eventDescriptionPlaneTextEdit.toPlainText(),
+                "localization": self.newEventW.eventLocalizationPlainTextEdit.toPlainText(),
+                "reminder": str(self.newEventW.remindBeforeComboBox.currentText())
             }
 
-        if self.setDurationEventRadioButton.isChecked():
+        if self.newEventW.setDurationEventRadioButton.isChecked():
 
-            timeFrom = datetime.datetime.strptime(str(self.timeFromEdit.time().hour()) + ":" + str(self.timeFromEdit.time().minute()), '%H:%M')
-            timeTo = datetime.datetime.strptime(str(self.timeToEdit.time().hour()) + ":" + str(self.timeToEdit.time().minute()), '%H:%M')
+            timeFrom = datetime.datetime.strptime(str(self.newEventW.timeFromEdit.time().hour()) + ":" + str(self.newEventW.timeFromEdit.time().minute()), '%H:%M')
+            timeTo = datetime.datetime.strptime(str(self.newEventW.timeToEdit.time().hour()) + ":" + str(self.newEventW.timeToEdit.time().minute()), '%H:%M')
 
             eventDuration = EventDuration(False, timeFrom, timeTo)
-            event = Event(datetime.datetime(self.dateEdit.date().year(), self.dateEdit.date().month(), self.dateEdit.date().day()),
-                          self.eventTitlePlainTextEdit.toPlainText(), self.eventDescriptionPlaneTextEdit.toPlainText(),
-                          self.eventLocalizationPlainTextEdit.toPlainText(), eventDuration,
-                          str(self.eventTypeComboBox.currentText()), str(self.remindBeforeComboBox.currentText()))
+            event = Event(datetime.datetime(self.newEventW.dateEdit.date().year(), self.newEventW.dateEdit.date().month(), self.newEventW.dateEdit.date().day()),
+                          self.newEventW.eventTitlePlainTextEdit.toPlainText(), self.newEventW.eventDescriptionPlaneTextEdit.toPlainText(),
+                          self.newEventW.eventLocalizationPlainTextEdit.toPlainText(), eventDuration,
+                          str(self.newEventW.eventTypeComboBox.currentText()), str(self.newEventW.remindBeforeComboBox.currentText()))
 
             eventHash = hash(event)
 
             eventDict = {
                 "eventId": str(eventHash),
-                "eventYear": self.dateEdit.date().year(),
-                "eventMonth": self.dateEdit.date().month(),
-                "eventDay": self.dateEdit.date().day(),
+                "eventYear": self.newEventW.dateEdit.date().year(),
+                "eventMonth": self.newEventW.dateEdit.date().month(),
+                "eventDay": self.newEventW.dateEdit.date().day(),
                 "allDayEvent": int(eventDuration.getIsAllDayEvent()),
-                "timeFromHour": self.timeFromEdit.time().hour(),
-                "timeFromMinute": self.timeFromEdit.time().minute(),
-                "timeToHour": self.timeToEdit.time().hour(),
-                "timeToMinute": self.timeToEdit.time().minute(),
-                "type": str(self.eventTypeComboBox.currentText()),
-                "title": self.eventTitlePlainTextEdit.toPlainText(),
-                "description": self.eventDescriptionPlaneTextEdit.toPlainText(),
-                "localization": self.eventLocalizationPlainTextEdit.toPlainText(),
-                "reminder": str(self.remindBeforeComboBox.currentText())
+                "timeFromHour": self.newEventW.timeFromEdit.time().hour(),
+                "timeFromMinute": self.newEventW.timeFromEdit.time().minute(),
+                "timeToHour": self.newEventW.timeToEdit.time().hour(),
+                "timeToMinute": self.newEventW.timeToEdit.time().minute(),
+                "type": str(self.newEventW.eventTypeComboBox.currentText()),
+                "title": self.newEventW.eventTitlePlainTextEdit.toPlainText(),
+                "description": self.newEventW.eventDescriptionPlaneTextEdit.toPlainText(),
+                "localization": self.newEventW.eventLocalizationPlainTextEdit.toPlainText(),
+                "reminder": str(self.newEventW.remindBeforeComboBox.currentText())
             }
         return eventDict
 
