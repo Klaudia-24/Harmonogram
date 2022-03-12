@@ -1,6 +1,3 @@
-from calendar import *
-from datetime import date
-
 from dataclasses import dataclass, field
 
 eventsTypesColorsDict = {"Home": "#00b33c", "Work": "#1a75ff", "School": "#e62e00"}
