@@ -6,6 +6,7 @@ import datetime
 import dateutils
 from calendar import monthrange
 
+
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -32,14 +33,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.weekLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.ui.calendarGridLayout.setSpacing(1)
 
-        #self.ui.ui_newEventWindow = nw.Ui_NewEventWindow()
-        self.ui.ui_newEventWindow = newEventW.NewEventW()
+        self.ui_newEventWindow = newEventW.NewEventW()
         self.ui.newEventButton.clicked.connect(self.openNewEventWindow)
         self.dateOnDateBar = date.today()
         self.ui.prevButton.clicked.connect(self.changeMonthToPrev)
         self.ui.nextButton.clicked.connect(self.changeMonthToNext)
-        for i in range(1,43):
-            getattr(getattr(self.ui, 'day_' + str(i)), 'setClicked')(self.getLabelNamefromCalendarDayLabel)
+        for i in range(1, 43):
+            getattr(getattr(self.ui, 'day_' + str(i)), 'setClicked')(self.getLabelNameFromCalendarDayLabel)
 
         self.generateCalendarDays()
 
@@ -105,8 +105,8 @@ class MainWindow(QtWidgets.QMainWindow):
             firstWeekDayOfMonth = 7
 
         todayIndex = date.today().day + firstWeekDayOfMonth - 1
-        getattr(getattr( self.ui, 'day_' + str(todayIndex)), 'setStyleSheet')("background-color: rgb(51, 153, 102)")
-        getattr(getattr( self.ui, 'day_' + str(todayIndex)), 'setFont')(QtGui.QFont('Times', 11, QtGui.QFont.Bold))
+        getattr(getattr(self.ui, 'day_' + str(todayIndex)), 'setStyleSheet')("background-color: rgb(51, 153, 102)")
+        getattr(getattr(self.ui, 'day_' + str(todayIndex)), 'setFont')(QtGui.QFont('Times', 11, QtGui.QFont.Bold))
 
     def setWeekNumbers(self):
         firstSundayDate = date(self.dateOnDateBar.year, self.dateOnDateBar.month, int(self.ui.day_7.text()))
@@ -117,8 +117,8 @@ class MainWindow(QtWidgets.QMainWindow):
             getattr(getattr(self.ui, 'weekNumber' + str(i)), 'setText')(str(number))
 
     def openNewEventWindow(self):
-        self.ui.ui_newEventWindow.setDateFromCalendar(self.dateOnDateBar)
-        self.ui.ui_newEventWindow.show()
+        self.ui_newEventWindow.setDateFromCalendar(self.dateOnDateBar)
+        self.ui_newEventWindow.show()
 
     def distinguishClickedDay(self):
         firstWeekDayOfMonth = int(
@@ -145,7 +145,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.generateCalendarDays()
         self.setDateInBar()
 
-    def getLabelNamefromCalendarDayLabel(self, event, labelName):
+    def getLabelNameFromCalendarDayLabel(self, event, labelName):
         button = event.button()
         modify = event.modifiers()
         if modify == QtCore.Qt.NoModifier and button == QtCore.Qt.LeftButton:
