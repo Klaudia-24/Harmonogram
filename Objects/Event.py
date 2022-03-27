@@ -2,7 +2,10 @@ from dataclasses import dataclass, field
 
 eventsTypesColorsDict = {"Home": "#00b33c", "Work": "#1a75ff", "School": "#e62e00"}
 eventsDictionary = dict()
+eventTypesDictionary = dict()
 eventsDictionary["events"] = []
+eventTypesDictionary["eventTypes"] = []
+
 
 class Event:
 
@@ -108,7 +111,7 @@ class Event_2:
 
     #TODO use dataclass and json write/read
 
-    eventId: str = field(init=False, repr=False)
+    eventId: int = field(init=False, repr=False)
     eventYear: int
     eventMonth: int
     eventDay: int
