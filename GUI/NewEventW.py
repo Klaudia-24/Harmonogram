@@ -34,6 +34,7 @@ class NewEventW(QtWidgets.QWidget):
         FileOperationMethods.readFromJsonFileToDict("./events.json", eventsDictionary, "events")
         FileOperationMethods.readFromJsonFileToDict("./eventTypes.json", eventTypesDictionary, "eventTypes")
         self.addEventTypesToComboBox()
+        # self.newEventW.setDurationEventRadioButton.toggled.connect(self.eventDurationDisable)
         self.newEventW.setDurationEventRadioButton.setChecked(True)
 
     def openNewEventTypeWindow(self) -> None:
@@ -135,3 +136,9 @@ class NewEventW(QtWidgets.QWidget):
         for i in tempList:
             for key, value in i.items():
                 self.newEventW.eventTypeComboBox.addItem(key)
+
+    # def eventDurationDisable(self):
+    #
+    #     self.newEventW.allDayEventRadioButton = self.sender()
+    #     if self.newEventW.setDurationEventRadioButton.isChecked():
+    #         pass
