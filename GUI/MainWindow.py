@@ -153,3 +153,5 @@ class MainWindow(QtWidgets.QMainWindow):
             self.setClickedDateInDateBar(labelObject.text(), labelName)
             self.distinguishClickedDay()
             return
+
+#TODO colors in calendar days for events also by sarting app and changing months

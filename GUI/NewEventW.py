@@ -44,6 +44,7 @@ class NewEventW(QtWidgets.QWidget):
         self.ui_newEventTypeWindow = Ui_NewEventTypeWindow()
         self.ui_newEventTypeWindow.setupUi(self.mainWindow)
         self.mainWindow.show()
+        # TODO refresh new event types here or by slots
 
     def closeWindow(self) -> None:
         """Only close the opened window, used for 'Close' buttons etc."""
@@ -142,3 +143,4 @@ class NewEventW(QtWidgets.QWidget):
         self.newEventW.allDayEventRadioButton = self.sender()
         if self.newEventW.setDurationEventRadioButton.isChecked():
             pass
+
