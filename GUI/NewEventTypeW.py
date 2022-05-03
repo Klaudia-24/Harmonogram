@@ -11,11 +11,32 @@ class NewTypeEventW(QtWidgets.QWidget):
         self.newEventTypeW = Ui_NewEventTypeWindow()
         self.newEventTypeW.setupUi(self)
 
-        #self.dialogColorW = Window()
-        #TODO move buttons clicked connect here like in MainWindow
+        self.dialogColorW = Window()
+        # TODO move buttons clicked connect here like in MainWindow
 
-        self.newEventTypeW.colorsPaletteButton.setStyleSheet("background-image : url(paletteImage.png);")
-        self.newEventTypeW.setEventColorButton.clicked.connect(self.getColorFromDialog)
+        self.newEventTypeW.colorsPaletteButton.setStyleSheet("QPushButton {"
+                                                             
+                                                             "border-radius: 6px;"
+                                                             "  background-image: url(./WindowObjects/paletteImage.png);"
+                                                             "background-repeat:no-repeat;"
+                                                             " background-position:center;"
+                                                             "  min-width: 80px;"
+                                                             "}"
+
+                                                             "QPushButton:pressed {"
+                                                             "   background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+                                                             " stop: 0 #dadbde, stop: 1 #f6f7fa);"
+                                                             "}"
+
+                                                             "QPushButton:flat {"
+                                                             "   border: none; /* no border for a flat push button */"
+                                                             "}"
+
+                                                             "QPushButton:default {"
+                                                             "    border-color: navy; /* make the default button prominent */"
+                                                             "}")
+
+        self.newEventTypeW.colorsPaletteButton.clicked.connect(self.getColorFromDialog)
 
         self.newEventTypeW.savePushButton.clicked.connect(self.saveNewEventType)
         self.newEventTypeW.cancelPushButton.clicked.connect(self.cancelNewEventTypeAdding)
@@ -29,4 +50,4 @@ class NewTypeEventW(QtWidgets.QWidget):
     def cancelNewEventTypeAdding(self):
         print("Cancel button")
 
-#TODO add button for adding new event type and method
+# TODO add button for adding new event type and method
