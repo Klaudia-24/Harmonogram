@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(513, 711)
+        Form.resize(513, 741)
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -280,7 +280,7 @@ class Ui_Form(object):
         font.setBold(True)
         font.setWeight(75)
         self.cancelButton.setFont(font)
-        self.cancelButton.setStyleSheet("background-color: rgb(213, 0, 0);")
+        self.cancelButton.setStyleSheet("background-color: rgb(255, 51, 51);")
         self.cancelButton.setObjectName("cancelButton")
         self.horizontalLayout.addWidget(self.cancelButton)
         spacerItem22 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -292,7 +292,7 @@ class Ui_Form(object):
         font.setBold(True)
         font.setWeight(75)
         self.addEventButton.setFont(font)
-        self.addEventButton.setStyleSheet("background-color: rgb(0, 181, 0);")
+        self.addEventButton.setStyleSheet("background-color: rgb(0, 179, 0);")
         self.addEventButton.setObjectName("addEventButton")
         self.horizontalLayout.addWidget(self.addEventButton)
         spacerItem23 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
