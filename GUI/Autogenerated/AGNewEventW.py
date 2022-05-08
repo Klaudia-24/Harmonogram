@@ -66,6 +66,7 @@ class Ui_Form(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         self.setDurationEventRadioButton.setFont(font)
+        self.setDurationEventRadioButton.setChecked(True)
         self.setDurationEventRadioButton.setObjectName("setDurationEventRadioButton")
         self.horizontalLayout_11.addWidget(self.setDurationEventRadioButton)
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)

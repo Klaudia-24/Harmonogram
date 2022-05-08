@@ -171,6 +171,9 @@
          <property name="text">
           <string>Set duration</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
