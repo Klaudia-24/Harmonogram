@@ -1,7 +1,13 @@
 {
     "eventTypes": [
-        {"Home": "#00b33c"},
-        {"Work": "#1a75ff"},
-        {"School": "#e62e00"}
+        {
+            "Home": "#00b33c"
+        },
+        {
+            "Work": "#1a75ff"
+        },
+        {
+            "School": "#e62e00"
+        }
     ]
 }
