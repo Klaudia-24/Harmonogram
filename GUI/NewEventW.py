@@ -31,7 +31,7 @@ class NewEventW(QtWidgets.QWidget):
         self.newEventW.addEventTypeButton.clicked.connect(self.openNewEventTypeWindow)
         self.newEventW.cancelButton.clicked.connect(self.closeWindow)
         self.newEventW.addEventButton.clicked.connect(self.confirmAddingNewEvent)
-        FileOperationMethods.readFromJsonFileToDict("./events.json", eventsDictionary, "events")
+        # FileOperationMethods.readFromJsonFileToDict("./events.json", eventsDictionary, "events")
         FileOperationMethods.readFromJsonFileToDict("./eventTypes.json", eventTypesDictionary, "eventTypes")
         self.addEventTypesToComboBox()
         # self.newEventW.setDurationEventRadioButton.toggled.connect(self.eventDurationDisable)
@@ -60,7 +60,7 @@ class NewEventW(QtWidgets.QWidget):
                                                                           self.newEventW.dateFromCalendar.month,
                                                                           self.newEventW.dateFromCalendar.day), QtCore.QTime(0, 0, 0)))
 
-    def changeEventToJsonFile(self) -> dict:
+    def createNewEvent(self) -> dict:
         """Changes the event object to the JSON dictionary."""
 
         eventDict = {}
@@ -78,9 +78,6 @@ class NewEventW(QtWidgets.QWidget):
 
             eventDict = {
                 "eventId": str(eventHash),
-                "eventYear": self.newEventW.dateEdit.date().year(),
-                "eventMonth": self.newEventW.dateEdit.date().month(),
-                "eventDay": self.newEventW.dateEdit.date().day(),
                 "allDayEvent": int(eventDuration.getIsAllDayEvent()),
                 "timeFromHour": 0,
                 "timeFromMinute": 0,
@@ -108,9 +105,6 @@ class NewEventW(QtWidgets.QWidget):
 
             eventDict = {
                 "eventId": str(eventHash),
-                "eventYear": self.newEventW.dateEdit.date().year(),
-                "eventMonth": self.newEventW.dateEdit.date().month(),
-                "eventDay": self.newEventW.dateEdit.date().day(),
                 "allDayEvent": int(eventDuration.getIsAllDayEvent()),
                 "timeFromHour": self.newEventW.timeFromEdit.time().hour(),
                 "timeFromMinute": self.newEventW.timeFromEdit.time().minute(),
@@ -125,12 +119,26 @@ class NewEventW(QtWidgets.QWidget):
         return eventDict
 
     def confirmAddingNewEvent(self) -> None:
-        """Used for 'Confirm' button. Adds new event to the events dictionary,
+        """Used for 'Confirm' button. Adds new event to the events' dictionary,
         saves the event dictionary to the JSON file and closes the new event window."""
 
-        eventsDictionary["events"].append(self.changeEventToJsonFile())
+        year = self.newEventW.dateEdit.date().year()
+        month = self.newEventW.dateEdit.date().month()
+        day = self.newEventW.dateEdit.date().day()
+
+        self.checkIfDateExists(year, month, day)
+        eventsDictionary["events"][year][month][day].append(self.createNewEvent())
         writeToJsonFile("./events.json", eventsDictionary)
+
         self.closeWindow()
+
+    def checkIfDateExists(self, year, month, day):
+        if year not in eventsDictionary["events"]:
+            eventsDictionary["events"][year] = dict()
+        if month not in eventsDictionary["events"][year]:
+            eventsDictionary["events"][year][month] = dict()
+        if day not in eventsDictionary["events"][year][month]:
+            eventsDictionary["events"][year][month][day] = []
 
     def addEventTypesToComboBox(self):
 

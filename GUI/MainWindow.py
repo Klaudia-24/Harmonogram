@@ -5,12 +5,16 @@ from datetime import date
 import datetime
 import dateutils
 from calendar import monthrange
+from PyQt5.QtGui import QPainter, QBrush, QPen
+
+from Lib import FileOperationMethods
+from Objects.Event import eventsDictionary
 
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
@@ -43,6 +47,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.generateCalendarDays()
 
+        FileOperationMethods.readFromJsonFileToDict("./events.json", eventsDictionary, "events")
+
+
     def setDateInBar(self):
         self.ui.dayFromDate.setText(str(self.dateOnDateBar.day))
         self.ui.monthFromDate.setText(self.dateOnDateBar.strftime("%B"))
@@ -72,7 +79,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 getattr(getattr(self.ui, 'day_' + str(i)), 'setStyleSheet')("background-color: rgb(128, 191, 255)")
 
             else:
-                getattr(getattr(self.ui, 'day_' + str(i)), 'setText')(str(i - firstWeekDayOfMonth - currentMonthRange + 1))
+                getattr(getattr(self.ui, 'day_' + str(i)), 'setText')(
+                    str(i - firstWeekDayOfMonth - currentMonthRange + 1))
                 getattr(getattr(self.ui, 'day_' + str(i)), 'setStyleSheet')("background-color: rgb(204, 230, 255)")
 
         self.setDateInBar()
@@ -154,4 +162,4 @@ class MainWindow(QtWidgets.QMainWindow):
             self.distinguishClickedDay()
             return
 
-#TODO colors in calendar days for events also by sarting app and changing months
+# TODO colors in calendar days for events also by starting app and changing months
