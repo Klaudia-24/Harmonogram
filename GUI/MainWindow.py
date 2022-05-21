@@ -9,8 +9,7 @@ import dateutils
 from calendar import monthrange
 from PyQt5.QtGui import QPainter, QBrush, QPen
 
-from Lib import FileOperationMethods
-from Objects.Event import eventsDictionary
+from Objects.Event import loadEventList, loadEventTypeList
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -38,7 +37,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.weekLabel.setFont(QtGui.QFont('Times', 11, QtGui.QFont.Bold))
         self.ui.weekLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.ui.calendarGridLayout.setSpacing(1)
-
+        loadEventTypeList()
+        loadEventList()
         self.ui_newEventWindow = newEventW.NewEventW()
         self.ui.newEventButton.clicked.connect(self.openNewEventWindow)
         self.dateOnDateBar = date.today()
@@ -48,9 +48,6 @@ class MainWindow(QtWidgets.QMainWindow):
             getattr(getattr(self.ui, 'day_' + str(i)), 'setClicked')(self.getLabelNameFromCalendarDayLabel)
 
         self.generateCalendarDays()
-
-        FileOperationMethods.readFromJsonFileToDict_v2("./events.json", eventsDictionary, "events")
-        print(json.dumps(eventsDictionary, indent=7))
 
 
     def setDateInBar(self):

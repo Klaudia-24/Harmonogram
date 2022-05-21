@@ -35,7 +35,6 @@ def readFromJsonFileToDict_v2(fileName, dictName, keyName):
     try:
         with open(fileName, 'r') as file:
             dataFromFile = json.load(file)
-            print(dataFromFile)
             dictName[keyName] = dataFromFile[keyName]
             # for i in dataFromFile[keyName]:
             #     dictName[keyName].append(i)
