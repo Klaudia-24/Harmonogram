@@ -1,4 +1,5 @@
 import datetime
+import json
 
 from PyQt5 import QtCore, QtWidgets
 
@@ -122,23 +123,23 @@ class NewEventW(QtWidgets.QWidget):
         """Used for 'Confirm' button. Adds new event to the events' dictionary,
         saves the event dictionary to the JSON file and closes the new event window."""
 
-        year = self.newEventW.dateEdit.date().year()
-        month = self.newEventW.dateEdit.date().month()
-        day = self.newEventW.dateEdit.date().day()
+        year = int(self.newEventW.dateEdit.date().year())
+        month = int(self.newEventW.dateEdit.date().month())
+        day = int(self.newEventW.dateEdit.date().day())
 
-        self.checkIfDateExists(year, month, day)
+        checkIfDateExists(year, month, day)
         eventsDictionary["events"][year][month][day].append(self.createNewEvent())
         writeToJsonFile("./events.json", eventsDictionary)
 
         self.closeWindow()
 
-    def checkIfDateExists(self, year, month, day):
-        if year not in eventsDictionary["events"]:
-            eventsDictionary["events"][year] = dict()
-        if month not in eventsDictionary["events"][year]:
-            eventsDictionary["events"][year][month] = dict()
-        if day not in eventsDictionary["events"][year][month]:
-            eventsDictionary["events"][year][month][day] = []
+    # def checkIfDateExists(self, year, month, day):
+    #     if year not in eventsDictionary["events"]:
+    #         eventsDictionary["events"][year] = dict()
+    #     if month not in eventsDictionary["events"][year]:
+    #         eventsDictionary["events"][year][month] = dict()
+    #     if day not in eventsDictionary["events"][year][month]:
+    #         eventsDictionary["events"][year][month][day] = []
 
     def addEventTypesToComboBox(self):
 
@@ -151,6 +152,10 @@ class NewEventW(QtWidgets.QWidget):
     def updateEventTypeComboBox(self, newEventType: str):
         self.newEventW.eventTypeComboBox.addItem(newEventType)
 
+    def clearEventDataInFormular(self):
+        self.newEventW.eventTitlePlainTextEdit.setPlainText("")
+        self.newEventW.eventDescriptionPlaneTextEdit.setPlainText("")
+        self.newEventW.eventLocalizationPlainTextEdit.setPlainText("")
 
     # def eventDurationDisable(self):
     #

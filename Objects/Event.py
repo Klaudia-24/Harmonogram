@@ -132,3 +132,12 @@ class Event_2:
     def __hash__(self):
         return hash((self.eventYear, self.eventMonth, self.eventDay, self.allDayEvent, self.timeFromHour, self.timeFromMinute,
                      self.timeToHour, self.timeToMinute, self.type, self.title, self.description, self.localization, self.reminder))
+
+def checkIfDateExists(year, month, day):
+    global eventsDictionary
+    if year not in eventsDictionary["events"]:
+        eventsDictionary["events"][year] = dict()
+    if month not in eventsDictionary["events"][year]:
+        eventsDictionary["events"][year][month] = dict()
+    if day not in eventsDictionary["events"][year][month]:
+        eventsDictionary["events"][year][month][day] = []
