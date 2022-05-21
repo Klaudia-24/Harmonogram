@@ -1,19 +1,10 @@
 {
-    "eventTypes": [
-        {
-            "Home": "#00b33c"
-        },
-        {
-            "Work": "#1a75ff"
-        },
-        {
-            "School": "#e62e00"
-        },
-        {
-            "xxx": "#0000ff"
-        },
-        {
-            "xxxx": "#0000ff"
-        }
-    ]
+    "eventTypes": {
+        "Home": "#00b33c",
+        "Work": "#1a75ff",
+        "School": "#e62e00",
+        "xxx": "#0000ff",
+        "xxxx": "#0000ff",
+        "xxxxx": "#009000"
+    }
 }

@@ -1,5 +1,4 @@
 import json
-
 from PyQt5.QtWidgets import QMessageBox
 
 
@@ -14,15 +13,15 @@ def readFromJsonFileToDict(fileName, dictName, keyName):
     try:
         with open(fileName, 'r') as file:
             dataFromFile = json.load(file)
-            for i in dataFromFile[keyName]:
-                dictName[keyName].append(i)
+            dictName[keyName] = dataFromFile[keyName]
     except FileNotFoundError:
 
+        # TODO create empty file
         messageWindow = QMessageBox()
         messageWindow.setWindowTitle("Info")
         messageWindow.setText("File with saved events was not found. New file will be created.")
         messageWindow.exec()
-        #raise, file with own errors
+        # TODO raise, file with own errors
 
     except PermissionError:
 
