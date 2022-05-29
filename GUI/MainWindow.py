@@ -131,6 +131,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def openNewEventWindow(self):
         self.ui_newEventWindow.setDateFromCalendar(self.dateOnDateBar)
+        self.ui_newEventWindow.timeEditDisabled()
+        self.ui_newEventWindow.clearEventDataInFormular()
         self.ui_newEventWindow.show()
 
     def distinguishClickedDay(self):
