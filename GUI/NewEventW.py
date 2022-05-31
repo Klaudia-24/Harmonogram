@@ -23,6 +23,8 @@ class NewEventW(QtWidgets.QWidget):
         self.newEventW.remindBeforeComboBox.addItem("5 hours")
         self.newEventW.remindBeforeComboBox.addItem("1 day")
         self.newEventW.addEventTypeButton.clicked.connect(self.openNewEventTypeWindow)
+        self.newEventW.allDayEventRadioButton.clicked.connect(self.timeEditDisabled)
+        self.newEventW.setDurationEventRadioButton.clicked.connect(self.timeEditEnabled)
         self.newEventW.cancelButton.clicked.connect(self.closeWindow)
         self.newEventW.addEventButton.clicked.connect(self.confirmAddingNewEvent)
         self.addEventTypesToComboBox()
@@ -94,10 +96,15 @@ class NewEventW(QtWidgets.QWidget):
         self.newEventW.eventTitlePlainTextEdit.setPlainText("")
         self.newEventW.eventDescriptionPlaneTextEdit.setPlainText("")
         self.newEventW.eventLocalizationPlainTextEdit.setPlainText("")
+        self.newEventW.allDayEventRadioButton.setChecked(True)
+        self.newEventW.setDurationEventRadioButton.setChecked(False)
+        self.newEventW.remindBeforeComboBox.setCurrentIndex(0)
+        self.newEventW.eventTypeComboBox.setCurrentIndex(0)
 
-    # def eventDurationDisable(self):
-    #
-    #     self.newEventW.allDayEventRadioButton = self.sender()
-    #     if self.newEventW.setDurationEventRadioButton.isChecked():
-    #         pass
+    def timeEditDisabled(self):
+        self.newEventW.timeFromEdit.setDisabled(True)
+        self.newEventW.timeToEdit.setDisabled(True)
 
+    def timeEditEnabled(self):
+        self.newEventW.timeFromEdit.setDisabled(False)
+        self.newEventW.timeToEdit.setDisabled(False)
