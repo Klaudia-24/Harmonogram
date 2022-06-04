@@ -5,23 +5,17 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPen
 
 
-class CalendarDayWidget(QtWidgets.QWidget):
+class CalendarCellWidget(QtWidgets.QWidget):
     __eventColorList = []
     __labelText = None
     __whenClicked = None
-    __shapeSize = 50
+    __shapeSize = 10
     __backgroundColor = None
+    __fontName = None
+    __fontStyle = None
 
     def __init__(self, *args, **kwargs):
-        super(CalendarDayWidget, self).__init__(*args, **kwargs)
-        # self.eventColorList = {"item": "black"}
-        # self.layout = QtWidgets.QVBoxLayout()
-        # self.label = QtWidgets.QLabel("Tekst")
-        # self.layout.addWidget(self.label)
-        # self.layout.setAlignment(Qt.AlignCenter)
-        # self.setLayout(self.layout)
-        # self.backgroundColor = "blue"
-        #self.setStyleSheet("background-color: blue;")
+        super(CalendarCellWidget, self).__init__(*args, **kwargs)
 
     def setClicked(self, whenClicked):
         self.__whenClicked = whenClicked
@@ -32,13 +26,12 @@ class CalendarDayWidget(QtWidgets.QWidget):
         self.__whenClicked(event, self.objectName())
     # TODO poprawic na przekazywanie jakiejkolwiek funkcji.
 
-    # def changeTextAlignment(self, alignment: Qt.Alignment):
-    #     """Change the alignment of the label"""
-    #     self.layout.setAlignment(alignment)
-
     def setText(self, text: str):
         """Set text for the label"""
         self.__labelText = text
+
+    def getText(self):
+        return self.__labelText
 
     def addEventColor(self, color):
         self.__eventColorList.append(color)
@@ -54,8 +47,19 @@ class CalendarDayWidget(QtWidgets.QWidget):
         self.__backgroundColor = color
         self.refresh()
 
+    def setFontAppearance(self, fontName):
+        self.__fontName = fontName
+        # self.__fontStyle = fontStyle
+        self.refresh()
+
+    def setEventShapeSize(self, shapeSize):
+        self.__shapeSize = shapeSize
+        self.refresh()
+
     def setWidgetSize(self, width, height):
-        self.setMaximumSize(width, height)
+        self.setMinimumSize(width, height)
+
+    #TODO calculate shapeSize or fontSet
 
     def paintEvent(self, event):
         painter = QtGui.QPainter(self)
@@ -65,7 +69,9 @@ class CalendarDayWidget(QtWidgets.QWidget):
         backgroundBrush.setStyle(Qt.SolidPattern)
         painter.fillRect(QtCore.QRect(0, 0, painter.device().width(), painter.device().height()), backgroundBrush)
         rect = QtCore.QRect(0, 0, painter.device().width(), painter.device().height())
-        painter.setFont(QtGui.QFont('Times', (painter.device().height()-2*self.__shapeSize)//2, QtGui.QFont.Normal))
+        # print(painter.device().height())
+        # painter.setFont(QtGui.QFont(self.__fontName, (painter.device().height()-2*self.__shapeSize)//2, self.__fontStyle))
+        painter.setFont(QtGui.QFont(self.__fontName, (painter.device().height() - 2 * self.__shapeSize) // 2, QtGui.QFont.Normal))
         painter.drawText(rect, Qt.AlignVCenter | Qt.AlignHCenter, self.__labelText)
 
         colorIndex = 0
@@ -77,7 +83,6 @@ class CalendarDayWidget(QtWidgets.QWidget):
             spaceSize = self.__shapeSize+spaceOffset
 
         for i in self.__eventColorList:
-
             painter.setPen(QPen(QtGui.QColor(i), 5, Qt.SolidLine))
             painter.setBrush(QtGui.QBrush(QtGui.QColor(i), Qt.SolidPattern))
             painter.drawEllipse(spaceSize*colorIndex+spaceOffset, 10, self.__shapeSize, self.__shapeSize)
@@ -87,9 +92,10 @@ class CalendarDayWidget(QtWidgets.QWidget):
 def __main__():
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Mainwindow = CalendarDayWidget()
+    Mainwindow = CalendarCellWidget()
 
     Mainwindow.setBackgroundColor("#FF0000")
+    Mainwindow.setFontAppearance('Times')
     Mainwindow.setText("10")
     Mainwindow.addEventColor("#3366FF")
     Mainwindow.addEventColor("#006600")
