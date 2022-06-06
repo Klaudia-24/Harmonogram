@@ -66,6 +66,9 @@
        <layout class="QVBoxLayout" name="dateCalendarVerticalLayout" stretch="0,1">
         <item>
          <layout class="QHBoxLayout" name="dateBarLayout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMaximumSize</enum>
+          </property>
           <item>
            <spacer name="dateBarLeftHorizontalSpacer">
             <property name="orientation">
@@ -81,6 +84,12 @@
           </item>
           <item>
            <widget class="QLabel" name="dayFromDate">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>100</height>
+             </size>
+            </property>
             <property name="styleSheet">
              <string notr="true">font: 75 16pt &quot;MS Shell Dlg 2&quot;;</string>
             </property>
@@ -91,6 +100,12 @@
           </item>
           <item>
            <widget class="QLabel" name="monthFromDate">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>100</height>
+             </size>
+            </property>
             <property name="styleSheet">
              <string notr="true">font: 75 16pt &quot;MS Shell Dlg 2&quot;;</string>
             </property>
@@ -101,6 +116,12 @@
           </item>
           <item>
            <widget class="QLabel" name="yearFromDate">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>100</height>
+             </size>
+            </property>
             <property name="styleSheet">
              <string notr="true">font: 75 16pt &quot;MS Shell Dlg 2&quot;;</string>
             </property>

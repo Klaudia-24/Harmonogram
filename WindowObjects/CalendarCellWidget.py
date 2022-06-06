@@ -9,10 +9,11 @@ class CalendarCellWidget(QtWidgets.QWidget):
     __eventColorList = []
     __labelText = None
     __whenClicked = None
-    __shapeSize = 10
+    __shapeSize = None
     __backgroundColor = None
     __fontName = None
     __fontStyle = None
+    __fontHeightRatio = None
 
     def __init__(self, *args, **kwargs):
         super(CalendarCellWidget, self).__init__(*args, **kwargs)
@@ -47,9 +48,10 @@ class CalendarCellWidget(QtWidgets.QWidget):
         self.__backgroundColor = color
         self.refresh()
 
-    def setFontAppearance(self, fontName):
+    def setFontAppearance(self, fontName, fontStyle, fontHeightRatio):
         self.__fontName = fontName
-        # self.__fontStyle = fontStyle
+        self.__fontStyle = fontStyle
+        self.__fontHeightRatio = fontHeightRatio
         self.refresh()
 
     def setEventShapeSize(self, shapeSize):
@@ -70,8 +72,12 @@ class CalendarCellWidget(QtWidgets.QWidget):
         painter.fillRect(QtCore.QRect(0, 0, painter.device().width(), painter.device().height()), backgroundBrush)
         rect = QtCore.QRect(0, 0, painter.device().width(), painter.device().height())
         # print(painter.device().height())
-        # painter.setFont(QtGui.QFont(self.__fontName, (painter.device().height()-2*self.__shapeSize)//2, self.__fontStyle))
-        painter.setFont(QtGui.QFont(self.__fontName, (painter.device().height() - 2 * self.__shapeSize) // 2, QtGui.QFont.Normal))
+        #TODO fix font size calculations
+        if self.__shapeSize != 0:
+            painter.setFont(QtGui.QFont(self.__fontName, ((painter.device().height()-2*self.__shapeSize)//self.__fontHeightRatio), self.__fontStyle))
+        else:
+            painter.setFont(QtGui.QFont(self.__fontName, (painter.device().width()) // self.__fontHeightRatio, self.__fontStyle))
+        # painter.setFont(QtGui.QFont(self.__fontName, (painter.device().height() - 2 * self.__shapeSize) // 2, QtGui.QFont.Normal))
         painter.drawText(rect, Qt.AlignVCenter | Qt.AlignHCenter, self.__labelText)
 
         colorIndex = 0

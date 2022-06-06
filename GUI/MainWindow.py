@@ -23,6 +23,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.ui.dateCalendarVerticalLayout.setStretch(0, 0)
+        self.ui.dateCalendarVerticalLayout.SetFixedSize = True
         self.mainCalendarWidget = MainCalendarWidget()
         self.mainCalendarWidget.setMinimumHeight(int(self.height()*0.8))
         self.ui.calendarGridLayout.addWidget(self.mainCalendarWidget)
@@ -52,8 +54,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui_newEventWindow = newEventW.NewEventW()
         self.ui.newEventButton.clicked.connect(self.openNewEventWindow)
         # self.dateOnDateBar = date.today()
-        self.ui.prevButton.clicked.connect(self.changeMonthToPrev)
-        self.ui.nextButton.clicked.connect(self.changeMonthToNext)
+        self.ui.prevButton.clicked.connect(self.setDateInBarToPrevMonth)
+        self.ui.nextButton.clicked.connect(self.setDateInBarToNextMonth)
         self.setDateInBar()
         # for i in range(1, 43):
         #     getattr(getattr(self.ui, 'day_' + str(i)), 'setClicked')(self.getLabelNameFromCalendarDayLabel)
@@ -73,6 +75,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def getDateOnDateBar(self):
         return self.dateOnDateBar
+
+    def setDateInBarToPrevMonth(self):
+        self.mainCalendarWidget.changeMonthToPrev()
+        self.setDateInBar()
+
+    def setDateInBarToNextMonth(self):
+        self.mainCalendarWidget.changeMonthToNext()
+        self.setDateInBar()
+
 
     # def generateCalendarDays(self):
     #     firstWeekDayOfMonth = int(
@@ -109,17 +120,17 @@ class MainWindow(QtWidgets.QMainWindow):
     #
     #     self.setWeekNumbers()
 
-    def changeMonthToPrev(self):
-
-        self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
-                                               self.dateOnDateBar.day) - dateutils.relativedelta(months=1)
-        self.generateCalendarDays()
-
-    def changeMonthToNext(self):
-
-        self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
-                                               self.dateOnDateBar.day) + dateutils.relativedelta(months=1)
-        self.generateCalendarDays()
+    # def changeMonthToPrev(self):
+    #
+    #     self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+    #                                            self.dateOnDateBar.day) - dateutils.relativedelta(months=1)
+    #     self.generateCalendarDays()
+    #
+    # def changeMonthToNext(self):
+    #
+    #     self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+    #                                            self.dateOnDateBar.day) + dateutils.relativedelta(months=1)
+    #     self.generateCalendarDays()
 
     # def distinguishDayFromDateBar(self):
     #     firstWeekDayOfMonth = int(
