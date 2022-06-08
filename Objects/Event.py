@@ -53,6 +53,14 @@ def addEventToList(year, month, day, newEvent):
 # TODO config file with file names etc.
 
 
+def getEventsDictionary():
+    return eventsDictionary
+
+
+def getEventTypesDictionary():
+    return eventTypesDictionary
+
+
 def addEventTypeToList(key, value):
     global eventTypesDictionary
     eventTypesDictionary["eventTypes"][key] = value
@@ -81,3 +89,9 @@ def loadEventsList():
 def getEventTypesList():
     global eventTypesDictionary
     return eventTypesDictionary["eventTypes"].keys()
+
+
+def getEventTypeColour(eventType):
+    global eventTypesDictionary
+    return eventTypesDictionary["eventTypes"][eventType]
+

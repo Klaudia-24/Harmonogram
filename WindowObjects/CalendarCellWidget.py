@@ -6,7 +6,7 @@ from PyQt5.QtGui import QPen
 
 
 class CalendarCellWidget(QtWidgets.QWidget):
-    __eventColorList = []
+    # __eventColorList = []
     __labelText = None
     __whenClicked = None
     __shapeSize = None
@@ -17,6 +17,7 @@ class CalendarCellWidget(QtWidgets.QWidget):
 
     def __init__(self, *args, **kwargs):
         super(CalendarCellWidget, self).__init__(*args, **kwargs)
+        self.__eventColorList = []
 
     def setClicked(self, whenClicked):
         self.__whenClicked = whenClicked
@@ -35,10 +36,18 @@ class CalendarCellWidget(QtWidgets.QWidget):
         return self.__labelText
 
     def addEventColor(self, color):
-        self.__eventColorList.append(color)
+        if color not in self.__eventColorList:
+            self.__eventColorList.append(color)
 
     def clearEventColorList(self):
         self.__eventColorList.clear()
+        self.refresh()
+
+    def setEventColorList(self, newList):
+        self.__eventColorList = newList
+
+    def getEventColorList(self):
+        return self.__eventColorList
 
     def refresh(self):
         self.update()
@@ -93,7 +102,6 @@ class CalendarCellWidget(QtWidgets.QWidget):
             painter.setBrush(QtGui.QBrush(QtGui.QColor(i), Qt.SolidPattern))
             painter.drawEllipse(spaceSize*colorIndex+spaceOffset, 10, self.__shapeSize, self.__shapeSize)
             colorIndex += 1
-
 
 def __main__():
     import sys

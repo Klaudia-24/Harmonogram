@@ -10,7 +10,7 @@ from calendar import monthrange
 from PyQt5.QtGui import QPainter, QBrush, QPen
 
 from Lib import FileOperationMethods
-from Objects.Event import loadEventsList, loadEventTypesList
+from Objects.Event import loadEventsList, loadEventTypesList, getEventsDictionary
 from GUI.MainCalendarWidget import MainCalendarWidget
 
 
@@ -23,6 +23,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        loadEventsList()
+        loadEventTypesList()
         self.ui.dateCalendarVerticalLayout.setStretch(0, 0)
         self.ui.dateCalendarVerticalLayout.SetFixedSize = True
         self.mainCalendarWidget = MainCalendarWidget()
@@ -48,8 +50,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.ui.weekLabel.setAlignment(QtCore.Qt.AlignCenter)
         # self.ui.calendarGridLayout.setSpacing(1)
 
-        loadEventsList()
-        loadEventTypesList()
 
         self.ui_newEventWindow = newEventW.NewEventW()
         self.ui.newEventButton.clicked.connect(self.openNewEventWindow)
@@ -152,7 +152,7 @@ class MainWindow(QtWidgets.QMainWindow):
     #         getattr(getattr(self.ui, 'weekNumber' + str(i)), 'setText')(str(number))
 
     def openNewEventWindow(self):
-        self.ui_newEventWindow.setDateFromCalendar(self.dateOnDateBar)
+        self.ui_newEventWindow.setDateFromCalendar(self.mainCalendarWidget.dateOnDateBar)
         self.ui_newEventWindow.timeEditDisabled()
         self.ui_newEventWindow.clearEventDataInFormular()
         self.ui_newEventWindow.show()
