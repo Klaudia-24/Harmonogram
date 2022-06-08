@@ -63,6 +63,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.generateCalendarDays()
 
         # FileOperationMethods.readFromJsonFileToDict("./events.json", eventsDictionary, "events")
+        self.mainCalendarWidget.clickedDaySignal.connect(self.setClickedDateInBar)
 
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
         self.mainCalendarWidget.resize(int(self.width()*0.7), int(self.height()*0.8))
@@ -72,6 +73,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.dayFromDate.setText(str(self.mainCalendarWidget.dateOnDateBar.day))
         self.ui.monthFromDate.setText(self.mainCalendarWidget.dateOnDateBar.strftime("%B"))
         self.ui.yearFromDate.setText(str(self.mainCalendarWidget.dateOnDateBar.year))
+
+    @QtCore.pyqtSlot()
+    def setClickedDateInBar(self):
+        self.setDateInBar()
 
     def getDateOnDateBar(self):
         return self.dateOnDateBar

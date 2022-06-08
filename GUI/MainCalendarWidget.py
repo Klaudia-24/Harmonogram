@@ -10,6 +10,8 @@ from Objects.Event import getEventsDictionary, getEventTypeColour
 
 class MainCalendarWidget(QtWidgets.QWidget):
 
+    clickedDaySignal = QtCore.pyqtSignal()
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -155,6 +157,8 @@ class MainCalendarWidget(QtWidgets.QWidget):
         clickedIndex = self.dateOnDateBar.day + firstWeekDayOfMonth - 1
         getattr(getattr(self.mainCalendarWidget, 'day_' + str(clickedIndex)), 'setBackgroundColor')("#66cc99")
 
+        self.clickedDaySignal.emit()
+
     def getLabelNameFromCalendarDayLabel(self, event, labelName):
         button = event.button()
         modify = event.modifiers()
@@ -208,6 +212,7 @@ class MainCalendarWidget(QtWidgets.QWidget):
         for i in range(1, 43):
             getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setEventColorList')([])
         self.generateCalendarDays()
+        self.distinguishClickedDay()
 
     def changeMonthToNext(self):
 
@@ -216,6 +221,7 @@ class MainCalendarWidget(QtWidgets.QWidget):
         for i in range(1, 43):
             getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setEventColorList')([])
         self.generateCalendarDays()
+        self.distinguishClickedDay()
 
     def setClickedDateInDateBar(self, labelText: str, labelName: str):
         offset = 0
