@@ -5,11 +5,11 @@ import datetime
 import dateutils
 from calendar import monthrange
 # from GUI.MainWindow import MainWindow
+from GUI.NewEventW import NewEventW
 from Objects.Event import getEventsDictionary, getEventTypeColour
 
 
 class MainCalendarWidget(QtWidgets.QWidget):
-
     clickedDaySignal = QtCore.pyqtSignal()
 
     def __init__(self, *args, **kwargs):
@@ -17,6 +17,7 @@ class MainCalendarWidget(QtWidgets.QWidget):
 
         self.mainCalendarWidget = Ui_Form()
         self.mainCalendarWidget.setupUi(self)
+        self.newEventW = NewEventW()
         self.dateOnDateBar = date.today()
         self.init_ui()
 
@@ -28,39 +29,45 @@ class MainCalendarWidget(QtWidgets.QWidget):
         self.generateCalendarDays()
 
         for i in range(1, 43):
-            getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setClicked')(self.getLabelNameFromCalendarDayLabel)
+            getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setClicked')(
+                self.getLabelNameFromCalendarDayLabel)
 
-        print("1 " + str(self.mainCalendarWidget.day_1.getEventColorList()))
-        print("2 " + str(self.mainCalendarWidget.day_2.getEventColorList()))
-        print("3 " + str(self.mainCalendarWidget.day_3.getEventColorList()))
-        print("4 " + str(self.mainCalendarWidget.day_4.getEventColorList()))
-        print("5 " + str(self.mainCalendarWidget.day_5.getEventColorList()))
-        print("6 " + str(self.mainCalendarWidget.day_6.getEventColorList()))
-        print("7 " + str(self.mainCalendarWidget.day_7.getEventColorList()))
-        print("8 " + str(self.mainCalendarWidget.day_8.getEventColorList()))
-        print("9 " + str(self.mainCalendarWidget.day_9.getEventColorList()))
-        print("10 " + str(self.mainCalendarWidget.day_10.getEventColorList()))
-        print("11 " + str(self.mainCalendarWidget.day_11.getEventColorList()))
-        print("12 " + str(self.mainCalendarWidget.day_12.getEventColorList()))
+        self.newEventW.newEventAddedSignal.connect(self.updateEventTypeColours)
+
+        # print("1 " + str(self.mainCalendarWidget.day_1.getEventColorList()))
+        # print("2 " + str(self.mainCalendarWidget.day_2.getEventColorList()))
+        # print("3 " + str(self.mainCalendarWidget.day_3.getEventColorList()))
+        # print("4 " + str(self.mainCalendarWidget.day_4.getEventColorList()))
+        # print("5 " + str(self.mainCalendarWidget.day_5.getEventColorList()))
+        # print("6 " + str(self.mainCalendarWidget.day_6.getEventColorList()))
+        # print("7 " + str(self.mainCalendarWidget.day_7.getEventColorList()))
+        # print("8 " + str(self.mainCalendarWidget.day_8.getEventColorList()))
+        # print("9 " + str(self.mainCalendarWidget.day_9.getEventColorList()))
+        # print("10 " + str(self.mainCalendarWidget.day_10.getEventColorList()))
+        # print("11 " + str(self.mainCalendarWidget.day_11.getEventColorList()))
+        # print("12 " + str(self.mainCalendarWidget.day_12.getEventColorList()))
 
     def setWeekDaysAppearance(self):
         for i in range(1, 8):
             getattr(getattr(self.mainCalendarWidget, 'weekDay' + str(i)), 'setBackgroundColor')("#bfbfbf")
             getattr(getattr(self.mainCalendarWidget, 'weekDay' + str(i)), 'setEventShapeSize')(0)
-            getattr(getattr(self.mainCalendarWidget, 'weekDay' + str(i)), 'setFontAppearance')('Times', QtGui.QFont.Normal, 8.1)
+            getattr(getattr(self.mainCalendarWidget, 'weekDay' + str(i)), 'setFontAppearance')('Times',
+                                                                                               QtGui.QFont.Normal, 8.1)
             # getattr(getattr(self.mainCalendarWidget, 'weekDay' + str(i)), 'setAlignment')(QtCore.Qt.AlignCenter)
 
     def setWeekNumbersAppearance(self):
         for i in range(1, 7):
             getattr(getattr(self.mainCalendarWidget, 'weekNumber' + str(i)), 'setBackgroundColor')("#bfbfbf")
             getattr(getattr(self.mainCalendarWidget, 'weekNumber' + str(i)), 'setEventShapeSize')(0)
-            getattr(getattr(self.mainCalendarWidget, 'weekNumber' + str(i)), 'setFontAppearance')('Times', QtGui.QFont.Normal, 7)
+            getattr(getattr(self.mainCalendarWidget, 'weekNumber' + str(i)), 'setFontAppearance')('Times',
+                                                                                                  QtGui.QFont.Normal, 7)
             # getattr(getattr(self.mainCalendarWidget, 'weekNumber' + str(i)), 'setAlignment')(QtCore.Qt.AlignCenter)
 
     def setDaysWidgetAppearance(self):
         for i in range(1, 43):
             getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setEventShapeSize')(10)
-            getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setFontAppearance')('Times', QtGui.QFont.Normal, 3.5)
+            getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setFontAppearance')('Times', QtGui.QFont.Normal,
+                                                                                            3.5)
             # getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setFont')(QtGui.QFont('Times', 9))
             # getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setAlignment')(QtCore.Qt.AlignCenter)
 
@@ -83,17 +90,22 @@ class MainCalendarWidget(QtWidgets.QWidget):
 
         for i in range(1, 43):
             if i < firstWeekDayOfMonth:
-                print(i)
-                newDate = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, self.dateOnDateBar.day) - dateutils.relativedelta(months=1)
+                # print(i)
+                newDate = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+                                            self.dateOnDateBar.day) - dateutils.relativedelta(months=1)
                 prevMonthRange = int(monthrange(newDate.year, newDate.month)[1])
-                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setText')(str(prevMonthRange - firstWeekDayOfMonth + i + 1))
+                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setText')(
+                    str(prevMonthRange - firstWeekDayOfMonth + i + 1))
                 getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setBackgroundColor')("#cce6ff")
 
                 if str(newDate.year) in getEventsDictionary()["events"]:
                     if str(newDate.month) in getEventsDictionary()["events"][str(newDate.year)]:
-                        if str(prevMonthRange - firstWeekDayOfMonth + i + 1) in getEventsDictionary()["events"][str(newDate.year)][str(newDate.month)]:
-                            for event in getEventsDictionary()["events"][str(newDate.year)][str(newDate.month)][str(prevMonthRange - firstWeekDayOfMonth + i + 1)]:
-                                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'addEventColor')(getEventTypeColour(event["type"]))
+                        if str(prevMonthRange - firstWeekDayOfMonth + i + 1) in \
+                                getEventsDictionary()["events"][str(newDate.year)][str(newDate.month)]:
+                            for event in getEventsDictionary()["events"][str(newDate.year)][str(newDate.month)][
+                                str(prevMonthRange - firstWeekDayOfMonth + i + 1)]:
+                                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'addEventColor')(
+                                    getEventTypeColour(event["type"]))
 
             elif firstWeekDayOfMonth <= i <= currentMonthRange + firstWeekDayOfMonth - 1:
                 getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setText')(str(i - firstWeekDayOfMonth + 1))
@@ -101,20 +113,30 @@ class MainCalendarWidget(QtWidgets.QWidget):
 
                 if str(self.dateOnDateBar.year) in getEventsDictionary()["events"]:
                     if str(self.dateOnDateBar.month) in getEventsDictionary()["events"][str(self.dateOnDateBar.year)]:
-                        if str(i - firstWeekDayOfMonth + 1) in getEventsDictionary()["events"][str(self.dateOnDateBar.year)][str(self.dateOnDateBar.month)]:
-                            for event in getEventsDictionary()["events"][str(self.dateOnDateBar.year)][str(self.dateOnDateBar.month)][str(i - firstWeekDayOfMonth + 1)]:
-                                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'addEventColor')(getEventTypeColour(event["type"]))
+                        if str(i - firstWeekDayOfMonth + 1) in \
+                                getEventsDictionary()["events"][str(self.dateOnDateBar.year)][
+                                    str(self.dateOnDateBar.month)]:
+                            for event in getEventsDictionary()["events"][str(self.dateOnDateBar.year)][
+                                str(self.dateOnDateBar.month)][str(i - firstWeekDayOfMonth + 1)]:
+                                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'addEventColor')(
+                                    getEventTypeColour(event["type"]))
 
             else:
-                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setText')(str(i - firstWeekDayOfMonth - currentMonthRange + 1))
+                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setText')(
+                    str(i - firstWeekDayOfMonth - currentMonthRange + 1))
                 getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setBackgroundColor')("#cce6ff")
 
                 if str(self.dateOnDateBar.year) in getEventsDictionary()["events"]:
-                    if str(self.dateOnDateBar.month+1) in getEventsDictionary()["events"][str(self.dateOnDateBar.year)]:
-                        if str(i - firstWeekDayOfMonth - currentMonthRange + 1) in getEventsDictionary()["events"][str(self.dateOnDateBar.year)][str(self.dateOnDateBar.month+1)]:
-                            for event in getEventsDictionary()["events"][str(self.dateOnDateBar.year)][str(self.dateOnDateBar.month+1)][str(i - firstWeekDayOfMonth - currentMonthRange + 1)]:
-                                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'addEventColor')(getEventTypeColour(event["type"]))
-
+                    if str(self.dateOnDateBar.month + 1) in getEventsDictionary()["events"][
+                        str(self.dateOnDateBar.year)]:
+                        if str(i - firstWeekDayOfMonth - currentMonthRange + 1) in \
+                                getEventsDictionary()["events"][str(self.dateOnDateBar.year)][
+                                    str(self.dateOnDateBar.month + 1)]:
+                            for event in getEventsDictionary()["events"][str(self.dateOnDateBar.year)][
+                                str(self.dateOnDateBar.month + 1)][
+                                str(i - firstWeekDayOfMonth - currentMonthRange + 1)]:
+                                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'addEventColor')(
+                                    getEventTypeColour(event["type"]))
 
         # self.setDateInBar()
 
@@ -123,7 +145,8 @@ class MainCalendarWidget(QtWidgets.QWidget):
         else:
             for i in range(1, 43):
                 # getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setFont')(QtGui.QFont('Times', 9, QtGui.QFont.Normal))
-                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setFontAppearance')('Times', QtGui.QFont.Normal, 3.5)
+                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setFontAppearance')('Times',
+                                                                                                QtGui.QFont.Normal, 3.5)
 
         self.setWeekNumbers()
 
@@ -137,10 +160,12 @@ class MainCalendarWidget(QtWidgets.QWidget):
         todayIndex = date.today().day + firstWeekDayOfMonth - 1
         getattr(getattr(self.mainCalendarWidget, 'day_' + str(todayIndex)), 'setBackgroundColor')("#339966")
         # getattr(getattr(self.mainCalendarWidget, 'day_' + str(todayIndex)), 'setFont')(QtGui.QFont('Times', 11, QtGui.QFont.Bold))
-        getattr(getattr(self.mainCalendarWidget, 'day_' + str(todayIndex)), 'setFontAppearance')('Times', QtGui.QFont.Bold, 3.5)
+        getattr(getattr(self.mainCalendarWidget, 'day_' + str(todayIndex)), 'setFontAppearance')('Times',
+                                                                                                 QtGui.QFont.Bold, 3.5)
 
     def setWeekNumbers(self):
-        firstSundayDate = date(self.dateOnDateBar.year, self.dateOnDateBar.month, int(self.mainCalendarWidget.day_7.getText()))
+        firstSundayDate = date(self.dateOnDateBar.year, self.dateOnDateBar.month,
+                               int(self.mainCalendarWidget.day_7.getText()))
 
         for i in range(0, 6):
             number = (firstSundayDate + dateutils.relativedelta(days=7 * i)).strftime('%W').lstrip("0")
@@ -172,8 +197,8 @@ class MainCalendarWidget(QtWidgets.QWidget):
         # print("width: " + str(self.width()))
         # print("height: " + str(self.height()))
 
-        cellWidth = (self.width()//8) - 6
-        cellHeight = (self.height()//7) - 6
+        cellWidth = (self.width() // 8) - 6
+        cellHeight = (self.height() // 7) - 6
 
         self.mainCalendarWidget.widget.setGeometry(0, 0, self.width(), self.height())
         self.resize(self.width(), self.height())
@@ -237,6 +262,11 @@ class MainCalendarWidget(QtWidgets.QWidget):
                                                int(labelText))
         self.generateCalendarDays()
         # self.setDateInBar()
+
+    @QtCore.pyqtSlot()
+    def updateEventTypeColours(self):
+        # TODO it refreshes only after action (click) -> repair it
+        self.generateCalendarDays()
 
 # def __main__():
 #     import sys

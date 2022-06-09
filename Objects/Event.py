@@ -20,7 +20,6 @@ class EventDuration:
 @dataclass_json
 @dataclass
 class Event:
-    # TODO use dataclass and json write/read
 
     eventId: int = field(init=False, repr=False)
     eventDuration: EventDuration
@@ -88,7 +87,7 @@ def loadEventsList():
 
 def getEventTypesList():
     global eventTypesDictionary
-    return eventTypesDictionary["eventTypes"].keys()
+    return sorted(eventTypesDictionary["eventTypes"].keys())
 
 
 def getEventTypeColour(eventType):

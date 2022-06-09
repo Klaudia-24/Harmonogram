@@ -13,4 +13,4 @@ class QLabelClickable(QLabel):
     def mousePressEvent(self, event):
         if self._whenClicked is None:
             return
-        self._whenClicked(event, self.objectName()) #TODO poprawić na przekazywanie jakiejkolwiek funkcji.
+        self._whenClicked(event, self.objectName())

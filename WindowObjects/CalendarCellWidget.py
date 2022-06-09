@@ -70,8 +70,6 @@ class CalendarCellWidget(QtWidgets.QWidget):
     def setWidgetSize(self, width, height):
         self.setMinimumSize(width, height)
 
-    #TODO calculate shapeSize or fontSet
-
     def paintEvent(self, event):
         painter = QtGui.QPainter(self)
         backgroundBrush = QtGui.QBrush()

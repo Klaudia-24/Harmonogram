@@ -58,9 +58,15 @@ class NewTypeEventW(QtWidgets.QWidget):
         self.submitted.emit(
             self.newEventTypeW.eventTypeNamePlainText.toPlainText()
         )
+        self.clearEventTypeDataInFormular()
         self.close()
 
     def cancelNewEventTypeAdding(self):
+        self.clearEventTypeDataInFormular()
         self.close()
+
+    def clearEventTypeDataInFormular(self):
+        self.newEventTypeW.eventTypeNamePlainText.setPlainText("")
+        self.color_RGB = ""
 
 
