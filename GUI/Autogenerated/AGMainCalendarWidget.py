@@ -16,10 +16,10 @@ from WindowObjects.CalendarCellWidget import CalendarCellWidget
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(900, 480)
+        # Form.resize(900, 480)
         Form.setToolTip("")
         self.widget = QtWidgets.QWidget(Form)
-        self.widget.setGeometry(QtCore.QRect(10, 10, 881, 459))
+        # self.widget.setGeometry(QtCore.QRect(10, 10, 881, 459))
         self.widget.setObjectName("widget")
         self.calendarGridLayout = QtWidgets.QGridLayout(self.widget)
         self.calendarGridLayout.setContentsMargins(0, 0, 0, 0)

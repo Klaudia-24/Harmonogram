@@ -6,7 +6,6 @@ from PyQt5.QtGui import QPen
 
 
 class CalendarCellWidget(QtWidgets.QWidget):
-    # __eventColorList = []
     __labelText = None
     __whenClicked = None
     __shapeSize = None
@@ -53,7 +52,6 @@ class CalendarCellWidget(QtWidgets.QWidget):
         self.update()
 
     def setBackgroundColor(self, color):
-        #self.label.setStyleSheet(f"background-color: {color}")
         self.__backgroundColor = color
         self.refresh()
 
@@ -78,7 +76,6 @@ class CalendarCellWidget(QtWidgets.QWidget):
         backgroundBrush.setStyle(Qt.SolidPattern)
         painter.fillRect(QtCore.QRect(0, 0, painter.device().width(), painter.device().height()), backgroundBrush)
         rect = QtCore.QRect(0, 0, painter.device().width(), painter.device().height())
-        # print(painter.device().height())
         #TODO fix font size calculations
         if self.__shapeSize != 0:
             painter.setFont(QtGui.QFont(self.__fontName, ((painter.device().height()-2*self.__shapeSize)//self.__fontHeightRatio), self.__fontStyle))
@@ -100,25 +97,3 @@ class CalendarCellWidget(QtWidgets.QWidget):
             painter.setBrush(QtGui.QBrush(QtGui.QColor(i), Qt.SolidPattern))
             painter.drawEllipse(spaceSize*colorIndex+spaceOffset, 10, self.__shapeSize, self.__shapeSize)
             colorIndex += 1
-
-def __main__():
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Mainwindow = CalendarCellWidget()
-
-    Mainwindow.setBackgroundColor("#FF0000")
-    Mainwindow.setFontAppearance('Times')
-    Mainwindow.setText("10")
-    Mainwindow.addEventColor("#3366FF")
-    Mainwindow.addEventColor("#006600")
-    Mainwindow.addEventColor("#3366FF")
-    Mainwindow.addEventColor("#006600")
-    Mainwindow.addEventColor("#3366FF")
-    Mainwindow.addEventColor("#006600")
-    Mainwindow.setWidgetSize(600, 300)
-
-    Mainwindow.show()
-    sys.exit(app.exec_())
-
-if __name__ == '__main__':
-    __main__()
