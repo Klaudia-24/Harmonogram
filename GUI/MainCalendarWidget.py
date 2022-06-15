@@ -31,23 +31,23 @@ class MainCalendarWidget(QtWidgets.QWidget):
     def setWeekDaysAppearance(self):
         for i in range(1, 8):
             getattr(getattr(self.mainCalendarWidget, 'weekDay' + str(i)), 'setBackgroundColor')("#bfbfbf")
-            getattr(getattr(self.mainCalendarWidget, 'weekDay' + str(i)), 'setEventShapeSize')(0)
+            getattr(getattr(self.mainCalendarWidget, 'weekDay' + str(i)), 'setEventTypeDotRatio')(0)
             getattr(getattr(self.mainCalendarWidget, 'weekDay' + str(i)), 'setFontAppearance')('Times', QtGui.QFont.Normal, 8.1)
 
     def setWeekNumbersAppearance(self):
         for i in range(1, 7):
             getattr(getattr(self.mainCalendarWidget, 'weekNumber' + str(i)), 'setBackgroundColor')("#bfbfbf")
-            getattr(getattr(self.mainCalendarWidget, 'weekNumber' + str(i)), 'setEventShapeSize')(0)
+            getattr(getattr(self.mainCalendarWidget, 'weekNumber' + str(i)), 'setEventTypeDotRatio')(0)
             getattr(getattr(self.mainCalendarWidget, 'weekNumber' + str(i)), 'setFontAppearance')('Times', QtGui.QFont.Normal, 7)
 
     def setDaysWidgetAppearance(self):
         for i in range(1, 43):
-            getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setEventShapeSize')(10)
+            getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setEventTypeDotRatio')(10)
             getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setFontAppearance')('Times', QtGui.QFont.Normal,  3.5)
 
     def setAdditionalCalendarAppearance(self):
         self.mainCalendarWidget.weekLabel.setBackgroundColor("#bfbfbf")
-        self.mainCalendarWidget.weekLabel.setEventShapeSize(0)
+        self.mainCalendarWidget.weekLabel.setEventTypeDotRatio(0)
         self.mainCalendarWidget.weekLabel.setFontAppearance('Times', QtGui.QFont.Normal, 8.1)
         self.mainCalendarWidget.calendarGridLayout.setSpacing(1)
 

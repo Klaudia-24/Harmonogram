@@ -8,7 +8,7 @@ from PyQt5.QtGui import QPen
 class CalendarCellWidget(QtWidgets.QWidget):
     __labelText = None
     __whenClicked = None
-    __shapeSize = None
+    __eventTypeDotRatio = None
     __backgroundColor = None
     __fontName = None
     __fontStyle = None
@@ -61,8 +61,8 @@ class CalendarCellWidget(QtWidgets.QWidget):
         self.__fontHeightRatio = fontHeightRatio
         self.refresh()
 
-    def setEventShapeSize(self, shapeSize):
-        self.__shapeSize = shapeSize
+    def setEventTypeDotRatio(self, eventTypeDotRatio):
+        self.__eventTypeDotRatio = eventTypeDotRatio
         self.refresh()
 
     def setWidgetSize(self, width, height):
@@ -76,24 +76,25 @@ class CalendarCellWidget(QtWidgets.QWidget):
         backgroundBrush.setStyle(Qt.SolidPattern)
         painter.fillRect(QtCore.QRect(0, 0, painter.device().width(), painter.device().height()), backgroundBrush)
         rect = QtCore.QRect(0, 0, painter.device().width(), painter.device().height())
-        #TODO fix font size calculations
-        if self.__shapeSize != 0:
-            painter.setFont(QtGui.QFont(self.__fontName, ((painter.device().height()-2*self.__shapeSize)//self.__fontHeightRatio), self.__fontStyle))
+
+        if self.__eventTypeDotRatio != 0:
+            painter.setFont(QtGui.QFont(self.__fontName, ((painter.device().height()-2*self.__eventTypeDotRatio)//self.__fontHeightRatio), self.__fontStyle))
         else:
             painter.setFont(QtGui.QFont(self.__fontName, (painter.device().width()) // self.__fontHeightRatio, self.__fontStyle))
-        # painter.setFont(QtGui.QFont(self.__fontName, (painter.device().height() - 2 * self.__shapeSize) // 2, QtGui.QFont.Normal))
         painter.drawText(rect, Qt.AlignVCenter | Qt.AlignHCenter, self.__labelText)
 
-        colorIndex = 0
-        spaceOffset = 10
+        if self.__eventTypeDotRatio != 0:
+            colorIndex = 0
+            spaceOffset = 10
+            eventTypeDotSize = int(self.width() / self.__eventTypeDotRatio)
 
-        if (self.__shapeSize+spaceOffset)*len(self.__eventColorList) > painter.device().width():
-            spaceSize = (painter.device().width() - spaceOffset - self.__shapeSize) // (len(self.__eventColorList))
-        else:
-            spaceSize = self.__shapeSize+spaceOffset
+            if (eventTypeDotSize + spaceOffset) * len(self.__eventColorList) > painter.device().width():
+                spaceSize = (painter.device().width() - spaceOffset - eventTypeDotSize) // (len(self.__eventColorList))
+            else:
+                spaceSize = eventTypeDotSize + spaceOffset
 
-        for i in self.__eventColorList:
-            painter.setPen(QPen(QtGui.QColor(i), 5, Qt.SolidLine))
-            painter.setBrush(QtGui.QBrush(QtGui.QColor(i), Qt.SolidPattern))
-            painter.drawEllipse(spaceSize*colorIndex+spaceOffset, 10, self.__shapeSize, self.__shapeSize)
-            colorIndex += 1
+            for i in self.__eventColorList:
+                painter.setPen(QPen(QtGui.QColor(i), 5, Qt.SolidLine))
+                painter.setBrush(QtGui.QBrush(QtGui.QColor(i), Qt.SolidPattern))
+                painter.drawEllipse(spaceSize * colorIndex + spaceOffset, 10, eventTypeDotSize, eventTypeDotSize)
+                colorIndex += 1
