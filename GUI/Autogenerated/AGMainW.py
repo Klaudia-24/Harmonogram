@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'AGMainW_v4.ui'
+# Form implementation generated from reading ui file 'AGMainW.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -9,8 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-from GUI.MainCalendarWidget import MainCalendarWidget
 
 
 class Ui_MainWindow(object):
