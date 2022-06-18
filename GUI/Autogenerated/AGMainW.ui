@@ -134,21 +134,29 @@
        </layout>
       </item>
       <item row="1" column="0">
-       <layout class="QVBoxLayout" name="sideBarVerticalLayout">
-        <item>
-         <spacer name="sideBarVerticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
+       <layout class="QGridLayout" name="navigationGridLayout" rowstretch="0,0,0,0,0,0">
+        <item row="0" column="0">
+         <widget class="QPushButton" name="dayCalendarButton">
+          <property name="minimumSize">
            <size>
-            <width>20</width>
-            <height>40</height>
+            <width>0</width>
+            <height>50</height>
            </size>
           </property>
-         </spacer>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(188, 202, 214);</string>
+          </property>
+          <property name="text">
+           <string>Day</string>
+          </property>
+         </widget>
         </item>
-        <item>
+        <item row="4" column="0">
          <widget class="QPushButton" name="newEventButton">
           <property name="minimumSize">
            <size>
@@ -162,12 +170,69 @@
            </font>
           </property>
           <property name="styleSheet">
-           <string notr="true">background-color: rgb(85, 170, 255);</string>
+           <string notr="true">background-color: rgb(135, 189, 216);</string>
           </property>
           <property name="text">
            <string>New event</string>
           </property>
          </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="weekCalendarButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(141, 157, 182);
+color: rgb(232,232,232);</string>
+          </property>
+          <property name="text">
+           <string>Week</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="monthCalendarButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(102, 114, 146);
+color: rgb(232,232,232)</string>
+          </property>
+          <property name="text">
+           <string>Month</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>

@@ -79,11 +79,7 @@ class CalendarCellWidget(QtWidgets.QWidget):
 
         if self.__eventTypeDotRatio != 0:
             painter.setFont(QtGui.QFont(self.__fontName, ((painter.device().height()-2*self.__eventTypeDotRatio)//self.__fontHeightRatio), self.__fontStyle))
-        else:
-            painter.setFont(QtGui.QFont(self.__fontName, (painter.device().width()) // self.__fontHeightRatio, self.__fontStyle))
-        painter.drawText(rect, Qt.AlignVCenter | Qt.AlignHCenter, self.__labelText)
 
-        if self.__eventTypeDotRatio != 0:
             colorIndex = 0
             spaceOffset = 10
             eventTypeDotSize = int(self.width() / self.__eventTypeDotRatio)
@@ -98,3 +94,9 @@ class CalendarCellWidget(QtWidgets.QWidget):
                 painter.setBrush(QtGui.QBrush(QtGui.QColor(i), Qt.SolidPattern))
                 painter.drawEllipse(spaceSize * colorIndex + spaceOffset, 10, eventTypeDotSize, eventTypeDotSize)
                 colorIndex += 1
+
+        else:
+            painter.setFont(QtGui.QFont(self.__fontName, (painter.device().width()) // self.__fontHeightRatio, self.__fontStyle))
+
+        painter.setPen(QtGui.QPen(QtGui.QColor("#000000"), 5, Qt.SolidLine))
+        painter.drawText(rect, Qt.AlignVCenter | Qt.AlignHCenter, self.__labelText)
