@@ -9,7 +9,6 @@ class DayCalendarWidget(QtWidgets.QWidget):
         super().__init__(*args, **kwargs)
         self.dayCalendarWidget = Ui_Form()
         self.dayCalendarWidget.setupUi(self)
-        # self.dayCalendarWidget.scrollAreaWidget.resize(2000, 374)
         self.dayCalendar = DayCalendar()
         self.dayCalendarWidget.scrollArea.setWidget(self.dayCalendar)
         # self.init_ui()

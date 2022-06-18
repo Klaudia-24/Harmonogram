@@ -11,9 +11,7 @@ class DayCalendar(QtWidgets.QWidget):
 
     def __init__(self, *args, **kwargs):
         super(DayCalendar, self).__init__(*args, **kwargs)
-        self.resize(2000, 900)
-
-    # def init_ui(self) -> None:
+        self.setMinimumHeight(1000)
 
     def mousePressEvent(self, event):
         self.__startPoint = event.pos()
@@ -39,10 +37,10 @@ class DayCalendar(QtWidgets.QWidget):
             for point in self.__shapes:
                 painter.fillRect(QtCore.QRect(point[0].x(), point[0].y(), point[1].x() - point[0].x(), point[1].y() - point[0].y()), brush)
 
-        painter.setFont(QtGui.QFont('Times', self.height()//40, QtGui.QFont.Bold))
-        for i in range(0, 15):
+        painter.setFont(QtGui.QFont('Times', self.height()//90, QtGui.QFont.Bold))
+        for i in range(0, 24):
             # painter.fillRect(QtCore.QRect(10, i*(self.height()//10) + 10, 10, 10), brush)
-            painter.drawText(QtCore.QRect(10, i*(self.height()//10) + 10, self.width()//20, self.height()//30), Qt.AlignVCenter | Qt.AlignHCenter, f"{i}:00")
+            painter.drawText(QtCore.QRect(10, i*(self.height()//24) + 10, self.width()//20, self.height()//25), Qt.AlignVCenter | Qt.AlignHCenter, f"{i}:00")
 
 
 
