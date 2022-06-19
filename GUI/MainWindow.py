@@ -33,7 +33,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.dayCalendarButton.clicked.connect(self.switchToTheDayCalendar)
         self.ui.monthCalendarButton.clicked.connect(self.switchToTheMonthCalendar)
 
-        self.setMinimumSize(1000, 600)
+        self.setMinimumSize(1300, 600)
 
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
         self.mainCalendarWidget.updateWidgetSize()

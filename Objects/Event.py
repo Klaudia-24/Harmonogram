@@ -94,3 +94,20 @@ def getEventTypeColour(eventType):
     global eventTypesDictionary
     return eventTypesDictionary["eventTypes"][eventType]
 
+
+def getEventsDataForDay(day, month, year):
+    global eventsDictionary
+    dayDataList = []
+    if str(year) in eventsDictionary["events"]:
+        if str(month) in eventsDictionary["events"][str(year)]:
+            if str(day) in eventsDictionary["events"][str(year)][str(month)]:
+                for event in eventsDictionary["events"][str(year)][str(month)][str(day)]:
+                    dataList = []
+                    dataList.append(event["eventDuration"]["timeFrom"])
+                    dataList.append(event["eventDuration"]["timeTo"])
+                    dataList.append(event["title"])
+                    dataList.append(getEventTypeColour(event["type"]))
+                    dayDataList.append(dataList)
+
+    return dayDataList
+
