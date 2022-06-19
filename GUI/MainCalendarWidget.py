@@ -186,19 +186,25 @@ class MainCalendarWidget(QtWidgets.QWidget):
         self.generateCalendarDays()
         self.distinguishClickedDay()
 
-    def changeDate(self, calendarType: str, changeType: str, changeRate: int):
-        if calendarType == "day" and changeType == "prev":
-            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
-                                                   self.dateOnDateBar.day) - dateutils.relativedelta(days=changeRate)
-        elif calendarType == "day" and changeType == "next":
-            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
-                                                   self.dateOnDateBar.day) + dateutils.relativedelta(days=changeRate)
-        elif calendarType == "week" and changeType == "prev":
-            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
-                                                   self.dateOnDateBar.day) - dateutils.relativedelta(weeks=changeRate)
-        elif calendarType == "week" and changeType == "next":
-            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
-                                                   self.dateOnDateBar.day) + dateutils.relativedelta(weeks=changeRate)
+    def changeDate(self, calendarType: str, changeType: str):
+        offset = 1 if changeType == "next" else -1
+        dateOffset = 0
+        if calendarType == "day":
+            dateOffset = dateutils.relativedelta(days=offset)
+        if calendarType == "week":
+            dateOffset = dateutils.relativedelta(weeks=offset)
+        if calendarType == "month":
+            dateOffset = dateutils.relativedelta(months=offset)
+
+
+        self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+                                               self.dateOnDateBar.day) + dateOffset
+
+        if calendarType == "month":
+            for i in range(1, 43):
+                getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setEventColorList')([])
+            self.generateCalendarDays()
+            self.distinguishClickedDay()
 
     def setClickedDateInDateBar(self, labelText: str, labelName: str):
         offset = 0

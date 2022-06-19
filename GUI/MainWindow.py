@@ -24,14 +24,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.stackedWidget.addWidget(self.dayCalendarWidget)
         self.ui_newEventWindow = newEventW.NewEventW()
         self.ui.newEventButton.clicked.connect(self.openNewEventWindow)
-        self.ui.prevButton.clicked.connect(self.setDateInBarToPrevMonth)
-        self.ui.nextButton.clicked.connect(self.setDateInBarToNextMonth)
+        self.ui.prevButton.clicked.connect(self.setDateInBarToPrev)
+        self.ui.nextButton.clicked.connect(self.setDateInBarToNext)
         self.setDateInBar()
         self.mainCalendarWidget.clickedDaySignal.connect(self.setClickedDateInBar)
         self.ui_newEventWindow.newEventAddedSignal.connect(self.mainCalendarWidget.updateEventTypeColours)
 
         self.ui.dayCalendarButton.clicked.connect(self.switchToTheDayCalendar)
         self.ui.monthCalendarButton.clicked.connect(self.switchToTheMonthCalendar)
+
+        self.setMinimumSize(1000, 600)
 
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
         self.mainCalendarWidget.updateWidgetSize()
@@ -48,19 +50,19 @@ class MainWindow(QtWidgets.QMainWindow):
     def getDateOnDateBar(self):
         return self.dateOnDateBar
 
-    def setDateInBarToPrevMonth(self):
+    def setDateInBarToPrev(self):
         if self.ui.stackedWidget.currentIndex() == 0:
-            self.mainCalendarWidget.changeMonthToPrev()
+            self.mainCalendarWidget.changeDate("month", "prev")
         elif self.ui.stackedWidget.currentIndex() == 1:
-            self.mainCalendarWidget.changeDate("day", "prev", 1)
+            self.mainCalendarWidget.changeDate("day", "prev")
 
         self.setDateInBar()
 
-    def setDateInBarToNextMonth(self):
+    def setDateInBarToNext(self):
         if self.ui.stackedWidget.currentIndex() == 0:
-            self.mainCalendarWidget.changeMonthToNext()
+            self.mainCalendarWidget.changeDate("month", "next")
         elif self.ui.stackedWidget.currentIndex() == 1:
-            self.mainCalendarWidget.changeDate("day", "next", 1)
+            self.mainCalendarWidget.changeDate("day", "next")
 
         self.setDateInBar()
 
