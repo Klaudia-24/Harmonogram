@@ -186,6 +186,20 @@ class MainCalendarWidget(QtWidgets.QWidget):
         self.generateCalendarDays()
         self.distinguishClickedDay()
 
+    def changeDate(self, calendarType: str, changeType: str, changeRate: int):
+        if calendarType == "day" and changeType == "prev":
+            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+                                                   self.dateOnDateBar.day) - dateutils.relativedelta(days=changeRate)
+        elif calendarType == "day" and changeType == "next":
+            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+                                                   self.dateOnDateBar.day) + dateutils.relativedelta(days=changeRate)
+        elif calendarType == "week" and changeType == "prev":
+            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+                                                   self.dateOnDateBar.day) - dateutils.relativedelta(weeks=changeRate)
+        elif calendarType == "week" and changeType == "next":
+            self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+                                                   self.dateOnDateBar.day) + dateutils.relativedelta(weeks=changeRate)
+
     def setClickedDateInDateBar(self, labelText: str, labelName: str):
         offset = 0
         if int(labelName.split("_")[1]) <= 6 and int(labelText) >= 7:

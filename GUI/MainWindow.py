@@ -49,11 +49,19 @@ class MainWindow(QtWidgets.QMainWindow):
         return self.dateOnDateBar
 
     def setDateInBarToPrevMonth(self):
-        self.mainCalendarWidget.changeMonthToPrev()
+        if self.ui.stackedWidget.currentIndex() == 0:
+            self.mainCalendarWidget.changeMonthToPrev()
+        elif self.ui.stackedWidget.currentIndex() == 1:
+            self.mainCalendarWidget.changeDate("day", "prev", 1)
+
         self.setDateInBar()
 
     def setDateInBarToNextMonth(self):
-        self.mainCalendarWidget.changeMonthToNext()
+        if self.ui.stackedWidget.currentIndex() == 0:
+            self.mainCalendarWidget.changeMonthToNext()
+        elif self.ui.stackedWidget.currentIndex() == 1:
+            self.mainCalendarWidget.changeDate("day", "next", 1)
+
         self.setDateInBar()
 
     def openNewEventWindow(self):
