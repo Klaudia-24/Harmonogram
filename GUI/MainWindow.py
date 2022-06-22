@@ -35,6 +35,28 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.setMinimumSize(1300, 600)
 
+        self.ui.settingsButton.setStyleSheet("QPushButton {"
+
+                                                             "border-radius: 6px;"
+                                                             "  background-image: url(./WindowObjects/settingsImage.png);"
+                                                             "background-repeat:no-repeat;"
+                                                             " background-position:center;"
+                                                             "  min-width: 60px;"
+                                                             "}"
+
+                                                             "QPushButton:pressed {"
+                                                             "   background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+                                                             " stop: 0 #dadbde, stop: 1 #f6f7fa);"
+                                                             "}"
+
+                                                             "QPushButton:flat {"
+                                                             "   border: none; /* no border for a flat push button */"
+                                                             "}"
+
+                                                             "QPushButton:default {"
+                                                             "    border-color: navy; /* make the default button prominent */"
+                                                             "}")
+
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
         self.mainCalendarWidget.updateWidgetSize()
 
