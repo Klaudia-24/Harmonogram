@@ -77,3 +77,5 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def switchToTheMonthCalendar(self):
         self.ui.stackedWidget.setCurrentIndex(0)
+        self.mainCalendarWidget.generateCalendarDays()
+        self.mainCalendarWidget.distinguishClickedDay()
