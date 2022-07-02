@@ -67,19 +67,20 @@ class DayCalendar(QtWidgets.QWidget):
                 painter.fillRect(QtCore.QRect(point[0].x(), point[0].y(), point[1].x() - point[0].x(), point[1].y() - point[0].y()), brush)
 
         for i in range(0, 24):
+            painter.drawLine(5, i*(self.height()//24) + 10, self.width() - 5, i*(self.height()//24) + 10)
+
+        for i in range(0, 24):
             # painter.fillRect(QtCore.QRect(10, i*(self.height()//24) + 10, self.width()//15, (self.height()//25) + 0), brush)
 
             hourXStart = 10
             hourYStart = i*(self.height()//24) + 10
             hourWidth = self.width()//15
             hourHeight = self.height()//24
-            wholePaintingSpace = self.width() - hourXStart - hourWidth - 30
+            wholePaintingSpace = self.width() - hourXStart - hourWidth - 20
 
             painter.setFont(QtGui.QFont('Times', self.height() // 130, QtGui.QFont.Bold))
             painter.drawText(QtCore.QRect(hourXStart, hourYStart, hourWidth, hourHeight),
                              Qt.AlignTop | Qt.AlignHCenter, f"{i}:00")
-
-            painter.drawLine(5, i*(self.height()//24) + 10, self.width() - 5, i*(self.height()//24) + 10)
 
             for event in self.dayDataList:
                 if event["timeFrom"].hour == i:
@@ -93,13 +94,16 @@ class DayCalendar(QtWidgets.QWidget):
 
                     brush.setColor(QtGui.QColor(event["type"]))
                     brush.setStyle(Qt.SolidPattern)
-                    painter.fillRect(
-                        QtCore.QRect(
+
+                    painter.setPen(Qt.NoPen)
+                    painter.setBrush(brush)
+                    painter.drawRoundedRect(QtCore.QRect(
                             eventRectX,
                             hourYStart,
-                            wholePaintingSpace // event["overlap"],
-                            int(hourHeight * heightFactor)),
-                        brush)
+                            (wholePaintingSpace // event["overlap"]) - 10,
+                            int(hourHeight * heightFactor)), 10, 10)
+
+                    painter.setPen(Qt.black)
 
                     painter.setFont(QtGui.QFont('Times', self.height() // 150, QtGui.QFont.Normal))
 
