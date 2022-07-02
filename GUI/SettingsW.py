@@ -12,7 +12,12 @@ class SettingsW(QtWidgets.QWidget):
         self.init_ui()
 
     def init_ui(self) -> None:
-        pass
+        self.settingsWindow.listWidget.insertItem(0, 'General')
+        self.settingsWindow.listWidget.insertItem(1, 'Day calendar')
+        self.settingsWindow.listWidget.insertItem(2, 'Week calendar')
+        self.settingsWindow.listWidget.insertItem(3, 'Month calendar')
+
+    #TODO day: tło na siatce, kolor i grubosc linii, przerwy miedzy prostokatami, dodatkowe informacje
 
 
 def __main__():

@@ -14,8 +14,15 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(600, 700)
-        Form.setMinimumSize(QtCore.QSize(600, 700))
+        Form.resize(1000, 700)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
+        Form.setSizePolicy(sizePolicy)
+        Form.setMinimumSize(QtCore.QSize(1000, 700))
+        Form.setMaximumSize(QtCore.QSize(1000, 700))
+        Form.setStyleSheet("background-color: rgb(221, 233, 238);")
         self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName("gridLayout")
         self.stackedWidget = QtWidgets.QStackedWidget(Form)
@@ -28,6 +35,21 @@ class Ui_Form(object):
         self.stackedWidget.addWidget(self.page_2)
         self.gridLayout.addWidget(self.stackedWidget, 0, 1, 1, 1)
         self.listWidget = QtWidgets.QListWidget(Form)
+        self.listWidget.setMinimumSize(QtCore.QSize(200, 0))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.listWidget.setFont(font)
+        self.listWidget.setStyleSheet("background-color: rgb(183, 215, 232);")
+        self.listWidget.setFrameShape(QtWidgets.QFrame.Panel)
+        self.listWidget.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.listWidget.setLineWidth(2)
+        self.listWidget.setMidLineWidth(0)
+        self.listWidget.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContentsOnFirstShow)
+        self.listWidget.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed|QtWidgets.QAbstractItemView.SelectedClicked)
+        self.listWidget.setIconSize(QtCore.QSize(0, 0))
+        self.listWidget.setResizeMode(QtWidgets.QListView.Fixed)
+        self.listWidget.setGridSize(QtCore.QSize(0, 35))
+        self.listWidget.setViewMode(QtWidgets.QListView.ListMode)
         self.listWidget.setObjectName("listWidget")
         self.gridLayout.addWidget(self.listWidget, 0, 0, 1, 1)
         self.gridLayout.setColumnStretch(1, 1)
@@ -38,7 +60,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Settings"))
 
 
 if __name__ == "__main__":
