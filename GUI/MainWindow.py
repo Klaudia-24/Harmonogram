@@ -5,6 +5,7 @@ import GUI.NewEventW as newEventW
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from GUI.DayCalendarWidget import DayCalendarWidget
+from GUI.SettingsW import SettingsW
 from GUI.WeekCalendarWidget import WeekCalendarWidget
 from Objects.Event import loadEventsList, loadEventTypesList
 from GUI.MainCalendarWidget import MainCalendarWidget
@@ -22,6 +23,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.mainCalendarWidget = MainCalendarWidget()
         self.dayCalendarWidget = DayCalendarWidget()
         self.weekCalendarWidget = WeekCalendarWidget()
+        self.settingsWindow = SettingsW()
         self.ui.stackedWidget.addWidget(self.mainCalendarWidget)
         self.ui.stackedWidget.addWidget(self.dayCalendarWidget)
         self.ui.stackedWidget.addWidget(self.weekCalendarWidget)
@@ -38,7 +40,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.weekCalendarButton.clicked.connect(self.switchToTheWeekCalendar)
 
         self.setMinimumSize(1300, 600)
-
         self.ui.settingsButton.setStyleSheet("QPushButton {"
 
                                                              "border-radius: 6px;"
@@ -60,6 +61,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                                              "QPushButton:default {"
                                                              "    border-color: navy; /* make the default button prominent */"
                                                              "}")
+        self.ui.settingsButton.clicked.connect(self.openSettingsWindow)
 
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
         self.mainCalendarWidget.updateWidgetSize()
@@ -121,3 +123,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.stackedWidget.setCurrentIndex(0)
         self.mainCalendarWidget.generateCalendarDays()
         self.mainCalendarWidget.distinguishClickedDay()
+
+    def openSettingsWindow(self):
+        self.settingsWindow.show()
