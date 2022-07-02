@@ -1,4 +1,6 @@
 from dataclasses import dataclass, field
+from datetime import datetime
+
 from dataclasses_json import dataclass_json
 from Lib.FileOperationMethods import writeToJsonFile, readFromJsonFileToDict
 
@@ -95,19 +97,21 @@ def getEventTypeColour(eventType):
     return eventTypesDictionary["eventTypes"][eventType]
 
 
-def getEventsDataForDay(day, month, year):
+def getEventsForDay(day, month, year):
     global eventsDictionary
     dayDataList = []
     if str(year) in eventsDictionary["events"]:
         if str(month) in eventsDictionary["events"][str(year)]:
             if str(day) in eventsDictionary["events"][str(year)][str(month)]:
                 for event in eventsDictionary["events"][str(year)][str(month)][str(day)]:
-                    dataList = []
-                    dataList.append(event["eventDuration"]["timeFrom"])
-                    dataList.append(event["eventDuration"]["timeTo"])
-                    dataList.append(event["title"])
-                    dataList.append(getEventTypeColour(event["type"]))
-                    dayDataList.append(dataList)
+                    dataDict = dict()
+                    dataDict["timeFrom"] = datetime.strptime(event["eventDuration"]["timeFrom"], '%H:%M')
+                    dataDict["timeTo"] = datetime.strptime(event["eventDuration"]["timeTo"], '%H:%M')
+                    dataDict["title"] = event["title"]
+                    dataDict["type"] = getEventTypeColour(event["type"])
+                    dataDict["overlap"] = 0 # number of events overlapping
+                    dataDict["order"] = 0 # ordinal number of event
+                    dayDataList.append(dataDict)
 
     return dayDataList
 

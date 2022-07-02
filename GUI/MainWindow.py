@@ -81,6 +81,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.mainCalendarWidget.changeDate("month", "prev")
         elif self.ui.stackedWidget.currentIndex() == 1:
             self.mainCalendarWidget.changeDate("day", "prev")
+            self.dayCalendarWidget.dayCalendar.setDayDataList(self.mainCalendarWidget.dateOnDateBar.day,
+                                                              self.mainCalendarWidget.dateOnDateBar.month,
+                                                              self.mainCalendarWidget.dateOnDateBar.year)
         elif self.ui.stackedWidget.currentIndex() == 2:
             self.mainCalendarWidget.changeDate("week", "prev")
 
@@ -91,6 +94,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.mainCalendarWidget.changeDate("month", "next")
         elif self.ui.stackedWidget.currentIndex() == 1:
             self.mainCalendarWidget.changeDate("day", "next")
+            self.dayCalendarWidget.dayCalendar.setDayDataList(self.mainCalendarWidget.dateOnDateBar.day,
+                                                              self.mainCalendarWidget.dateOnDateBar.month,
+                                                              self.mainCalendarWidget.dateOnDateBar.year)
         elif self.ui.stackedWidget.currentIndex() == 2:
             self.mainCalendarWidget.changeDate("week", "next")
 
@@ -103,6 +109,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui_newEventWindow.show()
 
     def switchToTheDayCalendar(self):
+        self.dayCalendarWidget.dayCalendar.setDayDataList(self.mainCalendarWidget.dateOnDateBar.day,
+                                              self.mainCalendarWidget.dateOnDateBar.month,
+                                              self.mainCalendarWidget.dateOnDateBar.year)
         self.ui.stackedWidget.setCurrentIndex(1)
 
     def switchToTheWeekCalendar(self):
