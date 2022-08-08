@@ -48,7 +48,6 @@ class SettingsW(QtWidgets.QWidget):
 
         self.settingsWindow.listWidget.currentItemChanged.connect(lambda: self.setSelectedWidget())
 
-
     def switchToTheGeneralSet(self):
         self.settingsWindow.stackedWidget.setCurrentIndex(2)
 
@@ -62,14 +61,15 @@ class SettingsW(QtWidgets.QWidget):
         self.settingsWindow.stackedWidget.setCurrentIndex(5)
 
     def setSelectedWidget(self):
-        if self.settingsWindow.listWidget.currentItem() == self.item_1:
-            self.switchToTheGeneralSet()
-        if self.settingsWindow.listWidget.currentItem() == self.item_2:
-            self.switchToTheDayCalendarSet()
-        if self.settingsWindow.listWidget.currentItem() == self.item_3:
-            self.switchToTheWeekCalendarSet()
-        if self.settingsWindow.listWidget.currentItem() == self.item_4:
-            self.switchToTheMonthCalendarSet()
+        match self.settingsWindow.listWidget.currentItem():
+            case self.item_1:
+                self.switchToTheGeneralSet()
+            case self.item_2:
+                self.switchToTheDayCalendarSet()
+            case self.item_3:
+                self.switchToTheWeekCalendarSet()
+            case self.item_4:
+                self.switchToTheMonthCalendarSet()
 
 
 def __main__():
