@@ -109,7 +109,7 @@ def getEventsForDay(day, month, year):
                     dataDict["timeTo"] = datetime.strptime(event["eventDuration"]["timeTo"], '%H:%M')
                     dataDict["title"] = event["title"]
                     dataDict["type"] = getEventTypeColour(event["type"])
-                    dataDict["overlap"] = 0 # number of events overlapping
+                    dataDict["overlap"] = 1 # number of events overlapping
                     dataDict["order"] = 0 # ordinal number of event
                     dayDataList.append(dataDict)
 
