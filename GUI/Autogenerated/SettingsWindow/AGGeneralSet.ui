@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>716</width>
+    <width>762</width>
     <height>491</height>
    </rect>
   </property>
@@ -138,14 +138,14 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>716</width>
+        <width>762</width>
         <height>374</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_8">
        <item row="0" column="0">
         <layout class="QGridLayout" name="gridLayout_7">
-         <item row="5" column="0">
+         <item row="4" column="0">
           <layout class="QGridLayout" name="gridLayout_6">
            <item row="1" column="0">
             <widget class="QLabel" name="sectionTitleLabel_4">
@@ -162,7 +162,7 @@
            <item row="2" column="0">
             <layout class="QGridLayout" name="gridLayout_5">
              <item row="0" column="2">
-              <widget class="QPushButton" name="fontColourBtn">
+              <widget class="QPushButton" name="dateBarFontColourBtn">
                <property name="minimumSize">
                 <size>
                  <width>50</width>
@@ -181,7 +181,7 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLabel" name="fontBoldLabel">
+              <widget class="QLabel" name="dateBarFontBoldLabel">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -209,7 +209,7 @@
               </spacer>
              </item>
              <item row="1" column="1">
-              <widget class="QLabel" name="fontSizeLabel">
+              <widget class="QLabel" name="dateBarFontSizeLabel">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -224,7 +224,7 @@
               </widget>
              </item>
              <item row="1" column="2">
-              <widget class="QSpinBox" name="fontSizeSpinBox">
+              <widget class="QSpinBox" name="dateBarFontSizeSpinBox">
                <property name="minimumSize">
                 <size>
                  <width>50</width>
@@ -248,14 +248,14 @@
               </widget>
              </item>
              <item row="2" column="2">
-              <widget class="QCheckBox" name="fontBoldCheckBox">
+              <widget class="QCheckBox" name="dateBarFontBoldCheckBox">
                <property name="text">
                 <string/>
                </property>
               </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QLabel" name="fontColourLabel">
+              <widget class="QLabel" name="dateBarFontColourLabel">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -298,8 +298,8 @@
          </item>
          <item row="0" column="0" colspan="2">
           <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0">
-           <item row="0" column="0">
-            <widget class="QLabel" name="sectionTitleLabel_1">
+           <item row="2" column="0">
+            <widget class="QLabel" name="sectionTitleLabel_2">
              <property name="minimumSize">
               <size>
                <width>260</width>
@@ -318,12 +318,12 @@
               </font>
              </property>
              <property name="text">
-              <string>Windows' background colour</string>
+              <string>Navigation buttons' style</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QPushButton" name="windowBackColourBtn">
+            <widget class="QPushButton" name="windowsBackColourBtn">
              <property name="minimumSize">
               <size>
                <width>50</width>
@@ -350,24 +350,29 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="2">
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
+           <item row="2" column="1">
+            <widget class="QComboBox" name="navBtnStyleComboBox">
+             <property name="minimumSize">
               <size>
-               <width>40</width>
-               <height>20</height>
+               <width>350</width>
+               <height>35</height>
               </size>
              </property>
-            </spacer>
+             <property name="maximumSize">
+              <size>
+               <width>300</width>
+               <height>35</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(255,255,255);</string>
+             </property>
+            </widget>
            </item>
-          </layout>
-         </item>
-         <item row="4" column="0" colspan="2">
-          <layout class="QGridLayout" name="gridLayout_4">
-           <item row="0" column="0">
+           <item row="4" column="0">
             <widget class="QLabel" name="sectionTitleLabel_3">
              <property name="minimumSize">
               <size>
@@ -391,8 +396,51 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QPlainTextEdit" name="filePathPlainTextEdit">
+           <item row="0" column="0">
+            <widget class="QLabel" name="sectionTitleLabel_1">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>260</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>260</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Windows' background colour</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPlainTextEdit" name="eventsFilePathPlainTextEdit">
              <property name="minimumSize">
               <size>
                <width>400</width>
@@ -418,97 +466,21 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="2">
-            <spacer name="horizontalSpacer_3">
+           <item row="1" column="0" colspan="3">
+            <widget class="Line" name="line_4">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-         <item row="3" column="0">
-          <widget class="Line" name="line_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0" colspan="2">
-          <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="0">
-            <widget class="QLabel" name="sectionTitleLabel_2">
-             <property name="minimumSize">
-              <size>
-               <width>260</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>260</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Navigation buttons' style</string>
-             </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="navBtnStyleComboBox">
-             <property name="minimumSize">
-              <size>
-               <width>350</width>
-               <height>35</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>300</width>
-               <height>35</height>
-              </size>
-             </property>
-             <property name="layoutDirection">
-              <enum>Qt::LeftToRight</enum>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(255,255,255);</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <spacer name="horizontalSpacer_2">
+           <item row="3" column="0" colspan="3">
+            <widget class="Line" name="line_3">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
+            </widget>
            </item>
           </layout>
-         </item>
-         <item row="1" column="0">
-          <widget class="Line" name="line_4">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
          </item>
         </layout>
        </item>
