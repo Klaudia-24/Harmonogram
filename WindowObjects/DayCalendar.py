@@ -31,25 +31,23 @@ class DayCalendar(QtWidgets.QWidget):
         self.update()
 
     def isOverlapping(self, event_1, event_2):
-        if event_2["timeFrom"] < event_1["timeFrom"] < event_2["timeTo"]:
+        if event_2["timeFrom"] <= event_1["timeFrom"] <= event_2["timeTo"]:
             return True
         if event_2["timeFrom"] < event_1["timeTo"] < event_2["timeTo"]:
             return True
-        if event_1["timeFrom"] < event_2["timeFrom"] < event_1["timeTo"]:
+        if event_1["timeFrom"] <= event_2["timeFrom"] <= event_1["timeTo"]:
             return True
         if event_1["timeFrom"] < event_2["timeTo"] < event_1["timeTo"]:
             return True
         return False
 
     def calculateEventsOffsets(self):
-        for i in range(0, len(self.dayDataList)):
-            counter = 1
-            for j in range(i, len(self.dayDataList)):
+        for i in range(0, len(self.dayDataList)-1):
+            for j in range(i+1, len(self.dayDataList)):
                 if self.isOverlapping(self.dayDataList[i], self.dayDataList[j]):
-                    counter += 1
                     self.dayDataList[j]["order"] += 1
+                    self.dayDataList[i]["overlap"] += 1
                     self.dayDataList[j]["overlap"] += 1
-            self.dayDataList[i]["overlap"] += counter
 
     def paintEvent(self, event):
         painter = QtGui.QPainter(self)
@@ -113,8 +111,6 @@ class DayCalendar(QtWidgets.QWidget):
                         wholePaintingSpace // (event["overlap"] + 1) - 5,
                         int(hourHeight * heightFactor) + 10),
                         Qt.AlignTop | Qt.AlignLeft, event["title"])
-
-        painter.drawLine(5, 24 * (self.height() // 24) + 10, self.width() - 5, 24 * (self.height() // 24) + 10)
 
 
 def __main__():
