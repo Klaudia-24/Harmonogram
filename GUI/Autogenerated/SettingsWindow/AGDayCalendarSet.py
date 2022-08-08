@@ -84,6 +84,7 @@ class Ui_Form(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.lineThicknessLabel.setFont(font)
+        self.lineThicknessLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.lineThicknessLabel.setObjectName("lineThicknessLabel")
         self.gridLayout_4.addWidget(self.lineThicknessLabel, 0, 1, 1, 1)
         self.hourLinesRatioSpinBox = QtWidgets.QDoubleSpinBox(self.scrollAreaWidgetContents)
