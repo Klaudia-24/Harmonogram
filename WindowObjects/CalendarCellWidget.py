@@ -1,9 +1,6 @@
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPen
-
 
 class CalendarCellWidget(QtWidgets.QWidget):
     __labelText = None
@@ -78,7 +75,9 @@ class CalendarCellWidget(QtWidgets.QWidget):
         rect = QtCore.QRect(0, 0, painter.device().width(), painter.device().height())
 
         if self.__eventTypeDotRatio != 0:
-            painter.setFont(QtGui.QFont(self.__fontName, ((painter.device().height()-2*self.__eventTypeDotRatio)//self.__fontHeightRatio), self.__fontStyle))
+            painter.setFont(QtGui.QFont(self.__fontName,
+                                        pointSize=int((painter.device().height()-2*self.__eventTypeDotRatio)//self.__fontHeightRatio),
+                                        weight=self.__fontStyle))
 
             colorIndex = 0
             spaceOffset = 10
@@ -96,7 +95,9 @@ class CalendarCellWidget(QtWidgets.QWidget):
                 colorIndex += 1
 
         else:
-            painter.setFont(QtGui.QFont(self.__fontName, (painter.device().width()) // self.__fontHeightRatio, self.__fontStyle))
+            painter.setFont(QtGui.QFont(self.__fontName,
+                                        pointSize=int(painter.device().width() // self.__fontHeightRatio),
+                                        weight=self.__fontStyle))
 
         painter.setPen(QtGui.QPen(QtGui.QColor("#000000"), 5, Qt.SolidLine))
         painter.drawText(rect, Qt.AlignVCenter | Qt.AlignHCenter, self.__labelText)
