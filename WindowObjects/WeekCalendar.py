@@ -39,6 +39,12 @@ class WeekCalendar(QtWidgets.QWidget):
         for i in range(0, 24):
             painter.drawLine(5, i * rowHeight + rowHeight, self.width() - 5, i * rowHeight + rowHeight)
 
+        self.drawHours(painter, rowHeight)
+        painter.drawLine(80, 5, 80, self.height() - 5)
+        self.drawWeekDay(painter, rowHeight)
+
+
+    def drawHours(self, painter, rowHeight):
         for i in range(0, 24):
             hourXStart = -40
             hourYStart = i*rowHeight + rowHeight
@@ -51,11 +57,7 @@ class WeekCalendar(QtWidgets.QWidget):
             painter.drawText(QtCore.QRect(self.width() - 130, hourYStart, hourWidth, hourHeight),
                              Qt.AlignTop | Qt.AlignHCenter, f"{i}:00")
 
-        painter.drawLine(80,
-                         5,
-                         80,
-                         self.height() - 5)
-
+    def drawWeekDay(self, painter, rowHeight):
         for i in range(0, 7):
             weekDayXStart = 50 + ((self.width()-150) // 7) * i
             weekDayYStart = 20
