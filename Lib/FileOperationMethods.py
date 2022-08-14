@@ -1,4 +1,5 @@
 import json
+import yaml
 from PyQt5.QtWidgets import QMessageBox
 
 
@@ -29,3 +30,15 @@ def readFromJsonFileToDict(fileName, dictName, keyName):
         messageWindow.setWindowTitle("Info")
         messageWindow.setText("Occurred some problems with file permission.")
         messageWindow.exec()
+
+
+def writeSettingsToYamlFile(settingsList):
+    with open('appConfig.yaml', mode='wt', encoding="utf-8") as f:
+        yaml.safe_dump_all(settingsList, f)
+
+def readSettingsFromYamlFile():
+    settingsList = []
+    with open('appConfig.yaml', 'r') as f:
+        settingsList = list(yaml.safe_load_all(f))
+
+    return settingsList
