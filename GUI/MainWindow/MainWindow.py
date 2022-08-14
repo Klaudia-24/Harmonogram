@@ -6,7 +6,7 @@ from GUI.MainWindow.DayCalendarWidget import DayCalendarWidget
 from GUI.SettingsWindow.SettingsW import SettingsW
 from GUI.MainWindow.WeekCalendarWidget import WeekCalendarWidget
 from Objects.Event import loadEventsList, loadEventTypesList
-from GUI.MainWindow.MainCalendarWidget import MainCalendarWidget
+from GUI.MainWindow.MonthCalendarWidget import MainCalendarWidget
 
 
 class MainWindow(QtWidgets.QMainWindow):

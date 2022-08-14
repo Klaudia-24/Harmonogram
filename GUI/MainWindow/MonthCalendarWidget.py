@@ -117,7 +117,7 @@ class MainCalendarWidget(QtWidgets.QWidget):
                 self.generateNextMonth(i, firstWeekDayOfMonth, currentMonthRange, "#cce6ff")
 
         if self.dateOnDateBar.year == date.today().year and self.dateOnDateBar.month == date.today().month:
-            self.distinguishDayFromDateBar()
+            self.distinguishTodayDate()
         else:
             for i in range(1, 43):
                 getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setFontAppearance')('Times',  QtGui.QFont.Normal, 3.5)
@@ -176,7 +176,7 @@ class MainCalendarWidget(QtWidgets.QWidget):
                         getattr(getattr(self.mainCalendarWidget, 'day_' + str(labelIndex)), 'addEventColor')(
                             getEventTypeColour(event["type"]))
 
-    def distinguishDayFromDateBar(self):
+    def distinguishTodayDate(self):
         firstWeekDayOfMonth = int(
             datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month, 1).strftime('%w'))
 

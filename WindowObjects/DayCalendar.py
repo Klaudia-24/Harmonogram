@@ -2,6 +2,8 @@ from datetime import datetime
 import sys
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPen
+
 from Objects.Event import getEventsForDay
 
 
@@ -57,7 +59,8 @@ class DayCalendar(QtWidgets.QWidget):
         backgroundBrush.setStyle(Qt.SolidPattern)
         painter.fillRect(QtCore.QRect(0, 0, painter.device().width(), painter.device().height()), backgroundBrush)
 
-        brush.setColor(QtGui.QColor("#80bfff"))
+        # brush.setColor(QtGui.QColor("#80bfff"))
+        # brush.setColor(QtGui.QColor("#cc3300"))
         brush.setStyle(Qt.SolidPattern)
 
         if self.__shapes:
@@ -65,9 +68,11 @@ class DayCalendar(QtWidgets.QWidget):
                 painter.fillRect(QtCore.QRect(point[0].x(), point[0].y(), point[1].x() - point[0].x(), point[1].y() - point[0].y()), brush)
 
         for i in range(0, 24):
+            painter.setPen(QPen(QtGui.QColor("#001a33"), 2, Qt.SolidLine))
             painter.drawLine(5, i*(self.height()//24) + 10, self.width() - 5, i*(self.height()//24) + 10)
 
         for i in range(0, 24):
+            painter.setPen(QPen(QtGui.QColor("#001a33"), 2, Qt.SolidLine))
             hourXStart = 10
             hourYStart = i*(self.height()//24) + 10
             hourWidth = self.width()//15
@@ -97,10 +102,13 @@ class DayCalendar(QtWidgets.QWidget):
 
                 painter.setPen(Qt.NoPen)
                 painter.setBrush(brush)
+
+                spaceBetweenEvents = 10
+
                 painter.drawRoundedRect(QtCore.QRect(
                     eventRectX,
                     hourYStart,
-                    (wholePaintingSpace // event["overlap"]) - 10,
+                    (wholePaintingSpace // event["overlap"]) - spaceBetweenEvents,
                     int(hourHeight * heightFactor)), 10, 10)
 
                 painter.setPen(Qt.black)

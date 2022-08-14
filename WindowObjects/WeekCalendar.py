@@ -9,13 +9,13 @@ class WeekCalendar(QtWidgets.QWidget):
     __startPoint = None
     __pointsList = []
     __shapes = []
-    __weekNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    __weekNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] # TODO enum in new file
 
     def __init__(self, *args, **kwargs):
         super(WeekCalendar, self).__init__(*args, **kwargs)
         self.setMinimumHeight(2000)
         self.setMinimumWidth(2500)
-        self.weekDataList = []
+        self.weekDataList = dict() #TODO key - day name
 
 
 
