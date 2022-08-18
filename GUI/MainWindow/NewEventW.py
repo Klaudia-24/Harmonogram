@@ -50,8 +50,8 @@ class NewEventW(QtWidgets.QWidget):
                                                                           self.newEventW.dateFromCalendar.month,
                                                                           self.newEventW.dateFromCalendar.day), QtCore.QTime(0, 0, 0)))
 
-    def createNewEvent(self) -> dict:
-        """Changes the event object to the JSON dictionary."""
+    def createNewEvent(self) -> Event:
+        """Returns the event object."""
 
         if self.newEventW.allDayEventRadioButton.isChecked():
             timeFrom = "00:00"
@@ -70,7 +70,7 @@ class NewEventW(QtWidgets.QWidget):
             localization=self.newEventW.eventLocalizationPlainTextEdit.toPlainText(),
             reminder=str(self.newEventW.remindBeforeComboBox.currentText())
         )
-        return event.to_dict()
+        return event
 
     def confirmAddingNewEvent(self) -> None:
         """Used for 'Confirm' button. Adds new event to the events' dictionary,
