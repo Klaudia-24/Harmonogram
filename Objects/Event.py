@@ -39,7 +39,7 @@ class Event:
 
 
 
-def addEventToList(year, month, day, newEvent):
+def addEventToList(year, month, day, newEvent: Event):
     global eventsDictionary
     if year not in eventsDictionary["events"]:
         eventsDictionary["events"][year] = dict()
@@ -48,7 +48,7 @@ def addEventToList(year, month, day, newEvent):
     if day not in eventsDictionary["events"][year][month]:
         eventsDictionary["events"][year][month][day] = []
 
-    eventsDictionary["events"][year][month][day].append(newEvent)
+    eventsDictionary["events"][year][month][day].append(newEvent.to_dict())
 
 
 # TODO config file with file names etc.
@@ -100,18 +100,20 @@ def getEventTypeColour(eventType):
 def getEventsForDay(day, month, year):
     global eventsDictionary
     dayDataList = []
-    if str(year) in eventsDictionary["events"]:
-        if str(month) in eventsDictionary["events"][str(year)]:
-            if str(day) in eventsDictionary["events"][str(year)][str(month)]:
-                for event in eventsDictionary["events"][str(year)][str(month)][str(day)]:
-                    dataDict = dict()
-                    dataDict["timeFrom"] = datetime.strptime(event["eventDuration"]["timeFrom"], '%H:%M')
-                    dataDict["timeTo"] = datetime.strptime(event["eventDuration"]["timeTo"], '%H:%M')
-                    dataDict["title"] = event["title"]
-                    dataDict["type"] = getEventTypeColour(event["type"])
-                    dataDict["overlap"] = 1 # number of events overlapping
-                    dataDict["order"] = 0 # ordinal number of event
-                    dayDataList.append(dataDict)
+    if str(year) in eventsDictionary["events"] and \
+       str(month) in eventsDictionary["events"][str(year)] and \
+       str(day) in eventsDictionary["events"][str(year)][str(month)]:
+
+        for event in eventsDictionary["events"][str(year)][str(month)][str(day)]:
+            dataDict = dict()
+            # TODO change to the data class
+            dataDict["timeFrom"] = datetime.strptime(event["eventDuration"]["timeFrom"], '%H:%M')
+            dataDict["timeTo"] = datetime.strptime(event["eventDuration"]["timeTo"], '%H:%M')
+            dataDict["title"] = event["title"]
+            dataDict["type"] = getEventTypeColour(event["type"])
+            dataDict["overlap"] = 1 # number of events overlapping
+            dataDict["order"] = 0 # ordinal number of event
+            dayDataList.append(dataDict)
 
     return dayDataList
 
