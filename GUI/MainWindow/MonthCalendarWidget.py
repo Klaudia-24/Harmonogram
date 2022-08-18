@@ -226,23 +226,23 @@ class MainCalendarWidget(QtWidgets.QWidget):
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
         self.updateWidgetSize()
 
-    def changeMonthToPrev(self):
-
-        self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
-                                               self.dateOnDateBar.day) - dateutils.relativedelta(months=1)
-        for i in range(1, 43):
-            getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setEventColorList')([])
-        self.generateCalendarDays()
-        self.distinguishClickedDay()
-
-    def changeMonthToNext(self):
-
-        self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
-                                               self.dateOnDateBar.day) + dateutils.relativedelta(months=1)
-        for i in range(1, 43):
-            getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setEventColorList')([])
-        self.generateCalendarDays()
-        self.distinguishClickedDay()
+    # def changeMonthToPrev(self):
+    #
+    #     self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+    #                                            self.dateOnDateBar.day) - dateutils.relativedelta(months=1)
+    #     for i in range(1, 43):
+    #         getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setEventColorList')([])
+    #     self.generateCalendarDays()
+    #     self.distinguishClickedDay()
+    #
+    # def changeMonthToNext(self):
+    #
+    #     self.dateOnDateBar = datetime.datetime(self.dateOnDateBar.year, self.dateOnDateBar.month,
+    #                                            self.dateOnDateBar.day) + dateutils.relativedelta(months=1)
+    #     for i in range(1, 43):
+    #         getattr(getattr(self.mainCalendarWidget, 'day_' + str(i)), 'setEventColorList')([])
+    #     self.generateCalendarDays()
+    #     self.distinguishClickedDay()
 
     def changeDate(self, calendarType: str, changeType: str):
         offset = 1 if changeType == "next" else -1
