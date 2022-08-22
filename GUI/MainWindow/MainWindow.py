@@ -94,9 +94,7 @@ class MainWindow(QtWidgets.QMainWindow):
                               str(self.mainCalendarWidget.dateOnDateBar.year))
         elif self.ui.stackedWidget.currentIndex() == 1:
             self.mainCalendarWidget.changeDate("day", "prev")
-            self.dayCalendarWidget.dayCalendar.setDayDataList(self.mainCalendarWidget.dateOnDateBar.day,
-                                                              self.mainCalendarWidget.dateOnDateBar.month,
-                                                              self.mainCalendarWidget.dateOnDateBar.year)
+            self.dayCalendarWidget.dayCalendar.setDayDataList(self.mainCalendarWidget.dateOnDateBar)
             self.setDateInBar(str(self.mainCalendarWidget.dateOnDateBar.day),
                               self.mainCalendarWidget.dateOnDateBar.strftime("%B"),
                               str(self.mainCalendarWidget.dateOnDateBar.year))
@@ -123,9 +121,7 @@ class MainWindow(QtWidgets.QMainWindow):
                               str(self.mainCalendarWidget.dateOnDateBar.year))
         elif self.ui.stackedWidget.currentIndex() == 1:
             self.mainCalendarWidget.changeDate("day", "next")
-            self.dayCalendarWidget.dayCalendar.setDayDataList(self.mainCalendarWidget.dateOnDateBar.day,
-                                                              self.mainCalendarWidget.dateOnDateBar.month,
-                                                              self.mainCalendarWidget.dateOnDateBar.year)
+            self.dayCalendarWidget.dayCalendar.setDayDataList(self.mainCalendarWidget.dateOnDateBar)
             self.setDateInBar(str(self.mainCalendarWidget.dateOnDateBar.day),
                               self.mainCalendarWidget.dateOnDateBar.strftime("%B"),
                               str(self.mainCalendarWidget.dateOnDateBar.year))
@@ -153,9 +149,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui_newEventWindow.show()
 
     def switchToTheDayCalendar(self):
-        self.dayCalendarWidget.dayCalendar.setDayDataList(self.mainCalendarWidget.dateOnDateBar.day,
-                                              self.mainCalendarWidget.dateOnDateBar.month,
-                                              self.mainCalendarWidget.dateOnDateBar.year)
+        self.dayCalendarWidget.dayCalendar.setDayDataList(self.mainCalendarWidget.dateOnDateBar)
         self.ui.stackedWidget.setCurrentIndex(1)
 
     def switchToTheWeekCalendar(self):

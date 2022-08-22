@@ -55,7 +55,7 @@ def addEventToList(year, month, day, newEvent: Event):
 
 
 def getEventsDictionary():
-    return eventsDictionary
+    return eventsDictionary["events"]
 
 
 def getEventTypesDictionary():
@@ -97,14 +97,14 @@ def getEventTypeColour(eventType):
     return eventTypesDictionary["eventTypes"][eventType]
 
 
-def getEventsForDay(day, month, year):
+def getEventsForDay(date: datetime):
     global eventsDictionary
     dayDataList = []
-    if str(year) in eventsDictionary["events"] and \
-       str(month) in eventsDictionary["events"][str(year)] and \
-       str(day) in eventsDictionary["events"][str(year)][str(month)]:
+    if str(date.year) in eventsDictionary["events"] and \
+       str(date.month) in eventsDictionary["events"][str(date.year)] and \
+       str(date.day) in eventsDictionary["events"][str(date.year)][str(date.month)]:
 
-        for event in eventsDictionary["events"][str(year)][str(month)][str(day)]:
+        for event in eventsDictionary["events"][str(date.year)][str(date.month)][str(date.day)]:
             dataDict = dict()
             # TODO change to the data class
             dataDict["timeFrom"] = datetime.strptime(event["eventDuration"]["timeFrom"], '%H:%M')

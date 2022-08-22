@@ -26,8 +26,8 @@ class DayCalendar(QtWidgets.QWidget):
         print(self.__shapes)
         self.update()
 
-    def setDayDataList(self, day, month, year):
-        self.dayDataList = getEventsForDay(day, month, year)
+    def setDayDataList(self, data : datetime):
+        self.dayDataList = getEventsForDay(data)
         self.calculateEventsOffsets()
         self.update()
 
@@ -55,7 +55,6 @@ class DayCalendar(QtWidgets.QWidget):
         hourWidth = self.width() // 15
         hourHeight = self.height() // 24
         hourXStart = 10 # margines lewostronny godziny
-        painter.setPen(QtGui.QPen())
         painter.fillRect(QtCore.QRect(0, 0, painter.device().width(), painter.device().height()), #background size
                          QtGui.QBrush(QtGui.QColor("#cfe0e8"), Qt.SolidPattern) #background color
                         )

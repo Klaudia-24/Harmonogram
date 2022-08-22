@@ -10,10 +10,9 @@ class CalendarCellWidget(QtWidgets.QWidget):
     __fontName = None
     __fontStyle = None
     __fontHeightRatio = None
-
+    __eventColorSet = set()
     def __init__(self, *args, **kwargs):
         super(CalendarCellWidget, self).__init__(*args, **kwargs)
-        self.__eventColorList = []
 
     def setClicked(self, whenClicked):
         self.__whenClicked = whenClicked
@@ -31,19 +30,19 @@ class CalendarCellWidget(QtWidgets.QWidget):
     def getText(self):
         return self.__labelText
 
-    def addEventColor(self, color):
-        if color not in self.__eventColorList:
-            self.__eventColorList.append(color)
+    # def addEventColor(self, color):
+    #     if color not in self.__eventColorList:
+    #         self.__eventColorList.append(color)
 
-    def clearEventColorList(self):
-        self.__eventColorList.clear()
+    def clearEventColorSet(self):
+        self.__eventColorSet.clear()
         self.refresh()
 
-    def setEventColorList(self, newList):
-        self.__eventColorList = newList
+    def setEventColorSet(self, newSet):
+        self.__eventColorSet = newSet
 
-    def getEventColorList(self):
-        return self.__eventColorList
+    def getEventColorSet(self):
+        return self.__eventColorSet
 
     def refresh(self):
         self.update()
@@ -58,7 +57,7 @@ class CalendarCellWidget(QtWidgets.QWidget):
         self.__fontHeightRatio = fontHeightRatio
         self.refresh()
 
-    def setEventTypeDotRatio(self, eventTypeDotRatio):
+    def setEventTypeDotRatio(self, eventTypeDotRatio: int) -> None:
         self.__eventTypeDotRatio = eventTypeDotRatio
         self.refresh()
 
@@ -73,7 +72,6 @@ class CalendarCellWidget(QtWidgets.QWidget):
         backgroundBrush.setStyle(Qt.SolidPattern)
         painter.fillRect(QtCore.QRect(0, 0, painter.device().width(), painter.device().height()), backgroundBrush)
         rect = QtCore.QRect(0, 0, painter.device().width(), painter.device().height())
-
         if self.__eventTypeDotRatio != 0:
             painter.setFont(QtGui.QFont(self.__fontName,
                                         pointSize=int((painter.device().height()-2*self.__eventTypeDotRatio)//self.__fontHeightRatio),
@@ -83,12 +81,12 @@ class CalendarCellWidget(QtWidgets.QWidget):
             spaceOffset = 10
             eventTypeDotSize = int(self.width() / self.__eventTypeDotRatio)
 
-            if (eventTypeDotSize + spaceOffset) * len(self.__eventColorList) > painter.device().width():
-                spaceSize = (painter.device().width() - spaceOffset - eventTypeDotSize) // (len(self.__eventColorList))
+            if (eventTypeDotSize + spaceOffset) * len(self.__eventColorSet) > painter.device().width():
+                spaceSize = (painter.device().width() - spaceOffset - eventTypeDotSize) // (len(self.__eventColorSet))
             else:
                 spaceSize = eventTypeDotSize + spaceOffset
 
-            for i in self.__eventColorList:
+            for i in self.__eventColorSet:
                 painter.setPen(QPen(QtGui.QColor(i), 5, Qt.SolidLine))
                 painter.setBrush(QtGui.QBrush(QtGui.QColor(i), Qt.SolidPattern))
                 painter.drawEllipse(spaceSize * colorIndex + spaceOffset, 10, eventTypeDotSize, eventTypeDotSize)

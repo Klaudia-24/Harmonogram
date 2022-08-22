@@ -25,7 +25,7 @@ def getEventsForWeek(firstDayOfWeekDate):
 
     for weekDay in Week:
         dayDate = firstDayOfWeekDate + dateutils.relativedelta(days=(int(weekDay.value)))
-        weekEvents[weekDay.name] = getEventsForDay(dayDate.day, dayDate.month, dayDate.year)
+        weekEvents[weekDay.name] = getEventsForDay(dayDate)
 
 # def getEventsListForWeekDay(weekDay):
 #     global weekEvents
