@@ -53,102 +53,73 @@ class WeekCalendar(QtWidgets.QWidget):
         brush.setColor(QtGui.QColor("#80bfff"))
         brush.setStyle(Qt.SolidPattern)
 
-        rowHeight = (self.height() - 0)//25
+        rowHeight = (self.height())//25
 
         for i in range(0, 24):
             painter.drawLine(5, i * rowHeight + rowHeight, self.width() - 5, i * rowHeight + rowHeight)
 
-            # painter.setPen(QPen(QtGui.QColor("#001a33"), 2, Qt.SolidLine))
-            # hourXStart = 10
-            # hourYStart = i * (self.height() // 24) + 10
-            # hourWidth = self.width() // 15
-            # hourHeight = self.height() // 24
-            #
-            # painter.setFont(QtGui.QFont('Times', self.height() // 130, QtGui.QFont.Bold))
-            # painter.drawText(QtCore.QRect(hourXStart, hourYStart, hourWidth, hourHeight),
-            #                  Qt.AlignTop | Qt.AlignHCenter, f"{i}:00")
-
-        self.drawHours(painter, rowHeight)
+        self.drawHours(painter)
         painter.drawLine(80, 5, 80, self.height() - 5)
-        self.drawWeekDay(painter, brush, rowHeight)
+        self.drawWeekDay(painter)
 
-    def drawHours(self, painter, rowHeight):
+    def drawHours(self, painter):
+        rowHeight = self.height() // 25
+
         for i in range(0, 24):
-            hourXStart = -40
-            hourYStart = i*rowHeight + rowHeight
-            hourWidth = self.width()//15
-            hourHeight = rowHeight
+            hourYStart = rowHeight + i*rowHeight
+            hourWidth = self.width()//30
+            rowHeight = (self.height())//25
 
             painter.setFont(QtGui.QFont('Times', self.height() // 130, QtGui.QFont.Bold))
-            painter.drawText(QtCore.QRect(hourXStart, hourYStart, hourWidth, hourHeight),
+            painter.drawText(QtCore.QRect(0, hourYStart, hourWidth, rowHeight),
                              Qt.AlignTop | Qt.AlignHCenter, f"{i}:00")
-            painter.drawText(QtCore.QRect(self.width() - 130, hourYStart, hourWidth, hourHeight),
+            painter.drawText(QtCore.QRect(self.width() - hourWidth, hourYStart, hourWidth, rowHeight),
                              Qt.AlignTop | Qt.AlignHCenter, f"{i}:00")
 
-    def drawWeekDay(self, painter, brush, rowHeight):
+    def drawWeekDay(self, painter):
         for day in Week:
-            weekDayXStart = 50 + ((self.width()-150) // 7) * day.value
-            weekDayYStart = 20
-            weekDayWidth = self.width() // 7
-            weekDayHeight = rowHeight
+            weekDayYStart = 20 # top margin
+            weekDayWidth = (4 * self.width() // 30)
+            rowHeight = self.height() // 25
+            weekDayXStart = self.width()//30 + weekDayWidth * day.value
 
             painter.setFont(QtGui.QFont('Times', self.height() // 130, QtGui.QFont.Bold))
-            painter.drawText(QtCore.QRect(weekDayXStart, weekDayYStart, weekDayWidth, weekDayHeight),
+            painter.drawText(QtCore.QRect(weekDayXStart, weekDayYStart, weekDayWidth, rowHeight),
                              Qt.AlignTop | Qt.AlignHCenter, day.name)
             painter.drawLine(weekDayXStart + weekDayWidth,
                              5,
                              weekDayXStart + weekDayWidth,
                              self.height() - 5)
 
-            for i in range(0, 24):
-                hourXStart = 10
-                hourYStart = i * (self.height() // 24) + 10 + weekDayHeight
-                hourWidth = self.width() // 15
-                hourHeight = self.height() // 25
+            self.drawDayEvents(painter, weekEvents[day.name], weekDayXStart, rowHeight, weekDayWidth)
 
-                self.drawEventsForDay(weekEvents[day.name], brush, painter, i, weekDayXStart, hourYStart, hourWidth,
-                                      hourHeight, weekDayWidth, weekDayHeight)
 
-    def drawEventsForDay(self, eventsList, brush, painter, hour, weekDayXStart, hourYStart, hourWidth,
-                         hourHeight, weekDayWidth, weekDayHeight):
+    def drawDayEvents(self, painter, dayDataList, hourLeftMargin, rowHeight, weekDayWidth):
+        brush = QtGui.QBrush()
+        brush.setStyle(Qt.SolidPattern)
+        spaceBetweenEvents = 10
+        for event in dayDataList:
+            brush.setColor(QtGui.QColor(event["type"]))
+            painter.setPen(Qt.NoPen)
+            painter.setBrush(brush)
+            eventVerticalStart = int((int(event["timeFrom"].strftime("%H"))+int(event["timeFrom"].strftime("%M"))/60)*rowHeight) + rowHeight
+            eventVerticalEnd = int((int(event["timeTo"].strftime("%H"))+int(event["timeTo"].strftime("%M"))/60) * rowHeight)
+            eventHorizontalStart = hourLeftMargin + (weekDayWidth // event["overlap"]) * event["order"] + 5
+            eventHorizontalEnd = (weekDayWidth // event["overlap"]) - spaceBetweenEvents
 
-        # wholePaintingSpace = self.width() - dayXStart - dayWidth - 20
+            painter.drawRoundedRect(QtCore.QRect(eventHorizontalStart, eventVerticalStart, eventHorizontalEnd, eventVerticalEnd), 10, 10)
 
-        wholePaintingSpace = weekDayWidth - 40
+            painter.setPen(Qt.black)
+            painter.setFont(QtGui.QFont('Times', self.height() // 150, QtGui.QFont.Normal))
 
-        # for weekDay in weekEvents:
-        for event in eventsList:
-            if event["timeFrom"].hour == hour:
-                timeDiff = str(event["timeTo"] - event["timeFrom"])
-                heightFactor = int(timeDiff.split(":")[0])
-                heightFactorFraction = int(timeDiff.split(":")[1]) / 60
-                heightFactor += heightFactorFraction
+            eventText = event["title"] + "\n" + event["description"] + "\n" + event["localization"] + "\n" + event["reminder"]
 
-                eventRectX = weekDayXStart + 40 + (wholePaintingSpace // event["overlap"]) * event["order"]
-
-                brush.setColor(QtGui.QColor(event["type"]))
-                brush.setStyle(Qt.SolidPattern)
-                painter.setPen(Qt.NoPen)
-                painter.setBrush(brush)
-
-                spaceBetweenEvents = 10
-
-                painter.drawRoundedRect(QtCore.QRect(
-                    eventRectX,
-                    hourYStart - 10,
-                    (wholePaintingSpace // event["overlap"]) - spaceBetweenEvents,
-                    int(hourHeight * heightFactor)), 10, 10)
-
-                painter.setPen(Qt.black)
-                painter.setFont(QtGui.QFont('Times', self.height() // 150, QtGui.QFont.Normal))
-
-                painter.drawText(QtCore.QRect(
-                    eventRectX + 10,
-                    hourYStart,
-                    wholePaintingSpace // (event["overlap"] + 1) - 5,
-                    int(hourHeight * heightFactor) + 10),
-                    Qt.AlignTop | Qt.AlignLeft, event["title"])
-
+            painter.drawText(QtCore.QRect(
+                eventHorizontalStart + 10,
+                eventVerticalStart + 5,
+                eventHorizontalEnd - 20,
+                eventVerticalEnd),
+                Qt.AlignTop | Qt.AlignLeft, eventText)
 
 def __main__():
     app = QtWidgets.QApplication(sys.argv)

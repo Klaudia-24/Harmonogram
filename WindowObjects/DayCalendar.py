@@ -57,7 +57,7 @@ class DayCalendar(QtWidgets.QWidget):
         hourXStart = 10 # margines lewostronny godziny
         painter.setPen(QtGui.QPen())
         painter.fillRect(QtCore.QRect(0, 0, painter.device().width(), painter.device().height()), #background size
-                         QtGui.QBrush(QtGui.QColor("#cfe0e8"),Qt.SolidPattern) #background color
+                         QtGui.QBrush(QtGui.QColor("#cfe0e8"), Qt.SolidPattern) #background color
                         )
         painter.setFont(QtGui.QFont('Times', self.height() // 130, QtGui.QFont.Bold))
 
@@ -81,23 +81,53 @@ class DayCalendar(QtWidgets.QWidget):
             )
 
         #rysowanie Eventow
-        self.drawEvents(painter,hourXStart, hourHeight, hourWidth)
+        self.drawEvents(painter, hourXStart, hourHeight, hourWidth)
 
-    def drawEvents(self, painter, hourLeftMargin,hourHeight, hourWidth):
+    def drawEvents(self, painter, hourLeftMargin, hourHeight, hourWidth):
         brush = QtGui.QBrush()
         brush.setStyle(Qt.SolidPattern)
-        painter.setPen(Qt.NoPen)
-        painter.setBrush(brush)
         spaceBetweenEvents = 10
         wholePaintingSpace = self.width() - hourLeftMargin - hourWidth - 20
         for event in self.dayDataList:
             brush.setColor(QtGui.QColor(event["type"]))
+            painter.setPen(Qt.NoPen)
             painter.setBrush(brush)
-            eventVerticalStart=int((int(event["timeFrom"].strftime("%H"))+int(event["timeFrom"].strftime("%M"))/60)*hourHeight+10)
-            eventVerticalEnd=int((int(event["timeTo"].strftime("%H"))+int(event["timeTo"].strftime("%M"))/60) * hourHeight)
-            eventHorizontalStart=hourLeftMargin + hourWidth + (wholePaintingSpace // event["overlap"]) * event["order"] + 10
-            eventHorizontalEnd=(wholePaintingSpace // event["overlap"]) - spaceBetweenEvents
+            eventVerticalStart = int((int(event["timeFrom"].strftime("%H"))+int(event["timeFrom"].strftime("%M"))/60)*hourHeight+10)
+            eventVerticalEnd = int((int(event["timeTo"].strftime("%H"))+int(event["timeTo"].strftime("%M"))/60) * hourHeight)
+            eventHorizontalStart = hourLeftMargin + hourWidth + (wholePaintingSpace // event["overlap"]) * event["order"] + 10
+            eventHorizontalEnd = (wholePaintingSpace // event["overlap"]) - spaceBetweenEvents
             painter.drawRoundedRect(QtCore.QRect(eventHorizontalStart, eventVerticalStart, eventHorizontalEnd, eventVerticalEnd), 10, 10)
+
+            painter.setPen(Qt.black)
+            painter.setFont(QtGui.QFont('Times', self.height() // 150, QtGui.QFont.Normal))
+
+            painter.drawText(QtCore.QRect(
+                eventHorizontalStart + 10,
+                eventVerticalStart + 5,
+                eventHorizontalEnd - 20,
+                eventVerticalEnd),
+                Qt.AlignTop | Qt.AlignLeft, event["title"])
+
+            painter.drawText(QtCore.QRect(
+                eventHorizontalStart + 10,
+                eventVerticalStart + 35,
+                eventHorizontalEnd - 20,
+                eventVerticalEnd),
+                Qt.AlignTop | Qt.AlignLeft, event["description"])
+
+            painter.drawText(QtCore.QRect(
+                eventHorizontalStart + 10,
+                eventVerticalStart + 65,
+                eventHorizontalEnd - 20,
+                eventVerticalEnd),
+                Qt.AlignTop | Qt.AlignLeft, event["localization"])
+
+            painter.drawText(QtCore.QRect(
+                eventHorizontalStart + 10,
+                eventVerticalStart + 95,
+                eventHorizontalEnd - 20,
+                eventVerticalEnd),
+                Qt.AlignTop | Qt.AlignLeft, event["reminder"])
 
 def __main__():
     app = QtWidgets.QApplication(sys.argv)
