@@ -110,6 +110,9 @@ def getEventsForDay(day, month, year):
             dataDict["timeFrom"] = datetime.strptime(event["eventDuration"]["timeFrom"], '%H:%M')
             dataDict["timeTo"] = datetime.strptime(event["eventDuration"]["timeTo"], '%H:%M')
             dataDict["title"] = event["title"]
+            dataDict["description"] = event["description"]
+            dataDict["localization"] = event["localization"]
+            dataDict["reminder"] = event["reminder"]
             dataDict["type"] = getEventTypeColour(event["type"])
             dataDict["overlap"] = 1 # number of events overlapping
             dataDict["order"] = 0 # ordinal number of event
