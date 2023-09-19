@@ -19,7 +19,7 @@ class EventDataW(QtWidgets.QWidget):
         self.eventDataWidget.eventEditBtn.setStyleSheet("QPushButton {"
 
                                                              "border-radius: 6px;"
-                                                             "  background-image: url(./WindowObjects/editImage.png);"
+                                                             "  background-image: url(./WindowObjects/Resources/editImage.png);"
                                                              "background-repeat:no-repeat;"
                                                              " background-position:center;"
                                                              "  min-width: 40px;"
@@ -40,7 +40,7 @@ class EventDataW(QtWidgets.QWidget):
         self.eventDataWidget.eventRemoveBtn.setStyleSheet("QPushButton {"
 
                                                         "border-radius: 6px;"
-                                                        "  background-image: url(./WindowObjects/trashImage.png);"
+                                                        "  background-image: url(./WindowObjects/Resources/trashImage.png);"
                                                         "background-repeat:no-repeat;"
                                                         " background-position:center;"
                                                         "  min-width: 40px;"

@@ -47,7 +47,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.settingsButton.setStyleSheet("QPushButton {"
 
                                                              "border-radius: 6px;"
-                                                             "  background-image: url(./WindowObjects/settingsImage.png);"
+                                                             "  background-image: url(./WindowObjects/Resources/settingsImage.png);"
                                                              "background-repeat:no-repeat;"
                                                              " background-position:center;"
                                                              "  min-width: 60px;"

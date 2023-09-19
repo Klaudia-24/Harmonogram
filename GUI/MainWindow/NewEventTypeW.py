@@ -19,7 +19,7 @@ class NewTypeEventW(QtWidgets.QWidget):
         self.newEventTypeW.colorsPaletteButton.setStyleSheet("QPushButton {"
                                                              
                                                              "border-radius: 6px;"
-                                                             "  background-image: url(./WindowObjects/paletteImage.png);"
+                                                             "  background-image: url(./WindowObjects/Resources/paletteImage.png);"
                                                              "background-repeat:no-repeat;"
                                                              " background-position:center;"
                                                              "  min-width: 80px;"
