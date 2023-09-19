@@ -1,8 +1,10 @@
+import datetime
 import sys
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.QtCore import Qt
 from Objects.WeekEvents import getEventsForWeek, weekEvents
 from Objects.WeekEvents import Week
+from Objects.Event import getEventTypeColour
 
 
 class WeekCalendar(QtWidgets.QWidget):
@@ -23,13 +25,13 @@ class WeekCalendar(QtWidgets.QWidget):
         self.update()
 
     def isOverlapping(self, event_1, event_2):
-        if event_2["timeFrom"] <= event_1["timeFrom"] <= event_2["timeTo"]:
+        if event_2.eventDuration.timeFrom <= event_1.eventDuration.timeFrom <= event_2.eventDuration.timeTo:
             return True
-        if event_2["timeFrom"] < event_1["timeTo"] < event_2["timeTo"]:
+        if event_2.eventDuration.timeFrom < event_1.eventDuration.timeTo < event_2.eventDuration.timeTo:
             return True
-        if event_1["timeFrom"] <= event_2["timeFrom"] <= event_1["timeTo"]:
+        if event_1.eventDuration.timeFrom <= event_2.eventDuration.timeFrom <= event_1.eventDuration.timeTo:
             return True
-        if event_1["timeFrom"] < event_2["timeTo"] < event_1["timeTo"]:
+        if event_1.eventDuration.timeFrom < event_2.eventDuration.timeTo < event_1.eventDuration.timeTo:
             return True
         return False
 
@@ -37,9 +39,9 @@ class WeekCalendar(QtWidgets.QWidget):
         for i in range(0, len(dayEventsList)-1):
             for j in range(i+1, len(dayEventsList)):
                 if self.isOverlapping(dayEventsList[i], dayEventsList[j]):
-                    dayEventsList[j]["order"] += 1
-                    dayEventsList[i]["overlap"] += 1
-                    dayEventsList[j]["overlap"] += 1
+                    dayEventsList[j].order += 1
+                    dayEventsList[i].overlap += 1
+                    dayEventsList[j].overlap += 1
 
     def paintEvent(self, event):
 
@@ -99,20 +101,25 @@ class WeekCalendar(QtWidgets.QWidget):
         brush.setStyle(Qt.SolidPattern)
         spaceBetweenEvents = 10
         for event in dayDataList:
-            brush.setColor(QtGui.QColor(event["type"]))
+            brush.setColor(QtGui.QColor(getEventTypeColour(event.type)))
             painter.setPen(Qt.NoPen)
             painter.setBrush(brush)
-            eventVerticalStart = int((int(event["timeFrom"].strftime("%H"))+int(event["timeFrom"].strftime("%M"))/60)*rowHeight) + rowHeight
-            eventVerticalEnd = int((int(event["timeTo"].strftime("%H"))+int(event["timeTo"].strftime("%M"))/60) * rowHeight)
-            eventHorizontalStart = hourLeftMargin + (weekDayWidth // event["overlap"]) * event["order"] + 5
-            eventHorizontalEnd = (weekDayWidth // event["overlap"]) - spaceBetweenEvents
+            # eventVerticalStart = int((int(event["eventDuration"]["timeFrom"].strftime("%H"))+int(event["eventDuration"]["timeFrom"].strftime("%M"))/60)*rowHeight) + rowHeight
+
+
+            eventVerticalStart = int((event.eventDuration.timeFrom.hour +
+                event.eventDuration.timeFrom.minute / 60) * rowHeight) + rowHeight
+
+            eventVerticalEnd = int((event.eventDuration.timeTo.hour + event.eventDuration.timeTo.minute/60) * rowHeight)
+            eventHorizontalStart = hourLeftMargin + (weekDayWidth // event.overlap) * event.order + 5
+            eventHorizontalEnd = (weekDayWidth // event.overlap) - spaceBetweenEvents
 
             painter.drawRoundedRect(QtCore.QRect(eventHorizontalStart, eventVerticalStart, eventHorizontalEnd, eventVerticalEnd), 10, 10)
 
             painter.setPen(Qt.black)
             painter.setFont(QtGui.QFont('Times', self.height() // 150, QtGui.QFont.Normal))
 
-            eventText = event["title"] + "\n" + event["description"] + "\n" + event["localization"] + "\n" + event["reminder"]
+            eventText = event.title + "\n" + event.description + "\n" + event.localization + "\n" + event.reminder
 
             painter.drawText(QtCore.QRect(
                 eventHorizontalStart + 10,

@@ -7,8 +7,9 @@ from GUI.MainWindow import NewEventW
 from GUI.MainWindow.DayCalendarWidget import DayCalendarWidget
 from GUI.SettingsWindow.SettingsW import SettingsW
 from GUI.MainWindow.WeekCalendarWidget import WeekCalendarWidget
-from Objects.Event import loadEventsList, loadEventTypesList
+from Objects.Event import loadEventsList, loadEventTypesList, Event
 from GUI.MainWindow.MonthCalendarWidget import MainCalendarWidget
+from GUI.MainWindow.EventDataW import EventDataW
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -24,6 +25,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.dayCalendarWidget = DayCalendarWidget()
         self.weekCalendarWidget = WeekCalendarWidget()
         self.settingsWindow = SettingsW()
+        self.eventDataWindow = EventDataW()
         self.ui.stackedWidget.addWidget(self.mainCalendarWidget)
         self.ui.stackedWidget.addWidget(self.dayCalendarWidget)
         self.ui.stackedWidget.addWidget(self.weekCalendarWidget)
@@ -64,6 +66,9 @@ class MainWindow(QtWidgets.QMainWindow):
                                                              "    border-color: navy; /* make the default button prominent */"
                                                              "}")
         self.ui.settingsButton.clicked.connect(self.openSettingsWindow)
+
+        self.eventDataWidget = DayCalendarWidget()
+        self.dayCalendarWidget.dayCalendar.eventClickedSignal.connect(self.eventDataShow)
 
     def resizeEvent(self, a0: QtGui.QResizeEvent) -> None:
         self.mainCalendarWidget.updateWidgetSize()
@@ -112,7 +117,6 @@ class MainWindow(QtWidgets.QMainWindow):
                               self.mainCalendarWidget.dateOnDateBar.strftime("%B"),
                               str(self.mainCalendarWidget.dateOnDateBar.year))
 
-
     def setDateInBarToNext(self):
         if self.ui.stackedWidget.currentIndex() == 0:
             self.mainCalendarWidget.changeDate("month", "next")
@@ -139,8 +143,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.setDateInBar(f"{firstDayOfWeekDate.day} - {lastDayOfWeekDate.day}",
                               self.mainCalendarWidget.dateOnDateBar.strftime("%B"),
                               str(self.mainCalendarWidget.dateOnDateBar.year))
-
-
 
     def openNewEventWindow(self):
         self.ui_newEventWindow.setDateFromCalendar(self.mainCalendarWidget.dateOnDateBar)
@@ -171,3 +173,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def openSettingsWindow(self):
         self.settingsWindow.show()
+
+    @QtCore.pyqtSlot(Event)
+    def eventDataShow(self, event):
+        self.eventDataWindow.setLabelsText(event)
+        self.eventDataWindow.show()
