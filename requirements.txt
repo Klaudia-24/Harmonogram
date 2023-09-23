@@ -1,0 +1,4 @@
+PyQt5>=5.15.7
+dateutils~=0.6.12
+PyYAML~=6.0
+marshmallow~=3.17.0
