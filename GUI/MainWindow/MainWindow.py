@@ -172,6 +172,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.mainCalendarWidget.distinguishClickedDay()
 
     def openSettingsWindow(self):
+        self.settingsWindow.switchToTheGeneralSet()
+        self.settingsWindow.clearSelectedListItem()
         self.settingsWindow.show()
 
     @QtCore.pyqtSlot(Event)
