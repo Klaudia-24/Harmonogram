@@ -6,7 +6,9 @@ from GUI.SettingsWindow.GeneralSet import GeneralSet
 from GUI.SettingsWindow.DayCalendarSet import DayCalendarSet
 from GUI.SettingsWindow.MonthCalendarSet import MonthCalendarSet
 from GUI.SettingsWindow.WeekCalendarSet import WeekCalendarSet
+from GUI.SettingsWindow.EventTypeSet import EventTypesSet
 
+from Objects.AppSettings import settingsDict
 
 class SettingsW(QtWidgets.QWidget):
 
@@ -40,10 +42,13 @@ class SettingsW(QtWidgets.QWidget):
         self.dayCalendarSet = DayCalendarSet()
         self.weekCalendarSet = WeekCalendarSet()
         self.monthCalendarSet = MonthCalendarSet()
+        self.eventTypesSet = EventTypesSet()
         self.settingsWindow.stackedWidget.addWidget(self.generalSet)
         self.settingsWindow.stackedWidget.addWidget(self.dayCalendarSet)
         self.settingsWindow.stackedWidget.addWidget(self.weekCalendarSet)
         self.settingsWindow.stackedWidget.addWidget(self.monthCalendarSet)
+        self.settingsWindow.stackedWidget.addWidget(self.eventTypesSet)
+        # self.settingsWindow.stackedWidget.setCurrentIndex(2)
 
 
         self.settingsWindow.listWidget.currentItemChanged.connect(lambda: self.setSelectedWidget())
@@ -60,6 +65,9 @@ class SettingsW(QtWidgets.QWidget):
     def switchToTheMonthCalendarSet(self):
         self.settingsWindow.stackedWidget.setCurrentIndex(5)
 
+    def switchToTheEventTypesSet(self):
+        self.settingsWindow.stackedWidget.setCurrentIndex(6)
+
     def setSelectedWidget(self):
         match self.settingsWindow.listWidget.currentItem():
             case self.item_1:
@@ -70,7 +78,11 @@ class SettingsW(QtWidgets.QWidget):
                 self.switchToTheWeekCalendarSet()
             case self.item_4:
                 self.switchToTheMonthCalendarSet()
+            case self.item_5:
+                self.switchToTheEventTypesSet()
 
+    def clearSelectedListItem(self):
+        self.settingsWindow.listWidget.clearSelection()
 
 def __main__():
     import sys
