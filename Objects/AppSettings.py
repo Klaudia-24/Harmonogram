@@ -1,14 +1,11 @@
 from dataclasses import dataclass
 from dataclasses_json import dataclass_json
 
-generalSettingsDict = dict()
-generalSettingsDict['generalSettings'] = dict()
-dayCalendarSettingsDict = dict()
-dayCalendarSettingsDict['dayCalendarSettings'] = dict()
-weekCalendarSettingsDict = dict()
-weekCalendarSettingsDict['weekCalendarSettings'] = dict()
-monthCalendarSettingsDict = dict()
-monthCalendarSettingsDict['monthCalendarSettings'] = dict()
+settingsDict = dict()
+settingsDict['generalSettings'] = dict()
+settingsDict['dayCalendarSettings'] = dict()
+settingsDict['weekCalendarSettings'] = dict()
+settingsDict['monthCalendarSettings'] = dict()
 
 @dataclass_json
 @dataclass

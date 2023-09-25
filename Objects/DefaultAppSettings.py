@@ -1,43 +1,36 @@
-from Objects.AppSettings import GeneralSettings, DayCalendarSettings, WeekCalendarSettings, MonthCalendarSettings
+from Objects.AppSettings import GeneralSettings, DayCalendarSettings, WeekCalendarSettings, MonthCalendarSettings, settingsDict
 from Lib.FileOperationMethods import writeSettingsToYamlFile
+import logging
+logger = logging.getLogger('main')
 
+def createSettingsFile():
+    settingsDict['generalSettings'] = GeneralSettings(windowBackColour='#cccccc',
+                                                             navBtnStyle='skyPalette',
+                                                             eventsFilePath='./events.json',
+                                                             dateBarFontColour='#19334d',
+                                                             dateBarFontSize=16,
+                                                             dateBarFontBold=True
+                                                             ).to_dict()
 
-generalSettingsDict = dict()
-generalSettingsDict['generalSettings'] = dict()
-dayCalendarSettingsDict = dict()
-dayCalendarSettingsDict['dayCalendarSettings'] = dict()
-weekCalendarSettingsDict = dict()
-weekCalendarSettingsDict['weekCalendarSettings'] = dict()
-monthCalendarSettingsDict = dict()
-monthCalendarSettingsDict['monthCalendarSettings'] = dict()
+    settingsDict['dayCalendarSettings'] = DayCalendarSettings(calendarBackColour='#cfe0e8',
+                                                                         linesColour='#001a33',
+                                                                         hoursColour='#001a33',
+                                                                         hourLinesThicknessRatio=2.0,
+                                                                         spaceRatioBetweenEvents=10,
+                                                                         eventTitleShow=True,
+                                                                         eventDescriptionShow=False,
+                                                                         eventLocalizationShow=False,
+                                                                         eventReminderShow=False
+                                                                         ).to_dict()
 
-generalSettingsDict['generalSettings'] = GeneralSettings(windowBackColour='#cccccc',
-                                                         navBtnStyle='skyPalette',
-                                                         eventsFilePath='./events.json',
-                                                         dateBarFontColour='#19334d',
-                                                         dateBarFontSize=16,
-                                                         dateBarFontBold=True
-                                                         ).to_dict()
-
-dayCalendarSettingsDict['dayCalendarSettings'] = DayCalendarSettings(calendarBackColour='#cfe0e8',
-                                                                     linesColour='#001a33',
-                                                                     hoursColour='#001a33',
-                                                                     hourLinesThicknessRatio=2.0,
-                                                                     spaceRatioBetweenEvents=10,
-                                                                     eventTitleShow=True,
-                                                                     eventDescriptionShow=False,
-                                                                     eventLocalizationShow=False,
-                                                                     eventReminderShow=False
-                                                                     ).to_dict()
-
-weekCalendarSettingsDict['weekCalendarSettings'] = WeekCalendarSettings(calendarBackColour='#9fdfbf',
+    settingsDict['weekCalendarSettings'] = WeekCalendarSettings(calendarBackColour='#9fdfbf',
                                                                             hourLinesColour='#001a33',
                                                                             dayLinesColour='#001a33',
                                                                             hourLinesThicknessRatio=2.0,
                                                                             dayLinesThicknessRatio=4.0
                                                                             ).to_dict()
 
-monthCalendarSettingsDict['monthCalendarSettings'] = MonthCalendarSettings(weekNumbersColour='#001a33',
+    settingsDict['monthCalendarSettings'] = MonthCalendarSettings(weekNumbersColour='#001a33',
                                                                                weekDaysColour='#001a33',
                                                                                currentDayColour='#339966',
                                                                                selectedDayColour='#66cc99',
@@ -54,12 +47,6 @@ monthCalendarSettingsDict['monthCalendarSettings'] = MonthCalendarSettings(weekN
                                                                                todayDateBold=True
                                                                                ).to_dict()
 
-def createSettingsFile():
-    settingsList = [generalSettingsDict,
-                    dayCalendarSettingsDict,
-                    weekCalendarSettingsDict,
-                    monthCalendarSettingsDict]
-
-    writeSettingsToYamlFile(settingsList)
+    writeSettingsToYamlFile([settingsDict])
 
     #file in the Lib
