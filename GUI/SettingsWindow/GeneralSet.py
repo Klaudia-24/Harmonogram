@@ -14,8 +14,23 @@ class GeneralSet(QtWidgets.QWidget):
     def init_ui(self) -> None:
         pass
 
+    def setCurrentData(self, settingsDict):
+        self.generalSet.windowsBackColourBtn.setStyleSheet(f"background-color:{settingsDict['windowBackColour']}")
+        self.generalSet.navBtnStyleComboBox.clear()
+        self.generalSet.navBtnStyleComboBox.addItem(settingsDict['navBtnStyle'])
+        self.generalSet.eventsFilePathPlainTextEdit.setPlainText(settingsDict['eventsFilePath'])
+        self.generalSet.dateBarFontColourBtn.setStyleSheet(f"background-color:{settingsDict['dateBarFontColour']}")
+        self.generalSet.dateBarFontSizeSpinBox.setValue(settingsDict['dateBarFontSize'])
+        self.generalSet.dateBarFontBoldCheckBox.setChecked(bool(settingsDict['dateBarFontBold']))
+
     def getCurrentData(self):
-        pass
+        return GeneralSettings(self.generalSet.windowsBackColourBtn.palette().window().color().name(),
+                               self.generalSet.navBtnStyleComboBox.currentText(),
+                               self.generalSet.eventsFilePathPlainTextEdit.toPlainText(),
+                               self.generalSet.dateBarFontColourBtn.palette().window().color().name(),
+                               self.generalSet.dateBarFontSizeSpinBox.value(),
+                               self.generalSet.dateBarFontBoldCheckBox.isChecked()
+                               )
 
 def __main__():
     import sys

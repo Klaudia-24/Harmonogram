@@ -10,6 +10,9 @@ from GUI.SettingsWindow.EventTypeSet import EventTypesSet
 
 from Objects.AppSettings import settingsDict
 
+import logging
+logger = logging.getLogger('settingsLogger')
+
 class SettingsW(QtWidgets.QWidget):
 
     def __init__(self, *args, **kwargs):
@@ -48,22 +51,43 @@ class SettingsW(QtWidgets.QWidget):
         self.settingsWindow.stackedWidget.addWidget(self.weekCalendarSet)
         self.settingsWindow.stackedWidget.addWidget(self.monthCalendarSet)
         self.settingsWindow.stackedWidget.addWidget(self.eventTypesSet)
-        # self.settingsWindow.stackedWidget.setCurrentIndex(2)
-
 
         self.settingsWindow.listWidget.currentItemChanged.connect(lambda: self.setSelectedWidget())
 
+        self.settingsWindow.okBtn.clicked.connect(self.settingsOkBtn)
+        self.settingsWindow.cancelBtn.clicked.connect(self.settingsCancelBtn)
+        self.settingsWindow.applyBtn.clicked.connect(self.settingsApplyBtn)
+
+        logger.debug(settingsDict['generalSettings']['windowBackColour'])
+
+    def settingsOkBtn(self):
+        pass
+        # call settingsApplyBtn()
+        # close window
+
+    def settingsCancelBtn(self):
+        pass
+
+    def settingsApplyBtn(self):
+        pass
+        # reload style
+        # save to the file
+
     def switchToTheGeneralSet(self):
         self.settingsWindow.stackedWidget.setCurrentIndex(2)
+        self.generalSet.setCurrentData(settingsDict['generalSettings'])
 
     def switchToTheDayCalendarSet(self):
         self.settingsWindow.stackedWidget.setCurrentIndex(3)
+        self.dayCalendarSet.setCurrentData(settingsDict['dayCalendarSettings'])
 
     def switchToTheWeekCalendarSet(self):
         self.settingsWindow.stackedWidget.setCurrentIndex(4)
+        self.weekCalendarSet.setCurrentData(settingsDict['weekCalendarSettings'])
 
     def switchToTheMonthCalendarSet(self):
         self.settingsWindow.stackedWidget.setCurrentIndex(5)
+        self.monthCalendarSet.setCurrentData(settingsDict['monthCalendarSettings'])
 
     def switchToTheEventTypesSet(self):
         self.settingsWindow.stackedWidget.setCurrentIndex(6)

@@ -47,7 +47,7 @@
    <item row="2" column="1">
     <layout class="QGridLayout" name="gridLayout_2">
      <item row="1" column="5">
-      <widget class="QPushButton" name="applyButton">
+      <widget class="QPushButton" name="applyBtn">
        <property name="minimumSize">
         <size>
          <width>120</width>
@@ -74,7 +74,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QPushButton" name="OKButton">
+      <widget class="QPushButton" name="okBtn">
        <property name="minimumSize">
         <size>
          <width>120</width>
@@ -130,7 +130,7 @@
       </spacer>
      </item>
      <item row="1" column="3">
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="cancelBtn">
        <property name="minimumSize">
         <size>
          <width>120</width>
