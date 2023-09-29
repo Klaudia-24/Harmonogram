@@ -42,3 +42,10 @@ def readSettingsFromYamlFile():
         settingsList = list(yaml.safe_load_all(f))
 
     return settingsList
+
+def readColourPalettesFromYamlFile():
+    colourPalettes = []
+    with open('./Lib/colourPalettes.yaml', 'r') as f:
+        colourPalettes = list(yaml.safe_load_all(f))
+
+    return colourPalettes

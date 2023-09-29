@@ -7,6 +7,8 @@ settingsDict['dayCalendarSettings'] = dict()
 settingsDict['weekCalendarSettings'] = dict()
 settingsDict['monthCalendarSettings'] = dict()
 
+colourPaletteDict = dict()
+
 @dataclass_json
 @dataclass
 class GeneralSettings:
@@ -59,6 +61,19 @@ class MonthCalendarSettings:
     nextMonthFontRatio: float
 
     todayDateBold: bool
+
+@dataclass_json
+@dataclass
+class ColourPalette:
+    name: str
+    colour1: str
+    fontColour1: str
+    colour2: str
+    fontColour2: str
+    colour3: str
+    fontColour3: str
+    colour4: str
+    fontColour4: str
 
 # def classFromArgs(className, argDict):
 #     fieldSet = {f.name for f in fields(className) if f.init}

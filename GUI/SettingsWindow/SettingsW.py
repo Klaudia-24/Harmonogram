@@ -11,7 +11,7 @@ from GUI.SettingsWindow.EventTypeSet import EventTypesSet
 from Objects.AppSettings import settingsDict
 
 import logging
-logger = logging.getLogger('settingsLogger')
+logger = logging.getLogger('settingsWLogger')
 
 class SettingsW(QtWidgets.QWidget):
 
@@ -57,8 +57,6 @@ class SettingsW(QtWidgets.QWidget):
         self.settingsWindow.okBtn.clicked.connect(self.settingsOkBtn)
         self.settingsWindow.cancelBtn.clicked.connect(self.settingsCancelBtn)
         self.settingsWindow.applyBtn.clicked.connect(self.settingsApplyBtn)
-
-        logger.debug(settingsDict['generalSettings']['windowBackColour'])
 
     def settingsOkBtn(self):
         pass
