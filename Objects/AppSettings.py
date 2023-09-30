@@ -7,8 +7,6 @@ settingsDict['dayCalendarSettings'] = dict()
 settingsDict['weekCalendarSettings'] = dict()
 settingsDict['monthCalendarSettings'] = dict()
 
-colourPalettesDict = dict()
-
 @dataclass_json
 @dataclass
 class GeneralSettings:
