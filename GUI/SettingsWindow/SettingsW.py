@@ -74,6 +74,7 @@ class SettingsW(QtWidgets.QWidget):
     def switchToTheGeneralSet(self):
         self.settingsWindow.stackedWidget.setCurrentIndex(2)
         self.generalSet.setCurrentData(settingsDict['generalSettings'])
+        self.generalSet.setButtonsPreview(settingsDict['generalSettings']['navBtnStyle'])
 
     def switchToTheDayCalendarSet(self):
         self.settingsWindow.stackedWidget.setCurrentIndex(3)

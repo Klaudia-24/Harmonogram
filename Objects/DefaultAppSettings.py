@@ -5,7 +5,7 @@ logger = logging.getLogger('main')
 
 def createSettingsFile():
     settingsDict['generalSettings'] = GeneralSettings(windowBackColour='#cccccc',
-                                                             navBtnStyle='skyPalette',
+                                                             navBtnStyle=2,
                                                              eventsFilePath='./events.json',
                                                              dateBarFontColour='#19334d',
                                                              dateBarFontSize=16,

@@ -7,13 +7,13 @@ settingsDict['dayCalendarSettings'] = dict()
 settingsDict['weekCalendarSettings'] = dict()
 settingsDict['monthCalendarSettings'] = dict()
 
-colourPaletteDict = dict()
+colourPalettesDict = dict()
 
 @dataclass_json
 @dataclass
 class GeneralSettings:
     windowBackColour: str
-    navBtnStyle: str
+    navBtnStyle: int
     eventsFilePath: str
     dateBarFontColour: str
     dateBarFontSize: int

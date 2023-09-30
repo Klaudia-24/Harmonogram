@@ -1,4 +1,4 @@
-blueSky:
+0:
   name: 'Blue sky'
   colour1: '#bccad6'
   fontColour1: '#000000'
@@ -8,7 +8,7 @@ blueSky:
   fontColour3: '#e8e8e8'
   colour4: '#87bdd8'
   fontColour4: '#000000'
-desertSand:
+1:
   name: 'Desert sand'
   colour1: '#fbefcc'
   fontColour1: '#000000'
@@ -18,7 +18,7 @@ desertSand:
   fontColour3: '#000000'
   colour4: '#e0876a'
   fontColour4: '#000000'
-bouquetOfFlowers:
+2:
   name: 'Bouquet of flowers'
   colour1: '#f9d5e5'
   fontColour1: '#000000'
@@ -28,7 +28,7 @@ bouquetOfFlowers:
   fontColour3: '#000000'
   colour4: '#c83349'
   fontColour4: '#000000'
-greenGrass:
+3:
   name: 'Green grass'
   colour1: '#d5e1df'
   fontColour1: '#000000'
@@ -38,7 +38,7 @@ greenGrass:
   fontColour3: '#000000'
   colour4: '#86af49'
   fontColour4: '#000000'
-summerVibes:
+4:
   name: 'Summer vibes'
   colour1: '#96ceb4'
   fontColour1: '#000000'
