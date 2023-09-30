@@ -46,6 +46,8 @@ class GeneralSet(QtWidgets.QWidget):
         self.generalSet.dateBarFontColourBtn.setStyleSheet(f"background-color:{settingsDict['dateBarFontColour']}")
         self.generalSet.dateBarFontSizeSpinBox.setValue(settingsDict['dateBarFontSize'])
         self.generalSet.dateBarFontBoldCheckBox.setChecked(bool(settingsDict['dateBarFontBold']))
+        self.generalSet.navBtnStyleComboBox.setCurrentIndex(settingsDict['navBtnStyle'])
+        self.setButtonsPreview(settingsDict['navBtnStyle'])
 
     def getCurrentData(self):
         return GeneralSettings(self.generalSet.windowsBackColourBtn.palette().window().color().name(),
@@ -58,8 +60,6 @@ class GeneralSet(QtWidgets.QWidget):
 
     def setButtonsPreview(self, paletteIndex):
 
-        # self.generalSet.navBtnStyleComboBox.setCurrentText(colourPalettesDict[0][paletteIndex]['name'])
-
         self.generalSet.dayColourBtn.setStyleSheet(f"background-color:{colourPalettesDict[0][paletteIndex]['colour1']}; "
                                                    f"color:{colourPalettesDict[0][paletteIndex]['fontColour1']}")
         self.generalSet.weekColourBtn.setStyleSheet(f"background-color:{colourPalettesDict[0][paletteIndex]['colour2']}; "
@@ -70,20 +70,19 @@ class GeneralSet(QtWidgets.QWidget):
                                                         f"color:{colourPalettesDict[0][paletteIndex]['fontColour4']}")
 
     def changeButtonsPreview(self):
-        paletteIndex = self.generalSet.navBtnStyleComboBox.currentIndex()
-
-        self.generalSet.dayColourBtn.setStyleSheet(
-            f"background-color:{colourPalettesDict[0][paletteIndex]['colour1']}; "
-            f"color:{colourPalettesDict[0][paletteIndex]['fontColour1']}")
-        self.generalSet.weekColourBtn.setStyleSheet(
-            f"background-color:{colourPalettesDict[0][paletteIndex]['colour2']}; "
-            f"color:{colourPalettesDict[0][paletteIndex]['fontColour2']}")
-        self.generalSet.monthColourBtn.setStyleSheet(
-            f"background-color:{colourPalettesDict[0][paletteIndex]['colour3']};"
-            f"color:{colourPalettesDict[0][paletteIndex]['fontColour3']}")
-        self.generalSet.newEventColourBtn.setStyleSheet(
-            f"background-color:{colourPalettesDict[0][paletteIndex]['colour4']};"
-            f"color:{colourPalettesDict[0][paletteIndex]['fontColour4']}")
+        self.setButtonsPreview(self.generalSet.navBtnStyleComboBox.currentIndex())
+        # self.generalSet.dayColourBtn.setStyleSheet(
+        #     f"background-color:{colourPalettesDict[0][paletteIndex]['colour1']}; "
+        #     f"color:{colourPalettesDict[0][paletteIndex]['fontColour1']}")
+        # self.generalSet.weekColourBtn.setStyleSheet(
+        #     f"background-color:{colourPalettesDict[0][paletteIndex]['colour2']}; "
+        #     f"color:{colourPalettesDict[0][paletteIndex]['fontColour2']}")
+        # self.generalSet.monthColourBtn.setStyleSheet(
+        #     f"background-color:{colourPalettesDict[0][paletteIndex]['colour3']};"
+        #     f"color:{colourPalettesDict[0][paletteIndex]['fontColour3']}")
+        # self.generalSet.newEventColourBtn.setStyleSheet(
+        #     f"background-color:{colourPalettesDict[0][paletteIndex]['colour4']};"
+        #     f"color:{colourPalettesDict[0][paletteIndex]['fontColour4']}")
 
 def __main__():
     import sys

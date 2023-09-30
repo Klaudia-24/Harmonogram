@@ -17,7 +17,7 @@ class SettingsW(QtWidgets.QWidget):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
+        #do usuniecia
         self.item_1 = None
         self.item_2 = None
         self.item_3 = None
@@ -35,6 +35,7 @@ class SettingsW(QtWidgets.QWidget):
         self.item_3 = QListWidgetItem('Week view')
         self.item_4 = QListWidgetItem('Month view')
         self.item_5 = QListWidgetItem('Event types manager')
+        #wprowadzic bezposrednio do listy
         self.settingsWindow.listWidget.addItem(self.item_1)
         self.settingsWindow.listWidget.addItem(self.item_2)
         self.settingsWindow.listWidget.addItem(self.item_3)
@@ -74,7 +75,7 @@ class SettingsW(QtWidgets.QWidget):
     def switchToTheGeneralSet(self):
         self.settingsWindow.stackedWidget.setCurrentIndex(2)
         self.generalSet.setCurrentData(settingsDict['generalSettings'])
-        self.generalSet.setButtonsPreview(settingsDict['generalSettings']['navBtnStyle'])
+
 
     def switchToTheDayCalendarSet(self):
         self.settingsWindow.stackedWidget.setCurrentIndex(3)
@@ -92,6 +93,7 @@ class SettingsW(QtWidgets.QWidget):
         self.settingsWindow.stackedWidget.setCurrentIndex(6)
 
     def setSelectedWidget(self):
+        # self.settingsWindow.listWidget.item(0) pomoze naprawic
         match self.settingsWindow.listWidget.currentItem():
             case self.item_1:
                 self.switchToTheGeneralSet()
