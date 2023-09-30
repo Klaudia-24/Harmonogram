@@ -47,6 +47,6 @@ def createSettingsFile():
                                                                                todayDateBold=True
                                                                                ).to_dict()
 
-    writeSettingsToYamlFile([settingsDict])
+    writeSettingsToYamlFile(settingsDict)
 
     #file in the Lib

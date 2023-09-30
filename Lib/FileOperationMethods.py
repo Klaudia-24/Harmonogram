@@ -34,7 +34,7 @@ def readFromJsonFileToDict(fileName, dictName, keyName):
 
 def writeSettingsToYamlFile(settingsList):
     with open('./Lib/appConfig.yaml', mode='wt', encoding="utf-8") as f:
-        yaml.safe_dump_all(settingsList, f)
+        yaml.safe_dump(settingsList, f)
 
 def readSettingsFromYamlFile():
     settingsList = []
