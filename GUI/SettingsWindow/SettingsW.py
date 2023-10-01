@@ -18,11 +18,11 @@ class SettingsW(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         #do usuniecia
-        self.item_1 = None
-        self.item_2 = None
-        self.item_3 = None
-        self.item_4 = None
-        self.item_5 = None
+        # self.item_1 = None
+        # self.item_2 = None
+        # self.item_3 = None
+        # self.item_4 = None
+        # self.item_5 = None
         self.settingsWindow = Ui_Form()
         self.settingsWindow.setupUi(self)
         self.init_ui()
@@ -30,17 +30,17 @@ class SettingsW(QtWidgets.QWidget):
 
     def init_ui(self) -> None:
 
-        self.item_1 = QListWidgetItem('General')
-        self.item_2 = QListWidgetItem('Day view')
-        self.item_3 = QListWidgetItem('Week view')
-        self.item_4 = QListWidgetItem('Month view')
-        self.item_5 = QListWidgetItem('Event types manager')
+        # self.item_1 = QListWidgetItem('General')
+        # self.item_2 = QListWidgetItem('Day view')
+        # self.item_3 = QListWidgetItem('Week view')
+        # self.item_4 = QListWidgetItem('Month view')
+        # self.item_5 = QListWidgetItem('Event types manager')
         #wprowadzic bezposrednio do listy
-        self.settingsWindow.listWidget.addItem(self.item_1)
-        self.settingsWindow.listWidget.addItem(self.item_2)
-        self.settingsWindow.listWidget.addItem(self.item_3)
-        self.settingsWindow.listWidget.addItem(self.item_4)
-        self.settingsWindow.listWidget.addItem(self.item_5)
+        self.settingsWindow.listWidget.addItem(QListWidgetItem('General'))
+        self.settingsWindow.listWidget.addItem(QListWidgetItem('Day view'))
+        self.settingsWindow.listWidget.addItem(QListWidgetItem('Week view'))
+        self.settingsWindow.listWidget.addItem(QListWidgetItem('Month view'))
+        self.settingsWindow.listWidget.addItem(QListWidgetItem('Event types manager'))
 
         self.generalSet = GeneralSet()
         self.dayCalendarSet = DayCalendarSet()
@@ -76,7 +76,6 @@ class SettingsW(QtWidgets.QWidget):
         self.settingsWindow.stackedWidget.setCurrentIndex(2)
         self.generalSet.setCurrentData(settingsDict['generalSettings'])
 
-
     def switchToTheDayCalendarSet(self):
         self.settingsWindow.stackedWidget.setCurrentIndex(3)
         self.dayCalendarSet.setCurrentData(settingsDict['dayCalendarSettings'])
@@ -94,17 +93,35 @@ class SettingsW(QtWidgets.QWidget):
 
     def setSelectedWidget(self):
         # self.settingsWindow.listWidget.item(0) pomoze naprawic
-        match self.settingsWindow.listWidget.currentItem():
-            case self.item_1:
-                self.switchToTheGeneralSet()
-            case self.item_2:
-                self.switchToTheDayCalendarSet()
-            case self.item_3:
-                self.switchToTheWeekCalendarSet()
-            case self.item_4:
-                self.switchToTheMonthCalendarSet()
-            case self.item_5:
-                self.switchToTheEventTypesSet()
+
+        logger.debug(self.settingsWindow.listWidget.currentRow())
+        # logger.debug(self.settingsWindow.listWidget.item(0))
+
+        if self.settingsWindow.listWidget.currentRow() != -1:
+
+            match self.settingsWindow.listWidget.currentRow():
+                case 0:
+                    self.switchToTheGeneralSet()
+                case 1:
+                    self.switchToTheDayCalendarSet()
+                case 2:
+                    self.switchToTheWeekCalendarSet()
+                case 3:
+                    self.switchToTheMonthCalendarSet()
+                case 4:
+                    self.switchToTheEventTypesSet()
+
+        # match self.settingsWindow.listWidget.currentItem():
+        #     case self.settingsWindow.listWidget.item(0):
+        #         self.switchToTheGeneralSet()
+        #     case self.settingsWindow.listWidget.item(1):
+        #         self.switchToTheDayCalendarSet()
+        #     case self.settingsWindow.listWidget.item(2):
+        #         self.switchToTheWeekCalendarSet()
+        #     case self.settingsWindow.listWidget.item(3):
+        #         self.switchToTheMonthCalendarSet()
+        #     case self.settingsWindow.listWidget.item(4):
+        #         self.switchToTheEventTypesSet()
 
     def clearSelectedListItem(self):
         self.settingsWindow.listWidget.clearSelection()

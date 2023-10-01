@@ -16,17 +16,11 @@ class GeneralSet(QtWidgets.QWidget):
         self.generalSet.setupUi(self)
         self.dialogColorW = Window()
         self.colourPalettesDict = readColourPalettesFromYamlFile()
-        # logger.debug(colourPalettesDict)
         self.generalSet.navBtnStyleComboBox.activated.connect(self.changeButtonsPreview)
-
-        # logger.debug(self.generalSet.navBtnStyleComboBox.currentIndex())
-        # self.setButtonsPreview()
-
         self.generalSet.groupBox.setStyleSheet("QGroupBox#groupBox { border: 1px solid #8c8c8c ;}")
-        # self.init_ui()
 
     def init_ui(self) -> None:
-        self.colourPalettesDict = readColourPalettesFromYamlFile()
+        pass
 
     def getColorFromDialog(self):
         self.color_RGB = self.dialogColorW.ReturnColor().name()
@@ -35,8 +29,6 @@ class GeneralSet(QtWidgets.QWidget):
         self.generalSet.windowsBackColourBtn.setStyleSheet(f"background-color:{settingsDict['windowBackColour']}")
 
         self.generalSet.navBtnStyleComboBox.clear()
-
-        # logger.debug(colourPalettesDict[0].keys())
 
         for index in self.colourPalettesDict.keys():
             self.generalSet.navBtnStyleComboBox.addItem(self.colourPalettesDict[index]['name'])
@@ -70,18 +62,6 @@ class GeneralSet(QtWidgets.QWidget):
 
     def changeButtonsPreview(self):
         self.setButtonsPreview(self.generalSet.navBtnStyleComboBox.currentIndex())
-        # self.generalSet.dayColourBtn.setStyleSheet(
-        #     f"background-color:{colourPalettesDict[0][paletteIndex]['colour1']}; "
-        #     f"color:{colourPalettesDict[0][paletteIndex]['fontColour1']}")
-        # self.generalSet.weekColourBtn.setStyleSheet(
-        #     f"background-color:{colourPalettesDict[0][paletteIndex]['colour2']}; "
-        #     f"color:{colourPalettesDict[0][paletteIndex]['fontColour2']}")
-        # self.generalSet.monthColourBtn.setStyleSheet(
-        #     f"background-color:{colourPalettesDict[0][paletteIndex]['colour3']};"
-        #     f"color:{colourPalettesDict[0][paletteIndex]['fontColour3']}")
-        # self.generalSet.newEventColourBtn.setStyleSheet(
-        #     f"background-color:{colourPalettesDict[0][paletteIndex]['colour4']};"
-        #     f"color:{colourPalettesDict[0][paletteIndex]['fontColour4']}")
 
 def __main__():
     import sys
