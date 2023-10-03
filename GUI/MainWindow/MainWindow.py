@@ -8,6 +8,7 @@ from GUI.MainWindow.WeekCalendarWidget import WeekCalendarWidget
 from Objects.Event import loadEventsList, loadEventTypesList, Event
 from GUI.MainWindow.MonthCalendarWidget import MainCalendarWidget
 from GUI.MainWindow.EventDataW import EventDataW
+from Objects.ObjectGeneration import getImageButtonStyleSheet
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -42,27 +43,29 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.weekCalendarButton.clicked.connect(self.switchToTheWeekCalendar)
 
         self.setMinimumSize(1300, 600)
-        self.ui.settingsButton.setStyleSheet("QPushButton {"
+        # self.ui.settingsButton.setStyleSheet("QPushButton {"
+        #
+        #                                                      "border-radius: 6px;"
+        #                                                      "  background-image: url(./WindowObjects/Resources/settingsImage.png);"
+        #                                                      "background-repeat:no-repeat;"
+        #                                                      " background-position:center;"
+        #                                                      "  min-width: 60px;"
+        #                                                      "}"
+        #
+        #                                                      "QPushButton:pressed {"
+        #                                                      "   background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
+        #                                                      " stop: 0 #dadbde, stop: 1 #f6f7fa);"
+        #                                                      "}"
+        #
+        #                                                      "QPushButton:flat {"
+        #                                                      "   border: none; /* no border for a flat push button */"
+        #                                                      "}"
+        #
+        #                                                      "QPushButton:default {"
+        #                                                      "    border-color: navy; /* make the default button prominent */"
+        #                                                      "}")
 
-                                                             "border-radius: 6px;"
-                                                             "  background-image: url(./WindowObjects/Resources/settingsImage.png);"
-                                                             "background-repeat:no-repeat;"
-                                                             " background-position:center;"
-                                                             "  min-width: 60px;"
-                                                             "}"
-
-                                                             "QPushButton:pressed {"
-                                                             "   background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
-                                                             " stop: 0 #dadbde, stop: 1 #f6f7fa);"
-                                                             "}"
-
-                                                             "QPushButton:flat {"
-                                                             "   border: none; /* no border for a flat push button */"
-                                                             "}"
-
-                                                             "QPushButton:default {"
-                                                             "    border-color: navy; /* make the default button prominent */"
-                                                             "}")
+        self.ui.settingsButton.setStyleSheet(getImageButtonStyleSheet())
         self.ui.settingsButton.clicked.connect(self.openSettingsWindow)
 
         self.eventDataWidget = DayCalendarWidget()
