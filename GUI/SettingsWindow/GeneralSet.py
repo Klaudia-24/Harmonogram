@@ -18,12 +18,18 @@ class GeneralSet(QtWidgets.QWidget):
         self.colourPalettesDict = readFromYamlFile('./Lib/colourPalettes.yaml')
         self.generalSet.navBtnStyleComboBox.activated.connect(self.changeButtonsPreview)
         self.generalSet.groupBox.setStyleSheet("QGroupBox#groupBox { border: 1px solid #8c8c8c ;}")
+        self.generalSet.windowsBackColourBtn.clicked.connect(self.setWindowBackColourFromDialog)
+        self.generalSet.dateBarFontColourBtn.clicked.connect(self.setDateBarFontColourFromDialog)
+
 
     def init_ui(self) -> None:
         pass
 
-    def getColorFromDialog(self):
-        self.color_RGB = self.dialogColorW.ReturnColor().name()
+    def setWindowBackColourFromDialog(self):
+        self.generalSet.windowsBackColourBtn.setStyleSheet(f"background-color:{self.dialogColorW.ReturnColor().name()}")
+
+    def setDateBarFontColourFromDialog(self):
+        self.generalSet.dateBarFontColourBtn.setStyleSheet(f"background-color:{self.dialogColorW.ReturnColor().name()}")
 
     def setCurrentData(self, settingsDict):
         self.generalSet.windowsBackColourBtn.setStyleSheet(f"background-color:{settingsDict['windowBackColour']}")

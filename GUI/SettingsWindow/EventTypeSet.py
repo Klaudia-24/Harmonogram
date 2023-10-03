@@ -4,6 +4,9 @@ from Objects.Event import eventTypesDictionary
 from GUI.MainWindow.ColorSettingWindow import *
 
 import logging
+
+from Objects.ObjectGeneration import getImageButtonStyleSheet
+
 logger = logging.getLogger('eventTypeSetLogger')
 
 class EventTypesSet(QtWidgets.QWidget):
@@ -37,6 +40,9 @@ class EventTypesSet(QtWidgets.QWidget):
                                                      "QPushButton:default {"
                                                      "    border-color: navy; /* make the default button prominent */"
                                                      "}")
+
+        # self.eventTypesSet.addTypeBtn.setStyleSheet(getImageButtonStyleSheet())
+
         self.eventTypesSet.removeTypeBtn.setStyleSheet("QPushButton {"
 
                                                           "border-radius: 6px;"
