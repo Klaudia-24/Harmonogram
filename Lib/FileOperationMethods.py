@@ -32,18 +32,25 @@ def readFromJsonFileToDict(fileName, dictName, keyName):
         messageWindow.exec()
 
 
-def writeSettingsToYamlFile(settingsList):
-    with open('./Lib/appConfig.yaml', mode='wt', encoding="utf-8") as f:
+# def writeSettingsToYamlFile(settingsList):
+#     with open('./Lib/appConfig.yaml', mode='wt', encoding="utf-8") as f:
+#         yaml.safe_dump(settingsList, f)
+
+def writeToYamlFile(settingsList, filePath):
+    with open(filePath, mode='wt', encoding="utf-8") as f:
         yaml.safe_dump(settingsList, f)
 
-def readSettingsFromYamlFile():
-    settingsList = []
-    with open('./Lib/appConfig.yaml', 'r') as f:
-        settingsList = list(yaml.safe_load_all(f))
+# def readSettingsFromYamlFile():
+#     settingsList = []
+#     with open('./Lib/appConfig.yaml', 'r') as f:
+#         settingsList = list(yaml.safe_load_all(f))
+#
+#     return settingsList
 
-    return settingsList
+# def readColourPalettesFromYamlFile():
+#     with open('./Lib/colourPalettes.yaml', 'r') as f:
+#         return yaml.safe_load(f)
 
-def readColourPalettesFromYamlFile():
-    with open('./Lib/colourPalettes.yaml', 'r') as f:
+def readFromYamlFile(filePath):
+    with open(filePath, 'r') as f:
         return yaml.safe_load(f)
-

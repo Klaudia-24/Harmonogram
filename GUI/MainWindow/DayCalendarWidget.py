@@ -11,6 +11,3 @@ class DayCalendarWidget(QtWidgets.QWidget):
         self.dayCalendarWidget.setupUi(self)
         self.dayCalendar = DayCalendar()
         self.dayCalendarWidget.scrollArea.setWidget(self.dayCalendar)
-        # self.init_ui()
-
-    # def init_ui(self) -> None:

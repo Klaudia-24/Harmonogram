@@ -1,5 +1,5 @@
 from Objects.AppSettings import GeneralSettings, DayCalendarSettings, WeekCalendarSettings, MonthCalendarSettings, settingsDict
-from Lib.FileOperationMethods import writeSettingsToYamlFile
+from Lib.FileOperationMethods import writeToYamlFile
 import logging
 logger = logging.getLogger('main')
 
@@ -47,6 +47,6 @@ def createSettingsFile():
                                                                                todayDateBold=True
                                                                                ).to_dict()
 
-    writeSettingsToYamlFile(settingsDict)
+    writeToYamlFile(settingsDict, './Lib/appConfig.yaml')
 
     #file in the Lib
