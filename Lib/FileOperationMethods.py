@@ -22,7 +22,7 @@ def readFromJsonFileToDict(fileName, dictName, keyName):
         messageWindow.setWindowTitle("Info")
         messageWindow.setText("File with saved events was not found. New file will be created.")
         messageWindow.exec()
-        # TODO raise, file with own errors
+
 
     except PermissionError:
 

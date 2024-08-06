@@ -1,0 +1,39 @@
+dayCalendarSettings:
+  calendarBackColour: '#cfe0e8'
+  eventDescriptionShow: false
+  eventLocalizationShow: false
+  eventReminderShow: false
+  eventTitleShow: true
+  hourLinesThicknessRatio: 2.0
+  hoursColour: '#001a33'
+  linesColour: '#001a33'
+  spaceRatioBetweenEvents: 10
+generalSettings:
+  dateBarFontBold: true
+  dateBarFontColour: '#19334d'
+  dateBarFontSize: 16
+  eventsFilePath: ./events.json
+  navBtnStyle: 2
+  windowBackColour: '#cccccc'
+monthCalendarSettings:
+  currentDayColour: '#339966'
+  currentDayFontRatio: 3.5
+  currentMonthColour: '#80bfff'
+  currentMonthFontRatio: 3.5
+  nextMonthColour: '#cce6ff'
+  nextMonthFontRatio: 3.5
+  prevMonthColour: '#cce6ff'
+  prevMonthFontRatio: 3.5
+  selectedDayColour: '#66cc99'
+  selectedDayFontRatio: 3.5
+  todayDateBold: true
+  weekDaysColour: '#001a33'
+  weekDaysFontRatio: 8.1
+  weekNumbersColour: '#001a33'
+  weekNumbersFontRatio: 7.0
+weekCalendarSettings:
+  calendarBackColour: '#9fdfbf'
+  dayLinesColour: '#001a33'
+  dayLinesThicknessRatio: 4.0
+  hourLinesColour: '#001a33'
+  hourLinesThicknessRatio: 2.0

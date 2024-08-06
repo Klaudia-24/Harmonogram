@@ -40,7 +40,6 @@ class NewEventW(QtWidgets.QWidget):
 
     def closeWindow(self) -> None:
         """Only close the opened window, used for 'Close' buttons etc."""
-
         self.close()
 
     def setDateFromCalendar(self, date) -> None:

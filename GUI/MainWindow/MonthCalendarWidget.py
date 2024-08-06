@@ -19,9 +19,9 @@ class MainCalendarWidget(QtWidgets.QWidget):
         self.mainCalendarWidget = Ui_Form()
         self.mainCalendarWidget.setupUi(self)
         self.dateOnDateBar = date.today()
-        self.init_ui()
+        self.__init_ui()
 
-    def init_ui(self) -> None:
+    def __init_ui(self) -> None:
 
         self.mainCalendarWidget.calendarGridLayout.setSpacing(1)
 

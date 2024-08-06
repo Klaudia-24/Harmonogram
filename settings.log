@@ -1,0 +1,105 @@
+2023-10-01 20:24:33,521 - settingsWLogger - DEBUG    - -1
+2023-10-01 20:33:58,010 - settingsWLogger - DEBUG    - -1
+2023-10-01 20:34:07,621 - settingsWLogger - DEBUG    - 1
+2023-10-01 20:34:08,276 - settingsWLogger - DEBUG    - 2
+2023-10-01 20:34:09,211 - settingsWLogger - DEBUG    - 3
+2023-10-01 20:34:09,557 - settingsWLogger - DEBUG    - 4
+2023-10-01 20:34:10,275 - settingsWLogger - DEBUG    - 0
+2023-10-01 20:34:10,828 - settingsWLogger - DEBUG    - 1
+2023-10-01 20:34:11,119 - settingsWLogger - DEBUG    - 3
+2023-10-01 20:34:11,699 - settingsWLogger - DEBUG    - 4
+2023-10-01 20:34:12,275 - settingsWLogger - DEBUG    - 2
+2023-10-01 20:34:12,751 - settingsWLogger - DEBUG    - 1
+2023-10-01 20:34:13,004 - settingsWLogger - DEBUG    - 0
+2023-10-01 20:34:13,307 - settingsWLogger - DEBUG    - 2
+2023-10-01 20:34:13,517 - settingsWLogger - DEBUG    - 3
+2023-10-01 20:34:13,733 - settingsWLogger - DEBUG    - 4
+2023-10-01 20:34:14,119 - settingsWLogger - DEBUG    - 3
+2023-10-01 20:34:14,492 - settingsWLogger - DEBUG    - 2
+2023-10-01 20:34:14,761 - settingsWLogger - DEBUG    - 1
+2023-10-01 20:34:15,020 - settingsWLogger - DEBUG    - 0
+2023-10-01 20:34:18,289 - settingsWLogger - DEBUG    - 1
+2023-10-01 20:34:18,556 - settingsWLogger - DEBUG    - 3
+2023-10-01 20:34:19,075 - settingsWLogger - DEBUG    - 4
+2023-10-01 20:34:19,619 - settingsWLogger - DEBUG    - 1
+2023-10-01 20:34:19,960 - settingsWLogger - DEBUG    - 0
+2023-10-01 20:34:20,339 - settingsWLogger - DEBUG    - 4
+2023-10-01 20:34:21,680 - settingsWLogger - DEBUG    - 3
+2023-10-01 20:34:25,415 - settingsWLogger - DEBUG    - 1
+2023-10-01 20:34:25,976 - settingsWLogger - DEBUG    - 0
+2023-10-01 20:34:34,724 - settingsWLogger - DEBUG    - 3
+2023-10-01 20:34:36,661 - settingsWLogger - DEBUG    - 0
+2023-10-01 20:34:42,909 - settingsWLogger - DEBUG    - 4
+2023-10-01 20:34:43,274 - settingsWLogger - DEBUG    - 3
+2023-10-01 20:34:43,609 - settingsWLogger - DEBUG    - 1
+2023-10-01 20:34:43,947 - settingsWLogger - DEBUG    - 0
+2023-10-01 20:42:58,467 - settingsWLogger - DEBUG    - -1
+2023-10-01 20:43:55,898 - settingsWLogger - DEBUG    - -1
+2023-10-01 20:43:58,054 - settingsWLogger - DEBUG    - 4
+2023-10-01 20:43:58,386 - settingsWLogger - DEBUG    - 2
+2023-10-01 20:43:58,977 - settingsWLogger - DEBUG    - 0
+2023-10-01 20:43:59,360 - settingsWLogger - DEBUG    - 1
+2023-10-01 20:43:59,648 - settingsWLogger - DEBUG    - 2
+2023-10-01 20:43:59,993 - settingsWLogger - DEBUG    - 3
+2023-10-01 20:44:00,745 - settingsWLogger - DEBUG    - 4
+2023-10-01 20:44:05,821 - settingsWLogger - DEBUG    - -1
+2023-10-01 20:44:08,429 - settingsWLogger - DEBUG    - 4
+2023-10-01 20:46:12,337 - settingsWLogger - DEBUG    - -1
+2023-10-01 21:22:30,043 - settingsWLogger - DEBUG    - monthCalendarSettings
+2023-10-01 21:22:30,044 - settingsWLogger - DEBUG    - {'weekNumbersColour': '#001a33', 'weekDaysColour': '#001a33', 'currentDayColour': '#339966', 'selectedDayColour': '#66cc99', 'prevMonthColour': '#cce6ff', 'currentMonthColour': '#80bfff', 'nextMonthColour': '#cce6ff', 'weekNumbersFontRatio': 7.0, 'weekDaysFontRatio': 8.1, 'currentDayFontRatio': 3.5, 'selectedDayFontRatio': 3.5, 'prevMonthFontRatio': 3.5, 'currentMonthFontRatio': 3.5, 'nextMonthFontRatio': 3.5, 'todayDateBold': True}
+2023-10-01 21:22:34,225 - settingsWLogger - DEBUG    - weekCalendarSettings
+2023-10-01 21:22:34,225 - settingsWLogger - DEBUG    - {'calendarBackColour': '#9fdfbf', 'hourLinesColour': '#001a33', 'dayLinesColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'dayLinesThicknessRatio': 4.0}
+2023-10-01 21:25:03,754 - settingsWLogger - DEBUG    - monthCalendarSettings
+2023-10-01 21:25:25,207 - settingsWLogger - DEBUG    - {'weekNumbersColour': '#001a33', 'weekDaysColour': '#001a33', 'currentDayColour': '#339966', 'selectedDayColour': '#66cc99', 'prevMonthColour': '#cce6ff', 'currentMonthColour': '#80bfff', 'nextMonthColour': '#cce6ff', 'weekNumbersFontRatio': 7.0, 'weekDaysFontRatio': 8.1, 'currentDayFontRatio': 3.5, 'selectedDayFontRatio': 3.5, 'prevMonthFontRatio': 3.5, 'currentMonthFontRatio': 3.5, 'nextMonthFontRatio': 3.5, 'todayDateBold': True}
+2023-10-01 21:26:01,620 - settingsWLogger - DEBUG    - generalSettings
+2023-10-01 21:26:17,793 - settingsWLogger - DEBUG    - {'windowBackColour': '#cccccc', 'navBtnStyle': 2, 'eventsFilePath': './events.json', 'dateBarFontColour': '#19334d', 'dateBarFontSize': 16, 'dateBarFontBold': True}
+2023-10-01 21:30:55,879 - settingsWLogger - DEBUG    - monthCalendarSettings
+2023-10-01 21:30:55,879 - settingsWLogger - DEBUG    - {'weekNumbersColour': '#001a33', 'weekDaysColour': '#001a33', 'currentDayColour': '#339966', 'selectedDayColour': '#66cc99', 'prevMonthColour': '#cce6ff', 'currentMonthColour': '#80bfff', 'nextMonthColour': '#cce6ff', 'weekNumbersFontRatio': 7.0, 'weekDaysFontRatio': 8.1, 'currentDayFontRatio': 3.5, 'selectedDayFontRatio': 3.5, 'prevMonthFontRatio': 3.5, 'currentMonthFontRatio': 3.5, 'nextMonthFontRatio': 3.5, 'todayDateBold': True}
+2023-10-01 21:35:47,012 - settingsWLogger - DEBUG    - monthCalendarSettings
+2023-10-01 21:35:47,012 - settingsWLogger - DEBUG    - {'weekNumbersColour': '#001a33', 'weekDaysColour': '#001a33', 'currentDayColour': '#339966', 'selectedDayColour': '#66cc99', 'prevMonthColour': '#cce6ff', 'currentMonthColour': '#80bfff', 'nextMonthColour': '#cce6ff', 'weekNumbersFontRatio': 7.0, 'weekDaysFontRatio': 8.1, 'currentDayFontRatio': 3.5, 'selectedDayFontRatio': 3.5, 'prevMonthFontRatio': 3.5, 'currentMonthFontRatio': 3.5, 'nextMonthFontRatio': 3.5, 'todayDateBold': True}
+2023-10-01 21:38:00,261 - settingsWLogger - DEBUG    - monthCalendarSettings
+2023-10-01 21:38:00,262 - settingsWLogger - DEBUG    - {'weekNumbersColour': '#001a33', 'weekDaysColour': '#001a33', 'currentDayColour': '#339966', 'selectedDayColour': '#66cc99', 'prevMonthColour': '#cce6ff', 'currentMonthColour': '#80bfff', 'nextMonthColour': '#cce6ff', 'weekNumbersFontRatio': 7.0, 'weekDaysFontRatio': 8.1, 'currentDayFontRatio': 3.5, 'selectedDayFontRatio': 3.5, 'prevMonthFontRatio': 3.5, 'currentMonthFontRatio': 3.5, 'nextMonthFontRatio': 3.5, 'todayDateBold': True}
+2023-10-01 21:43:26,212 - settingsWLogger - DEBUG    - generalSettings
+2023-10-01 21:43:26,212 - settingsWLogger - DEBUG    - {'windowBackColour': '#cccccc', 'navBtnStyle': 2, 'eventsFilePath': './events.json', 'dateBarFontColour': '#19334d', 'dateBarFontSize': 16, 'dateBarFontBold': True}
+2023-10-01 21:43:28,824 - settingsWLogger - DEBUG    - dayCalendarSettings
+2023-10-01 21:43:28,825 - settingsWLogger - DEBUG    - {'calendarBackColour': '#cfe0e8', 'linesColour': '#001a33', 'hoursColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'spaceRatioBetweenEvents': 10, 'eventTitleShow': True, 'eventDescriptionShow': False, 'eventLocalizationShow': False, 'eventReminderShow': False}
+2023-10-01 21:43:29,401 - settingsWLogger - DEBUG    - weekCalendarSettings
+2023-10-01 21:43:29,401 - settingsWLogger - DEBUG    - {'calendarBackColour': '#9fdfbf', 'hourLinesColour': '#001a33', 'dayLinesColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'dayLinesThicknessRatio': 4.0}
+2023-10-01 21:43:29,754 - settingsWLogger - DEBUG    - monthCalendarSettings
+2023-10-01 21:43:29,754 - settingsWLogger - DEBUG    - {'weekNumbersColour': '#001a33', 'weekDaysColour': '#001a33', 'currentDayColour': '#339966', 'selectedDayColour': '#66cc99', 'prevMonthColour': '#cce6ff', 'currentMonthColour': '#80bfff', 'nextMonthColour': '#cce6ff', 'weekNumbersFontRatio': 7.0, 'weekDaysFontRatio': 8.1, 'currentDayFontRatio': 3.5, 'selectedDayFontRatio': 3.5, 'prevMonthFontRatio': 3.5, 'currentMonthFontRatio': 3.5, 'nextMonthFontRatio': 3.5, 'todayDateBold': True}
+2023-10-01 21:43:30,769 - settingsWLogger - DEBUG    - dayCalendarSettings
+2023-10-01 21:43:30,769 - settingsWLogger - DEBUG    - {'calendarBackColour': '#cfe0e8', 'linesColour': '#001a33', 'hoursColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'spaceRatioBetweenEvents': 10, 'eventTitleShow': True, 'eventDescriptionShow': False, 'eventLocalizationShow': False, 'eventReminderShow': False}
+2023-10-01 21:43:31,459 - settingsWLogger - DEBUG    - generalSettings
+2023-10-01 21:43:31,459 - settingsWLogger - DEBUG    - {'windowBackColour': '#cccccc', 'navBtnStyle': 2, 'eventsFilePath': './events.json', 'dateBarFontColour': '#19334d', 'dateBarFontSize': 16, 'dateBarFontBold': True}
+2023-10-01 21:43:34,412 - settingsWLogger - DEBUG    - monthCalendarSettings
+2023-10-01 21:43:34,412 - settingsWLogger - DEBUG    - {'weekNumbersColour': '#001a33', 'weekDaysColour': '#001a33', 'currentDayColour': '#339966', 'selectedDayColour': '#66cc99', 'prevMonthColour': '#cce6ff', 'currentMonthColour': '#80bfff', 'nextMonthColour': '#cce6ff', 'weekNumbersFontRatio': 7.0, 'weekDaysFontRatio': 8.1, 'currentDayFontRatio': 3.5, 'selectedDayFontRatio': 3.5, 'prevMonthFontRatio': 3.5, 'currentMonthFontRatio': 3.5, 'nextMonthFontRatio': 3.5, 'todayDateBold': True}
+2023-10-01 21:43:34,687 - settingsWLogger - DEBUG    - dayCalendarSettings
+2023-10-01 21:43:34,687 - settingsWLogger - DEBUG    - {'calendarBackColour': '#cfe0e8', 'linesColour': '#001a33', 'hoursColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'spaceRatioBetweenEvents': 10, 'eventTitleShow': True, 'eventDescriptionShow': False, 'eventLocalizationShow': False, 'eventReminderShow': False}
+2023-10-01 21:43:35,043 - settingsWLogger - DEBUG    - monthCalendarSettings
+2023-10-01 21:43:35,043 - settingsWLogger - DEBUG    - {'weekNumbersColour': '#001a33', 'weekDaysColour': '#001a33', 'currentDayColour': '#339966', 'selectedDayColour': '#66cc99', 'prevMonthColour': '#cce6ff', 'currentMonthColour': '#80bfff', 'nextMonthColour': '#cce6ff', 'weekNumbersFontRatio': 7.0, 'weekDaysFontRatio': 8.1, 'currentDayFontRatio': 3.5, 'selectedDayFontRatio': 3.5, 'prevMonthFontRatio': 3.5, 'currentMonthFontRatio': 3.5, 'nextMonthFontRatio': 3.5, 'todayDateBold': True}
+2023-10-01 21:43:38,898 - settingsWLogger - DEBUG    - weekCalendarSettings
+2023-10-01 21:43:38,899 - settingsWLogger - DEBUG    - {'calendarBackColour': '#9fdfbf', 'hourLinesColour': '#001a33', 'dayLinesColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'dayLinesThicknessRatio': 4.0}
+2023-10-01 21:43:39,851 - settingsWLogger - DEBUG    - monthCalendarSettings
+2023-10-01 21:43:39,851 - settingsWLogger - DEBUG    - {'weekNumbersColour': '#001a33', 'weekDaysColour': '#001a33', 'currentDayColour': '#339966', 'selectedDayColour': '#66cc99', 'prevMonthColour': '#cce6ff', 'currentMonthColour': '#80bfff', 'nextMonthColour': '#cce6ff', 'weekNumbersFontRatio': 7.0, 'weekDaysFontRatio': 8.1, 'currentDayFontRatio': 3.5, 'selectedDayFontRatio': 3.5, 'prevMonthFontRatio': 3.5, 'currentMonthFontRatio': 3.5, 'nextMonthFontRatio': 3.5, 'todayDateBold': True}
+2023-10-01 21:43:40,143 - settingsWLogger - DEBUG    - dayCalendarSettings
+2023-10-01 21:43:40,143 - settingsWLogger - DEBUG    - {'calendarBackColour': '#cfe0e8', 'linesColour': '#001a33', 'hoursColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'spaceRatioBetweenEvents': 10, 'eventTitleShow': True, 'eventDescriptionShow': False, 'eventLocalizationShow': False, 'eventReminderShow': False}
+2023-10-01 21:43:40,493 - settingsWLogger - DEBUG    - generalSettings
+2023-10-01 21:43:40,493 - settingsWLogger - DEBUG    - {'windowBackColour': '#cccccc', 'navBtnStyle': 2, 'eventsFilePath': './events.json', 'dateBarFontColour': '#19334d', 'dateBarFontSize': 16, 'dateBarFontBold': True}
+2023-10-01 21:43:40,877 - settingsWLogger - DEBUG    - dayCalendarSettings
+2023-10-01 21:43:40,878 - settingsWLogger - DEBUG    - {'calendarBackColour': '#cfe0e8', 'linesColour': '#001a33', 'hoursColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'spaceRatioBetweenEvents': 10, 'eventTitleShow': True, 'eventDescriptionShow': False, 'eventLocalizationShow': False, 'eventReminderShow': False}
+2023-10-01 21:43:41,178 - settingsWLogger - DEBUG    - weekCalendarSettings
+2023-10-01 21:43:41,178 - settingsWLogger - DEBUG    - {'calendarBackColour': '#9fdfbf', 'hourLinesColour': '#001a33', 'dayLinesColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'dayLinesThicknessRatio': 4.0}
+2023-10-01 21:43:41,460 - settingsWLogger - DEBUG    - monthCalendarSettings
+2023-10-01 21:43:41,461 - settingsWLogger - DEBUG    - {'weekNumbersColour': '#001a33', 'weekDaysColour': '#001a33', 'currentDayColour': '#339966', 'selectedDayColour': '#66cc99', 'prevMonthColour': '#cce6ff', 'currentMonthColour': '#80bfff', 'nextMonthColour': '#cce6ff', 'weekNumbersFontRatio': 7.0, 'weekDaysFontRatio': 8.1, 'currentDayFontRatio': 3.5, 'selectedDayFontRatio': 3.5, 'prevMonthFontRatio': 3.5, 'currentMonthFontRatio': 3.5, 'nextMonthFontRatio': 3.5, 'todayDateBold': True}
+2023-10-01 21:43:44,564 - settingsWLogger - DEBUG    - weekCalendarSettings
+2023-10-01 21:43:44,564 - settingsWLogger - DEBUG    - {'calendarBackColour': '#9fdfbf', 'hourLinesColour': '#001a33', 'dayLinesColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'dayLinesThicknessRatio': 4.0}
+2023-10-01 21:43:45,592 - settingsWLogger - DEBUG    - monthCalendarSettings
+2023-10-01 21:43:45,592 - settingsWLogger - DEBUG    - {'weekNumbersColour': '#001a33', 'weekDaysColour': '#001a33', 'currentDayColour': '#339966', 'selectedDayColour': '#66cc99', 'prevMonthColour': '#cce6ff', 'currentMonthColour': '#80bfff', 'nextMonthColour': '#cce6ff', 'weekNumbersFontRatio': 7.0, 'weekDaysFontRatio': 8.1, 'currentDayFontRatio': 3.5, 'selectedDayFontRatio': 3.5, 'prevMonthFontRatio': 3.5, 'currentMonthFontRatio': 3.5, 'nextMonthFontRatio': 3.5, 'todayDateBold': True}
+2023-10-01 21:43:46,618 - settingsWLogger - DEBUG    - weekCalendarSettings
+2023-10-01 21:43:46,618 - settingsWLogger - DEBUG    - {'calendarBackColour': '#9fdfbf', 'hourLinesColour': '#001a33', 'dayLinesColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'dayLinesThicknessRatio': 4.0}
+2023-10-01 21:43:46,919 - settingsWLogger - DEBUG    - dayCalendarSettings
+2023-10-01 21:43:46,919 - settingsWLogger - DEBUG    - {'calendarBackColour': '#cfe0e8', 'linesColour': '#001a33', 'hoursColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'spaceRatioBetweenEvents': 10, 'eventTitleShow': True, 'eventDescriptionShow': False, 'eventLocalizationShow': False, 'eventReminderShow': False}
+2023-10-01 21:43:47,201 - settingsWLogger - DEBUG    - generalSettings
+2023-10-01 21:43:47,201 - settingsWLogger - DEBUG    - {'windowBackColour': '#cccccc', 'navBtnStyle': 2, 'eventsFilePath': './events.json', 'dateBarFontColour': '#19334d', 'dateBarFontSize': 16, 'dateBarFontBold': True}
+2023-10-01 21:43:51,610 - settingsWLogger - DEBUG    - weekCalendarSettings
+2023-10-01 21:43:51,611 - settingsWLogger - DEBUG    - {'calendarBackColour': '#9fdfbf', 'hourLinesColour': '#001a33', 'dayLinesColour': '#001a33', 'hourLinesThicknessRatio': 2.0, 'dayLinesThicknessRatio': 4.0}
